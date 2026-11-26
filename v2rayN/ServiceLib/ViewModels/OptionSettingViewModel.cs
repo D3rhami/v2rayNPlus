@@ -60,6 +60,11 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
     [Reactive] public partial string SpeedPingTestUrl { get; set; }
     [Reactive] public partial string UdpTestTarget { get; set; }
     [Reactive] public partial int MixedConcurrencyCount { get; set; }
+    [Reactive] public partial int UnblockPageSize { get; set; }
+    [Reactive] public partial bool UnblockYtEnabled { get; set; }
+    [Reactive] public partial bool UnblockNfEnabled { get; set; }
+    [Reactive] public partial bool UnblockGemEnabled { get; set; }
+    [Reactive] public partial bool UnblockChatEnabled { get; set; }
     [Reactive] public partial bool EnableHWA { get; set; }
     [Reactive] public partial string SubConvertUrl { get; set; }
     [Reactive] public partial int MainGirdOrientation { get; set; }
@@ -204,6 +209,12 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         SrsFileSourceUrl = _config.ConstItem.SrsSourceUrl;
         RoutingRulesSourceUrl = _config.ConstItem.RouteRulesTemplateSourceUrl;
         IPAPIUrl = _config.SpeedTestItem.IPAPIUrl;
+        UnblockPageSize = _config.SpeedTestItem.UnblockPageSize ?? Global.UnblockTestPageSize;
+        var svc = _config.SpeedTestItem.UnblockServices ?? Global.UnblockDefaultServices;
+        UnblockYtEnabled = svc.Contains("YouTube");
+        UnblockNfEnabled = svc.Contains("Netflix");
+        UnblockGemEnabled = svc.Contains("Gemini");
+        UnblockChatEnabled = svc.Contains("ChatGPT");
         RootCertProvider = _config.GuiItem.RootCertProvider;
 
         #endregion UI
@@ -396,6 +407,25 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         _config.ConstItem.SrsSourceUrl = SrsFileSourceUrl;
         _config.ConstItem.RouteRulesTemplateSourceUrl = RoutingRulesSourceUrl;
         _config.SpeedTestItem.IPAPIUrl = IPAPIUrl;
+        _config.SpeedTestItem.UnblockPageSize = UnblockPageSize;
+        var unblockServices = new List<string>();
+        if (UnblockYtEnabled)
+        {
+            unblockServices.Add("YouTube");
+        }
+        if (UnblockNfEnabled)
+        {
+            unblockServices.Add("Netflix");
+        }
+        if (UnblockGemEnabled)
+        {
+            unblockServices.Add("Gemini");
+        }
+        if (UnblockChatEnabled)
+        {
+            unblockServices.Add("ChatGPT");
+        }
+        _config.SpeedTestItem.UnblockServices = unblockServices;
         _config.GuiItem.RootCertProvider = RootCertProvider;
 
         //systemProxy

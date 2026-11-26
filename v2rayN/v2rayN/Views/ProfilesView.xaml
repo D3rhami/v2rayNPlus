@@ -18,6 +18,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <conv:DelayColorConverter x:Key="DelayColorConverter" />
+        <conv:UnblockStatusColorConverter x:Key="UnblockStatusColorConverter" />
     </UserControl.Resources>
     <Grid>
         <DockPanel>
@@ -130,11 +131,12 @@
                             x:Name="menuEditServer"
                             Height="{StaticResource MenuItemHeight}"
                             Header="{x:Static resx:ResUI.menuEditServer}"
-                            InputGestureText="Ctrl+D" />
+                            InputGestureText="Ctrl+E" />
                         <MenuItem
                             x:Name="menuCopyServer"
                             Height="{StaticResource MenuItemHeight}"
-                            Header="{x:Static resx:ResUI.menuCopyServer}" />
+                            Header="{x:Static resx:ResUI.menuCopyServer}"
+                            InputGestureText="Ctrl+D" />
                         <MenuItem
                             x:Name="menuRemoveServer"
                             Height="{StaticResource MenuItemHeight}"
@@ -143,22 +145,24 @@
                         <MenuItem
                             x:Name="menuRemoveDuplicateServer"
                             Height="{StaticResource MenuItemHeight}"
-                            Header="{x:Static resx:ResUI.menuRemoveDuplicateServer}" />
+                            Header="{x:Static resx:ResUI.menuRemoveDuplicateServer}"
+                            InputGestureText="Ctrl+Alt+D" />
                         <MenuItem
                             x:Name="menuRemoveInvalidServerResult"
                             Height="{StaticResource MenuItemHeight}"
-                            Header="{x:Static resx:ResUI.menuRemoveInvalidServerResult}" />
+                            Header="{x:Static resx:ResUI.menuRemoveInvalidServerResult}"
+                            InputGestureText="Ctrl+Alt+R" />
                         <Separator />
                         <MenuItem
                             x:Name="menuTcpingServer"
                             Height="{StaticResource MenuItemHeight}"
                             Header="{x:Static resx:ResUI.menuTcpingServer}"
-                            InputGestureText="Ctrl+O" />
+                            InputGestureText="Ctrl+Alt+T" />
                         <MenuItem
                             x:Name="menuRealPingServer"
                             Height="{StaticResource MenuItemHeight}"
                             Header="{x:Static resx:ResUI.menuRealPingServer}"
-                            InputGestureText="Ctrl+R" />
+                            InputGestureText="Ctrl+Alt+U" />
                         <MenuItem
                             x:Name="menuUdpTestServer"
                             Height="{StaticResource MenuItemHeight}"
@@ -167,7 +171,12 @@
                             x:Name="menuSpeedServer"
                             Height="{StaticResource MenuItemHeight}"
                             Header="{x:Static resx:ResUI.menuSpeedServer}"
-                            InputGestureText="Ctrl+T" />
+                            InputGestureText="Ctrl+Alt+F" />
+                        <MenuItem
+                            x:Name="menuUnblockTestServer"
+                            Height="{StaticResource MenuItemHeight}"
+                            Header="Unblock Test"
+                            InputGestureText="Ctrl+Alt+B" />
                         <MenuItem
                             x:Name="menuSortServerResult"
                             Height="{StaticResource MenuItemHeight}"
@@ -176,7 +185,8 @@
                         <MenuItem
                             x:Name="menuMoveToGroup"
                             Height="{StaticResource MenuItemHeight}"
-                            Header="{x:Static resx:ResUI.menuMoveToGroup}">
+                            Header="{x:Static resx:ResUI.menuMoveToGroup}"
+                            InputGestureText="Ctrl+M">
                             <MenuItem Height="Auto">
                                 <MenuItem.Header>
                                     <DockPanel>
@@ -223,7 +233,7 @@
                             x:Name="menuShareServer"
                             Height="{StaticResource MenuItemHeight}"
                             Header="{x:Static resx:ResUI.menuShareServer}"
-                            InputGestureText="Ctrl+F" />
+                            InputGestureText="Ctrl+Q" />
                         <MenuItem Header="{x:Static resx:ResUI.menuExportConfig}">
                             <MenuItem
                                 x:Name="menuExport2ClientConfig"
@@ -354,6 +364,72 @@
                         Binding="{Binding IpInfo}"
                         ExName="IpInfo"
                         Header="{x:Static resx:ResUI.LvTestIpInfo}" />
+
+                    <base:MyDGTextColumn
+                        x:Name="colUnblock"
+                        Width="180"
+                        Binding="{Binding UnblockSummary}"
+                        ExName="Unblock"
+                        Header="Unblock"
+                        SortMemberPath="UnblockSummary">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="ToolTipService.ToolTip" Value="{Binding UnblockTooltip}" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </base:MyDGTextColumn>
+                    <base:MyDGTextColumn
+                        x:Name="colYt"
+                        Width="60"
+                        Binding="{Binding YtText}"
+                        ExName="YtStatus"
+                        Header="YT">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Foreground" Value="{Binding YtStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </base:MyDGTextColumn>
+                    <base:MyDGTextColumn
+                        x:Name="colNf"
+                        Width="60"
+                        Binding="{Binding NfText}"
+                        ExName="NfStatus"
+                        Header="NF">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Foreground" Value="{Binding NfStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </base:MyDGTextColumn>
+                    <base:MyDGTextColumn
+                        x:Name="colGem"
+                        Width="70"
+                        Binding="{Binding GemText}"
+                        ExName="GemStatus"
+                        Header="GEM">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Foreground" Value="{Binding GemStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </base:MyDGTextColumn>
+                    <base:MyDGTextColumn
+                        x:Name="colChat"
+                        Width="70"
+                        Binding="{Binding ChatText}"
+                        ExName="ChatStatus"
+                        Header="CHAT">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                <Setter Property="Foreground" Value="{Binding ChatStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </base:MyDGTextColumn>
 
                     <base:MyDGTextColumn
                         x:Name="colTodayDown"

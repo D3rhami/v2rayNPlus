@@ -71,6 +71,7 @@ public partial class ProfilesView
             this.BindCommand(ViewModel, vm => vm.RealPingServerCmd, v => v.menuRealPingServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.UdpTestServerCmd, v => v.menuUdpTestServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.SpeedServerCmd, v => v.menuSpeedServer).DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.UnblockTestServerCmd, v => v.menuUnblockTestServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.SortServerResultCmd, v => v.menuSortServerResult).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.RemoveInvalidServerResultCmd, v => v.menuRemoveInvalidServerResult).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.FastRealPingCmd, v => v.btnFastRealPing).DisposeWith(disposables);
@@ -219,7 +220,47 @@ public partial class ProfilesView
 
     private void LstProfiles_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+        var ctrlDown = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+        var altDown = Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt);
+
+        if (ctrlDown && altDown)
+        {
+            switch (e.Key)
+            {
+                case Key.T:
+                    ViewModel?.ServerSpeedtest(ESpeedActionType.Tcping);
+                    break;
+
+                case Key.U:
+                    ViewModel?.ServerSpeedtest(ESpeedActionType.Realping);
+                    break;
+
+                case Key.F:
+                    ViewModel?.ServerSpeedtest(ESpeedActionType.Speedtest);
+                    break;
+
+                case Key.B:
+                    ViewModel?.ServerSpeedtest(ESpeedActionType.UnblockTest);
+                    break;
+
+                case Key.E:
+                    ViewModel?.ServerSpeedtest(ESpeedActionType.Mixedtest);
+                    break;
+
+                case Key.S:
+                    ViewModel?.ServerSpeedtestStop();
+                    break;
+
+                case Key.D:
+                    ((ICommand)ViewModel?.RemoveDuplicateServerCmd)?.Execute(null);
+                    break;
+
+                case Key.R:
+                    ((ICommand)ViewModel?.RemoveInvalidServerResultCmd)?.Execute(null);
+                    break;
+            }
+        }
+        else if (ctrlDown)
         {
             switch (e.Key)
             {
@@ -232,27 +273,24 @@ public partial class ProfilesView
                     break;
 
                 case Key.D:
+                    ((ICommand)ViewModel?.CopyServerCmd)?.Execute(null);
+                    break;
+
+                case Key.E:
                     ViewModel?.EditServerAsync();
                     break;
 
                 case Key.F:
+                    txtServerFilter.Focus();
+                    txtServerFilter.SelectAll();
+                    break;
+
+                case Key.M:
+                    MoveSelectedToGroup();
+                    break;
+
+                case Key.Q:
                     ViewModel?.ShareServerAsync();
-                    break;
-
-                case Key.O:
-                    ViewModel?.ServerSpeedtest(ESpeedActionType.Tcping);
-                    break;
-
-                case Key.R:
-                    ViewModel?.ServerSpeedtest(ESpeedActionType.Realping);
-                    break;
-
-                case Key.T:
-                    ViewModel?.ServerSpeedtest(ESpeedActionType.Speedtest);
-                    break;
-
-                case Key.E:
-                    ViewModel?.ServerSpeedtest(ESpeedActionType.Mixedtest);
                     break;
             }
         }
@@ -290,6 +328,29 @@ public partial class ProfilesView
                     ViewModel?.ServerSpeedtestStop();
                     break;
             }
+        }
+    }
+
+    private void MoveSelectedToGroup()
+    {
+        var groups = ViewModel?.SubItems?.ToList();
+        if (groups is not { Count: > 0 })
+        {
+            return;
+        }
+
+        var dialog = new ChoiceDialog(
+            ResUI.menuMoveToGroup,
+            ResUI.menuMoveToGroup,
+            groups.Select(g => g.Remarks).ToList(),
+            groups.Count - 1)
+        {
+            Owner = Window.GetWindow(this),
+        };
+        var vm = ViewModel;
+        if (vm != null && dialog.ShowDialog() == true && dialog.Choice >= 0 && dialog.Choice < groups.Count)
+        {
+            vm.SelectedMoveToGroup = groups[dialog.Choice];
         }
     }
 
@@ -353,6 +414,26 @@ public partial class ProfilesView
                         if (item.Name.Equals("IpInfo", StringComparison.CurrentCultureIgnoreCase))
                         {
                             item2.Visibility = _config.SpeedTestItem.IPAPIUrl.IsNotEmpty() && !_config.UiItem.HideColumnIpInfo ? Visibility.Visible : Visibility.Hidden;
+                        }
+                        if (item.Name.Equals("Unblock", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.Visibility = !_config.UiItem.HideColumnUnblock ? Visibility.Visible : Visibility.Hidden;
+                        }
+                        if (item.Name.Equals("YtStatus", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.Visibility = !_config.UiItem.HideColumnYt ? Visibility.Visible : Visibility.Hidden;
+                        }
+                        if (item.Name.Equals("NfStatus", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.Visibility = !_config.UiItem.HideColumnNf ? Visibility.Visible : Visibility.Hidden;
+                        }
+                        if (item.Name.Equals("GemStatus", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.Visibility = !_config.UiItem.HideColumnGem ? Visibility.Visible : Visibility.Hidden;
+                        }
+                        if (item.Name.Equals("ChatStatus", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.Visibility = !_config.UiItem.HideColumnChat ? Visibility.Visible : Visibility.Hidden;
                         }
                     }
                 }

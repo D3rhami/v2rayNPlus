@@ -29,6 +29,40 @@ public partial class ProfileItemModel : ReactiveObject
     public partial string IpInfo { get; set; }
 
     [Reactive]
+    public partial string UnblockSummary { get; set; } = string.Empty;
+
+    [Reactive]
+    public partial string UnblockTooltip { get; set; } = string.Empty;
+
+    [Reactive]
+    public partial string YtText { get; set; } = "—";
+
+    [Reactive]
+    public partial string NfText { get; set; } = "—";
+
+    [Reactive]
+    public partial string GemText { get; set; } = "—";
+
+    [Reactive]
+    public partial string ChatText { get; set; } = "—";
+
+    [Reactive]
+    public partial int YtStatus { get; set; }
+
+    [Reactive]
+    public partial int NfStatus { get; set; }
+
+    [Reactive]
+    public partial int GemStatus { get; set; }
+
+    [Reactive]
+    public partial int ChatStatus { get; set; }
+
+    public string? ExitIpU { get; set; }
+
+    public string? ExitCountryU { get; set; }
+
+    [Reactive]
     public partial string TodayUp { get; set; }
 
     [Reactive]

@@ -519,7 +519,7 @@ public sealed partial class V2rayRuntime
             return OperationView.Fail("speedtest_profile_selection_required", ApiMessageKeys.SpeedTestSelectRequired);
         }
 
-        if (action != ESpeedActionType.Tcping
+        if (action is not (ESpeedActionType.Tcping or ESpeedActionType.UnblockTest)
             && profiles.Where(item => !item.ConfigType.IsComplexType())
                 .Any(item => AppManager.Instance.GetCoreType(item, item.ConfigType) is not (ECoreType.Xray or ECoreType.sing_box)))
         {

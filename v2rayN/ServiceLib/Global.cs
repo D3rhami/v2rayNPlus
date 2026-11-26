@@ -117,6 +117,8 @@ public class Global
     public const string XrayLocalCert = "XRAY_LOCATION_CERT";
     public const int SpeedTestPageSize = 16;
     public const int SpeedTestConcurrencyCountMin = 10;
+    public static readonly int UnblockTestPageSize = 25;
+    public static List<string> UnblockDefaultServices => new List<string> { "YouTube", "Netflix", "Gemini", "ChatGPT" };
     public const string LinuxBash = "/bin/bash";
     public const string StringTrue = "true";
     public const string StringFalse = "false";
@@ -886,7 +888,7 @@ public class Global
         { ECoreType.overtls, "ShadowsocksR-Live/overtls" },
         { ECoreType.shadowquic, "spongebob888/shadowquic" },
         { ECoreType.mieru, "enfein/mieru" },
-        { ECoreType.v2rayN, "patterniha/PattN" },
+        { ECoreType.v2rayN, "D3rhami/v2rayNPlus" },
 
         // PattN: the fork, not upstream CluvexStudio/Aether: only the fork's core takes --psiphon-server-entries,
         // --api-address, --api-sni and --api-host

@@ -65,6 +65,7 @@ public partial class ProfilesView : ReactiveUserControl<ProfilesViewModel>
             this.BindCommand(ViewModel, vm => vm.RealPingServerCmd, v => v.menuRealPingServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.UdpTestServerCmd, v => v.menuUdpTestServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.SpeedServerCmd, v => v.menuSpeedServer).DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.UnblockTestServerCmd, v => v.menuUnblockTestServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.SortServerResultCmd, v => v.menuSortServerResult).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.RemoveInvalidServerResultCmd, v => v.menuRemoveInvalidServerResult).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.FastRealPingCmd, v => v.btnFastRealPing).DisposeWith(disposables);
@@ -243,7 +244,16 @@ public partial class ProfilesView : ReactiveUserControl<ProfilesViewModel>
 
     private void LstProfiles_KeyDown(object? sender, KeyEventArgs e)
     {
-        if (e.KeyModifiers is KeyModifiers.Control or KeyModifiers.Meta)
+        if (e.KeyModifiers.HasFlag(KeyModifiers.Control) && e.KeyModifiers.HasFlag(KeyModifiers.Alt))
+        {
+            switch (e.Key)
+            {
+                case Key.B:
+                    ViewModel?.ServerSpeedtest(ESpeedActionType.UnblockTest);
+                    break;
+            }
+        }
+        else if (e.KeyModifiers is KeyModifiers.Control or KeyModifiers.Meta)
         {
             switch (e.Key)
             {
@@ -400,6 +410,26 @@ public partial class ProfilesView : ReactiveUserControl<ProfilesViewModel>
                         if (item.Name.Equals("IpInfo", StringComparison.CurrentCultureIgnoreCase))
                         {
                             item2.IsVisible = _config.SpeedTestItem.IPAPIUrl.IsNotEmpty() && !_config.UiItem.HideColumnIpInfo;
+                        }
+                        if (item.Name.Equals("Unblock", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.IsVisible = !_config.UiItem.HideColumnUnblock;
+                        }
+                        if (item.Name.Equals("YtStatus", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.IsVisible = !_config.UiItem.HideColumnYt;
+                        }
+                        if (item.Name.Equals("NfStatus", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.IsVisible = !_config.UiItem.HideColumnNf;
+                        }
+                        if (item.Name.Equals("GemStatus", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.IsVisible = !_config.UiItem.HideColumnGem;
+                        }
+                        if (item.Name.Equals("ChatStatus", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.IsVisible = !_config.UiItem.HideColumnChat;
                         }
                     }
                 }

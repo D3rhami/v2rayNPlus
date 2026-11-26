@@ -102,6 +102,11 @@ public class UIItem
     public List<ColumnItem> MainColumnItem { get; set; }
     public List<WindowSizeItem> WindowSizeItem { get; set; }
     public bool HideColumnIpInfo { get; set; }
+    public bool HideColumnUnblock { get; set; }
+    public bool HideColumnYt { get; set; }
+    public bool HideColumnNf { get; set; }
+    public bool HideColumnGem { get; set; }
+    public bool HideColumnChat { get; set; }
     public int? FrozenColumnCount { get; set; }
 }
 
@@ -161,6 +166,8 @@ public class SpeedTestItem
     public string UdpTestTarget { get; set; }
     public int? SpeedTestPageSize { get; set; }
     public int? SpeedTestDelayInterval { get; set; }
+    public int? UnblockPageSize { get; set; }
+    public List<string>? UnblockServices { get; set; }
 }
 
 public class RoutingBasicItem

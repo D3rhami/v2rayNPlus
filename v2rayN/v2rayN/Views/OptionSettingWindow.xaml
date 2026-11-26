@@ -793,6 +793,11 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -1114,10 +1119,85 @@
                             Margin="{StaticResource Margin8}"
                             VerticalAlignment="Center"
                             Style="{StaticResource ToolbarTextBlock}"
+                            Text="Unblock batch size" />
+                        <ComboBox
+                            x:Name="cmbUnblockPageSize"
+                            Grid.Row="23"
+                            Grid.Column="1"
+                            Width="200"
+                            Margin="{StaticResource Margin8}"
+                            Style="{StaticResource DefComboBox}" />
+
+                        <TextBlock
+                            Grid.Row="24"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Unblock: test YouTube" />
+                        <CheckBox
+                            x:Name="chkUnblockYt"
+                            Grid.Row="24"
+                            Grid.Column="1"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="25"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Unblock: test Netflix" />
+                        <CheckBox
+                            x:Name="chkUnblockNf"
+                            Grid.Row="25"
+                            Grid.Column="1"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="26"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Unblock: test Gemini" />
+                        <CheckBox
+                            x:Name="chkUnblockGem"
+                            Grid.Row="26"
+                            Grid.Column="1"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="27"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Unblock: test ChatGPT" />
+                        <CheckBox
+                            x:Name="chkUnblockChat"
+                            Grid.Row="27"
+                            Grid.Column="1"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="28"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin8}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
                             Text="{x:Static resx:ResUI.TbSettingsSubConvert}" />
                         <ComboBox
                             x:Name="cmbSubConvertUrl"
-                            Grid.Row="23"
+                            Grid.Row="28"
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin8}"
@@ -1126,7 +1206,7 @@
                             Style="{StaticResource DefComboBox}" />
 
                         <TextBlock
-                            Grid.Row="24"
+                            Grid.Row="29"
                             Grid.Column="0"
                             Margin="{StaticResource Margin8}"
                             VerticalAlignment="Center"
@@ -1134,14 +1214,14 @@
                             Text="{x:Static resx:ResUI.TbSettingsMainGirdOrientation}" />
                         <ComboBox
                             x:Name="cmbMainGirdOrientation"
-                            Grid.Row="24"
+                            Grid.Row="29"
                             Grid.Column="1"
                             Width="200"
                             Margin="{StaticResource Margin8}"
                             Style="{StaticResource DefComboBox}" />
 
                         <TextBlock
-                            Grid.Row="25"
+                            Grid.Row="30"
                             Grid.Column="0"
                             Margin="{StaticResource Margin8}"
                             VerticalAlignment="Center"
@@ -1149,14 +1229,14 @@
                             Text="{x:Static resx:ResUI.TbSettingsGeoFilesSource}" />
                         <ComboBox
                             x:Name="cmbGetFilesSourceUrl"
-                            Grid.Row="25"
+                            Grid.Row="30"
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin8}"
                             IsEditable="True"
                             Style="{StaticResource DefComboBox}" />
                         <TextBlock
-                            Grid.Row="25"
+                            Grid.Row="30"
                             Grid.Column="2"
                             Margin="{StaticResource Margin4}"
                             VerticalAlignment="Center"
@@ -1165,7 +1245,7 @@
                             TextWrapping="Wrap" />
 
                         <TextBlock
-                            Grid.Row="26"
+                            Grid.Row="31"
                             Grid.Column="0"
                             Margin="{StaticResource Margin8}"
                             VerticalAlignment="Center"
@@ -1173,14 +1253,14 @@
                             Text="{x:Static resx:ResUI.TbSettingsSrsFilesSource}" />
                         <ComboBox
                             x:Name="cmbSrsFilesSourceUrl"
-                            Grid.Row="26"
+                            Grid.Row="31"
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin8}"
                             IsEditable="True"
                             Style="{StaticResource DefComboBox}" />
                         <TextBlock
-                            Grid.Row="26"
+                            Grid.Row="31"
                             Grid.Column="2"
                             Margin="{StaticResource Margin4}"
                             VerticalAlignment="Center"
@@ -1189,7 +1269,7 @@
                             TextWrapping="Wrap" />
 
                         <TextBlock
-                            Grid.Row="27"
+                            Grid.Row="32"
                             Grid.Column="0"
                             Margin="{StaticResource Margin8}"
                             VerticalAlignment="Center"
@@ -1197,14 +1277,14 @@
                             Text="{x:Static resx:ResUI.TbSettingsRoutingRulesSource}" />
                         <ComboBox
                             x:Name="cmbRoutingRulesSourceUrl"
-                            Grid.Row="27"
+                            Grid.Row="32"
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin8}"
                             IsEditable="True"
                             Style="{StaticResource DefComboBox}" />
                         <TextBlock
-                            Grid.Row="27"
+                            Grid.Row="32"
                             Grid.Column="2"
                             Margin="{StaticResource Margin4}"
                             VerticalAlignment="Center"

@@ -65,7 +65,7 @@
                                     x:Name="menuAddServerViaScan"
                                     Height="{StaticResource MenuItemHeight}"
                                     Header="{x:Static resx:ResUI.menuAddServerViaScan}"
-                                    InputGestureText="Ctrl+S" />
+                                    InputGestureText="Ctrl+Alt+Q" />
                                 <MenuItem
                                     x:Name="menuAddServerViaImage"
                                     Height="{StaticResource MenuItemHeight}"
@@ -178,7 +178,8 @@
                                 <MenuItem
                                     x:Name="menuSubGroupUpdate"
                                     Height="{StaticResource MenuItemHeight}"
-                                    Header="{x:Static resx:ResUI.menuSubGroupUpdate}" />
+                                    Header="{x:Static resx:ResUI.menuSubGroupUpdate}"
+                                    InputGestureText="Ctrl+U" />
                                 <MenuItem
                                     x:Name="menuSubGroupUpdateViaProxy"
                                     Height="{StaticResource MenuItemHeight}"
@@ -229,7 +230,8 @@
                                 <MenuItem
                                     x:Name="menuClearServerStatistics"
                                     Height="{StaticResource MenuItemHeight}"
-                                    Header="{x:Static resx:ResUI.menuClearServerStatistics}" />
+                                    Header="{x:Static resx:ResUI.menuClearServerStatistics}"
+                                    InputGestureText="Ctrl+Alt+C" />
                                 <Separator Margin="-40,5" />
                                 <MenuItem Height="{StaticResource MenuItemHeight}" Header="{x:Static resx:ResUI.menuRegionalPresets}">
                                     <MenuItem

@@ -16,6 +16,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <conv:DelayColorConverter x:Key="DelayColorConverter" />
+        <conv:UnblockStatusColorConverter x:Key="UnblockStatusColorConverter" />
     </UserControl.Resources>
     <Grid>
         <DockPanel>
@@ -151,6 +152,10 @@
                             x:Name="menuSpeedServer"
                             Header="{x:Static resx:ResUI.menuSpeedServer}"
                             InputGesture="Ctrl+T" />
+                        <MenuItem
+                            x:Name="menuUnblockTestServer"
+                            Header="Unblock Test"
+                            InputGesture="Ctrl+Alt+B" />
                         <MenuItem x:Name="menuUdpTestServer" Header="{x:Static resx:ResUI.menuUdpTestServer}" />
                         <MenuItem x:Name="menuSortServerResult" Header="{x:Static resx:ResUI.menuSortServerResult}" />
                         <Separator />
@@ -314,6 +319,86 @@
                                         </ContextMenu>
                                     </TextBlock.ContextMenu>
                                 </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn
+                        Width="180"
+                        Header="Unblock"
+                        SortMemberPath="UnblockSummary"
+                        Tag="Unblock">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="{StaticResource MarginLr8}"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Path=UnblockSummary, Mode=OneWay}"
+                                    ToolTip.Tip="{Binding UnblockTooltip, Mode=OneWay}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                        Width="60"
+                        Header="YT"
+                        SortMemberPath="YtStatus"
+                        Tag="YtStatus">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="{StaticResource MarginLr8}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Foreground="{Binding YtStatus, Converter={StaticResource UnblockStatusColorConverter}}"
+                                    Text="{Binding Path=YtText, Mode=OneWay}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                        Width="60"
+                        Header="NF"
+                        SortMemberPath="NfStatus"
+                        Tag="NfStatus">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="{StaticResource MarginLr8}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Foreground="{Binding NfStatus, Converter={StaticResource UnblockStatusColorConverter}}"
+                                    Text="{Binding Path=NfText, Mode=OneWay}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                        Width="70"
+                        Header="GEM"
+                        SortMemberPath="GemStatus"
+                        Tag="GemStatus">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="{StaticResource MarginLr8}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Foreground="{Binding GemStatus, Converter={StaticResource UnblockStatusColorConverter}}"
+                                    Text="{Binding Path=GemText, Mode=OneWay}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                        Width="70"
+                        Header="CHAT"
+                        SortMemberPath="ChatStatus"
+                        Tag="ChatStatus">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="{StaticResource MarginLr8}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Foreground="{Binding ChatStatus, Converter={StaticResource UnblockStatusColorConverter}}"
+                                    Text="{Binding Path=ChatText, Mode=OneWay}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -1,10 +1,14 @@
+using ServiceLib.Services.Unblock;
+
 namespace ServiceLib.Manager;
 
 public class ProfileExManager
 {
     private static readonly Lazy<ProfileExManager> _instance = new(() => new());
     private ConcurrentDictionary<string, ProfileExItem> _dicProfileEx = new();
+    private ConcurrentDictionary<string, UnblockItem> _dicUnblock = new();
     private readonly ConcurrentQueue<string> _queIndexIds = new();
+    private readonly ConcurrentQueue<string> _queUnblockIds = new();
     private readonly Lock _profileExLock = new();
     private int _maxSort;
     public static ProfileExManager Instance => _instance.Value;
@@ -25,19 +29,31 @@ public class ProfileExManager
         return await Task.FromResult(_dicProfileEx.Values);
     }
 
+    public List<UnblockItem> GetUnblocks()
+    {
+        return [.. _dicUnblock.Values];
+    }
+
     private async Task InitData()
     {
         await SQLiteHelper.Instance.ExecuteAsync($"delete from ProfileExItem where indexId not in ( select indexId from ProfileItem )");
+        await SQLiteHelper.Instance.ExecuteAsync($"delete from UnblockItem where indexId not in ( select indexId from ProfileItem )");
 
         var dicProfileEx = new ConcurrentDictionary<string, ProfileExItem>();
         foreach (var item in await SQLiteHelper.Instance.TableAsync<ProfileExItem>().ToListAsync())
         {
             dicProfileEx[item.IndexId] = item;
         }
+        var dicUnblock = new ConcurrentDictionary<string, UnblockItem>();
+        foreach (var item in await SQLiteHelper.Instance.TableAsync<UnblockItem>().ToListAsync())
+        {
+            dicUnblock[item.IndexId] = item;
+        }
         lock (_profileExLock)
         {
             _dicProfileEx = dicProfileEx;
             _maxSort = dicProfileEx.Values.Select(t => t.Sort).DefaultIfEmpty(0).Max();
+            _dicUnblock = dicUnblock;
         }
     }
 
@@ -47,6 +63,14 @@ public class ProfileExManager
         {
             //Speed tests touch this from many threads; the save loop deduplicates IDs.
             _queIndexIds.Enqueue(indexId);
+        }
+    }
+
+    private void UnblockIdEnqueue(string indexId)
+    {
+        if (indexId.IsNotEmpty())
+        {
+            _queUnblockIds.Enqueue(indexId);
         }
     }
 
@@ -77,6 +101,42 @@ public class ProfileExManager
                 if (lstSaves.Count > 0)
                 {
                     //Another save may have inserted these rows since the queue was drained.
+                    await SQLiteHelper.Instance.ReplaceAllAsync(lstSaves);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.SaveLog(_tag, ex);
+            }
+        }
+    }
+
+    private async Task SaveQueueUnblockIds()
+    {
+        var lstIds = new HashSet<string>();
+        while (_queUnblockIds.TryDequeue(out var id))
+        {
+            lstIds.Add(id);
+        }
+
+        if (lstIds.Count > 0)
+        {
+            List<UnblockItem> lstSaves = [];
+
+            foreach (var id in lstIds)
+            {
+                if (!_dicUnblock.TryGetValue(id, out var itemNew))
+                {
+                    continue;
+                }
+
+                lstSaves.Add(itemNew);
+            }
+
+            try
+            {
+                if (lstSaves.Count > 0)
+                {
                     await SQLiteHelper.Instance.ReplaceAllAsync(lstSaves);
                 }
             }
@@ -126,11 +186,21 @@ public class ProfileExManager
         }
     }
 
+    public async Task ClearAllUnblock()
+    {
+        await SQLiteHelper.Instance.ExecuteAsync($"delete from UnblockItem ");
+        lock (_profileExLock)
+        {
+            _dicUnblock = new();
+        }
+    }
+
     public async Task SaveTo()
     {
         try
         {
             await SaveQueueIndexIds();
+            await SaveQueueUnblockIds();
         }
         catch (Exception ex)
         {
@@ -168,6 +238,40 @@ public class ProfileExManager
 
         profileEx.IpInfo = ipInfo;
         IndexIdEnqueue(indexId);
+    }
+
+    public void SetTestUnblock(string indexId, UnblockNodeResult result)
+    {
+        var unblockItem = new UnblockItem()
+        {
+            IndexId = indexId,
+            ExitIp = result.ExitIp,
+            ExitCountry = result.ExitCountry,
+            LatencyMedianMs = result.LatencyMedianMs,
+            AttemptsOk = result.AttemptsOk,
+            AttemptsTotal = result.AttemptsTotal,
+            YtStatus = GetServiceStatus(result, "YouTube"),
+            NfStatus = GetServiceStatus(result, "Netflix"),
+            GemStatus = GetServiceStatus(result, "Gemini"),
+            ChatStatus = GetServiceStatus(result, "ChatGPT"),
+            EvidenceJson = JsonSerializer.Serialize(result.Services),
+            PredictedLockGemini = result.PredictedLockGemini,
+            PredictedLockChatGpt = result.PredictedLockChatGpt,
+            TestTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        };
+        _dicUnblock[indexId] = unblockItem;
+        UnblockIdEnqueue(indexId);
+    }
+
+    public UnblockItem? GetUnblock(string indexId)
+    {
+        return _dicUnblock.TryGetValue(indexId, out var unblockItem) ? unblockItem : null;
+    }
+
+    private static int GetServiceStatus(UnblockNodeResult result, string service)
+    {
+        var item = result.Services.FirstOrDefault(t => t.Service == service);
+        return item == null ? (int)EUnblockStatus.Unknown : (int)item.Status;
     }
 
     public void SetSort(string indexId, int sort)

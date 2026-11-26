@@ -118,6 +118,10 @@ public class SpeedtestService(Config config, Func<SpeedTestResult, Task> updateF
                     await RunMixedTestAsync(lstSelected, completedIds, _config.SpeedTestItem.MixedConcurrencyCount, true,
                         ct);
                     break;
+
+                case ESpeedActionType.UnblockTest:
+                    await RunUnblockTestAsync(lstSelected, ct);
+                    break;
             }
             // PattN
             await RunAetherTestsAsync(actionType, lstAether, completedIds, ct);
@@ -207,6 +211,9 @@ public class SpeedtestService(Config config, Func<SpeedTestResult, Task> updateF
                 case ESpeedActionType.Mixedtest:
                     ProfileExManager.Instance.SetTestSpeed(it.IndexId, 0);
                     await UpdateFunc(it.IndexId, message, message);
+                    break;
+
+                case ESpeedActionType.UnblockTest:
                     break;
             }
         }
@@ -349,6 +356,179 @@ public class SpeedtestService(Config config, Func<SpeedTestResult, Task> updateF
             }
         }
         return true;
+    }
+
+    private async Task RunUnblockTestAsync(List<ServerTestItem> lstSelected, CancellationToken ct, int pageSize = 0)
+    {
+        if (pageSize <= 0)
+        {
+            pageSize = _config.SpeedTestItem.UnblockPageSize ?? Global.UnblockTestPageSize;
+        }
+        var lstTest = GetTestBatchItem(lstSelected, pageSize);
+
+        List<ServerTestItem> lstFailed = [];
+        var totalPages = lstTest.Count;
+        for (var pageNo = 1; pageNo <= totalPages; pageNo++)
+        {
+            ct.ThrowIfCancellationRequested();
+
+            await UpdateFunc("", $"Unblock testing page {pageNo}/{totalPages} ({lstSelected.Count} configs)");
+
+            var lst = lstTest[pageNo - 1];
+            var ret = await RunUnblockPageAsync(lst, ct);
+            if (ret == false)
+            {
+                lstFailed.AddRange(lst);
+            }
+            if (pageNo < totalPages)
+            {
+                await Task.Delay(_delayInterval, ct);
+            }
+        }
+
+        var pageSizeNext = pageSize / 2;
+        if (lstFailed.Count > 0 && pageSizeNext > 0)
+        {
+            ct.ThrowIfCancellationRequested();
+
+            await UpdateFunc("", string.Format(ResUI.SpeedtestingTestFailedPart, lstFailed.Count));
+
+            await RunUnblockTestAsync(lstFailed, ct, pageSizeNext);
+        }
+    }
+
+    private async Task<bool> RunUnblockPageAsync(List<ServerTestItem> selecteds, CancellationToken ct)
+    {
+        ProcessService processService = null;
+        try
+        {
+            processService = await CoreManager.Instance.LoadCoreConfigSpeedtest(selecteds);
+            if (processService is null)
+            {
+                return false;
+            }
+            await Task.Delay(1000, ct);
+
+            var parallelOptions = new ParallelOptions
+            {
+                MaxDegreeOfParallelism = selecteds.Count,
+                CancellationToken = ct,
+            };
+
+            await Parallel.ForEachAsync(selecteds, parallelOptions, async (it, innerCt) =>
+            {
+                if (!it.AllowTest)
+                {
+                    await UpdateFunc(it.IndexId, ResUI.SpeedtestingSkip);
+                    return;
+                }
+
+                try
+                {
+                    await DoUnblockCheckAsync(it, innerCt);
+                }
+                catch (OperationCanceledException) when (ct.IsCancellationRequested)
+                {
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    Logging.SaveLog(_tag, ex);
+                }
+            });
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            Logging.SaveLog(_tag, ex);
+        }
+        finally
+        {
+            if (processService != null)
+            {
+                await processService?.StopAsync();
+            }
+        }
+        return true;
+    }
+
+    private async Task DoUnblockCheckAsync(ServerTestItem it, CancellationToken ct)
+    {
+        try
+        {
+            using var handler = HttpClientHelper.CreateProxySocketsHttpHandler(it.Port, new());
+            handler.ConnectTimeout = Global.LocalFetch;
+            using var client = new HttpClient(handler, false);
+
+            var attempts = new List<int>();
+            for (var i = 0; i < 3; i++)
+            {
+                using var attemptCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+                var time = await ConnectionHandler.GetRealPingTime(client, attemptCts.Token);
+                if (time > 0)
+                {
+                    attempts.Add(time);
+                }
+            }
+            attempts.Sort();
+            var latencyMedian = attempts.Count == 0
+                ? -1
+                : attempts.Count % 2 == 1
+                    ? attempts[attempts.Count / 2]
+                    : (attempts[attempts.Count / 2 - 1] + attempts[attempts.Count / 2]) / 2;
+
+            string? exitIp = null;
+            string? exitCountry = null;
+            try
+            {
+                using var traceCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+                traceCts.CancelAfter(TimeSpan.FromSeconds(5));
+                var trace = await client.GetStringAsync("http://www.cloudflare.com/cdn-cgi/trace", traceCts.Token);
+                foreach (var line in trace.Split('\n'))
+                {
+                    if (line.StartsWith("ip=", StringComparison.Ordinal))
+                    {
+                        exitIp = line[3..].Trim();
+                    }
+                    else if (line.StartsWith("loc=", StringComparison.Ordinal))
+                    {
+                        exitCountry = line[4..].Trim().ToUpperInvariant();
+                    }
+                }
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Logging.SaveLog(_tag, ex);
+            }
+
+            var enabled = _config.SpeedTestItem.UnblockServices ?? Global.UnblockDefaultServices;
+            var nodeResult = await Unblock.UnblockChecker.CheckServicesAsync(client, enabled, ct);
+            nodeResult.ExitIp = exitIp;
+            nodeResult.ExitCountry = exitCountry;
+            nodeResult.LatencyMedianMs = latencyMedian;
+            nodeResult.AttemptsOk = attempts.Count;
+            nodeResult.AttemptsTotal = 3;
+            nodeResult.PredictedLockGemini = Unblock.CountryLockLists.IsGeminiLocked(exitCountry);
+            nodeResult.PredictedLockChatGpt = Unblock.CountryLockLists.IsChatGptLocked(exitCountry);
+
+            ProfileExManager.Instance.SetTestUnblock(it.IndexId, nodeResult);
+            await _updateFunc?.Invoke(new SpeedTestResult { IndexId = it.IndexId, Delay = latencyMedian.ToString(), Unblock = nodeResult });
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            Logging.SaveLog(_tag, ex);
+        }
     }
 
     private async Task RunUdpTestBatchAsync(List<ServerTestItem> lstSelected,
@@ -714,6 +894,11 @@ public class SpeedtestService(Config config, Func<SpeedTestResult, Task> updateF
                     case ESpeedActionType.Speedtest:
                     case ESpeedActionType.Mixedtest:
                         await DoAetherTest(it, true, completedIds, ct);
+                        break;
+
+                    case ESpeedActionType.UnblockTest:
+                        await UpdateFunc(it.IndexId, ResUI.SpeedtestingSkip);
+                        completedIds.TryAdd(it.IndexId, 0);
                         break;
 
                     default:

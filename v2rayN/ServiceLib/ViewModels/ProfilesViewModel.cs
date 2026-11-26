@@ -72,6 +72,7 @@ public partial class ProfilesViewModel : MyReactiveObject
     public ReactiveCommand<RxVoid, RxVoid> RealPingServerCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> UdpTestServerCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> SpeedServerCmd { get; }
+    public ReactiveCommand<RxVoid, RxVoid> UnblockTestServerCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> SortServerResultCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> RemoveInvalidServerResultCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> FastRealPingCmd { get; }
@@ -194,6 +195,10 @@ public partial class ProfilesViewModel : MyReactiveObject
         {
             await ServerSpeedtest(ESpeedActionType.Speedtest);
         }, canEditRemove);
+        UnblockTestServerCmd = ReactiveCommand.CreateFromTask(async () =>
+        {
+            await ServerSpeedtest(ESpeedActionType.UnblockTest);
+        }, canEditRemove);
         SortServerResultCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await SortServer(nameof(EServerColName.DelayVal));
@@ -298,7 +303,99 @@ public partial class ProfilesViewModel : MyReactiveObject
         {
             item.IpInfo = result.IpInfo ?? string.Empty;
         }
+        if (result.Unblock != null)
+        {
+            var unblock = result.Unblock;
+            var yt = unblock.Services.FirstOrDefault(t => t.Service == "YouTube");
+            var nf = unblock.Services.FirstOrDefault(t => t.Service == "Netflix");
+            var gem = unblock.Services.FirstOrDefault(t => t.Service == "Gemini");
+            var chat = unblock.Services.FirstOrDefault(t => t.Service == "ChatGPT");
+            item.YtStatus = yt == null ? 0 : (int)yt.Status;
+            item.NfStatus = nf == null ? 0 : (int)nf.Status;
+            item.GemStatus = gem == null ? 0 : (int)gem.Status;
+            item.ChatStatus = chat == null ? 0 : (int)chat.Status;
+            item.YtText = GetUnblockSymbol(item.YtStatus);
+            item.NfText = GetUnblockSymbol(item.NfStatus);
+            item.GemText = GetUnblockSymbol(item.GemStatus);
+            item.ChatText = GetUnblockSymbol(item.ChatStatus);
+            item.UnblockSummary = $"YT {item.YtText} GEM {item.GemText} NF {item.NfText} CHAT {item.ChatText} {unblock.AttemptsOk}/{unblock.AttemptsTotal} {unblock.ExitCountry ?? ""}";
+            item.UnblockTooltip = BuildUnblockTooltip(unblock);
+            item.ExitIpU = unblock.ExitIp;
+            item.ExitCountryU = unblock.ExitCountry;
+        }
         await Task.CompletedTask;
+    }
+
+    private static string GetUnblockSymbol(int status)
+    {
+        return status switch
+        {
+            1 => "✔",
+            2 => "✘lock",
+            3 => "⚠",
+            4 => "✘",
+            _ => "—"
+        };
+    }
+
+    private static string BuildUnblockTooltip(ServiceLib.Services.Unblock.UnblockNodeResult unblock)
+    {
+        var lines = new List<string>();
+        foreach (var service in unblock.Services)
+        {
+            var evidence = service.Evidence;
+            lines.Add(evidence == null
+                ? $"{service.Service}: {service.Status}"
+                : $"{service.Service}: {service.Status} ({evidence.HttpStatusCode}, {evidence.FinalUrl ?? ""}, {evidence.ElapsedMs}ms, {evidence.MatchedMarker ?? ""})");
+        }
+        if (unblock.PredictedLockGemini)
+        {
+            lines.Add($"Predicted: Gemini country-lock ({unblock.ExitCountry ?? ""})");
+        }
+        if (unblock.PredictedLockChatGpt)
+        {
+            lines.Add($"Predicted: ChatGPT country-lock ({unblock.ExitCountry ?? ""})");
+        }
+        return string.Join(Environment.NewLine, lines);
+    }
+
+    private static string BuildUnblockSummary(UnblockItem? item)
+    {
+        if (item == null)
+        {
+            return string.Empty;
+        }
+
+        return $"YT {GetUnblockSymbol(item.YtStatus)} GEM {GetUnblockSymbol(item.GemStatus)} NF {GetUnblockSymbol(item.NfStatus)} CHAT {GetUnblockSymbol(item.ChatStatus)} {item.AttemptsOk}/{item.AttemptsTotal} {item.ExitCountry ?? ""}";
+    }
+
+    private static string BuildUnblockTooltip(UnblockItem? item)
+    {
+        if (item == null)
+        {
+            return string.Empty;
+        }
+
+        var lines = new List<string>();
+        if (item.YtStatus > 0)
+        {
+            lines.Add($"YouTube: {GetUnblockSymbol(item.YtStatus)}");
+        }
+        if (item.NfStatus > 0)
+        {
+            lines.Add($"Netflix: {GetUnblockSymbol(item.NfStatus)}");
+        }
+        if (item.GemStatus > 0)
+        {
+            lines.Add($"Gemini: {GetUnblockSymbol(item.GemStatus)}");
+        }
+        if (item.ChatStatus > 0)
+        {
+            lines.Add($"ChatGPT: {GetUnblockSymbol(item.ChatStatus)}");
+        }
+        lines.Add($"Exit: {item.ExitIp ?? ""} {item.ExitCountry ?? ""}".TrimEnd());
+        lines.Add($"Tested: {item.TestTime ?? ""}");
+        return string.Join(Environment.NewLine, lines);
     }
 
     public async Task UpdateStatistics(ServerSpeedItem update)
@@ -432,6 +529,28 @@ public partial class ProfilesViewModel : MyReactiveObject
                         TotalDown = t22 == null ? "" : Utils.HumanFy(t22.TotalDown),
                         TotalUp = t22 == null ? "" : Utils.HumanFy(t22.TotalUp)
                     }).OrderBy(t => t.Sort).ToList();
+
+        foreach (var it in lstModel)
+        {
+            var unblock = ProfileExManager.Instance.GetUnblock(it.IndexId);
+            if (unblock == null)
+            {
+                continue;
+            }
+
+            it.YtStatus = unblock.YtStatus;
+            it.NfStatus = unblock.NfStatus;
+            it.GemStatus = unblock.GemStatus;
+            it.ChatStatus = unblock.ChatStatus;
+            it.YtText = GetUnblockSymbol(unblock.YtStatus);
+            it.NfText = GetUnblockSymbol(unblock.NfStatus);
+            it.GemText = GetUnblockSymbol(unblock.GemStatus);
+            it.ChatText = GetUnblockSymbol(unblock.ChatStatus);
+            it.UnblockSummary = BuildUnblockSummary(unblock);
+            it.UnblockTooltip = BuildUnblockTooltip(unblock);
+            it.ExitIpU = unblock.ExitIp;
+            it.ExitCountryU = unblock.ExitCountry;
+        }
 
         // PattN: an Aether row names its tunnel from the outside in, with the WARP protocol as the editor names it, in
         // the Network column (design 3.8, PattNG serverProtocolDescription); its profiles are read in one batch.

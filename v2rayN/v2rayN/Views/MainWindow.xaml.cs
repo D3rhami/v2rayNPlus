@@ -217,7 +217,23 @@ public partial class MainWindow
 
     private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+        var ctrlDown = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+        var altDown = Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt);
+
+        if (ctrlDown && altDown)
+        {
+            switch (e.Key)
+            {
+                case Key.Q:
+                    ScanScreenTaskAsync().ContinueWith(_ => { });
+                    break;
+
+                case Key.C:
+                    ((ICommand)ViewModel?.ClearServerStatisticsCmd)?.Execute(null);
+                    break;
+            }
+        }
+        else if (ctrlDown)
         {
             switch (e.Key)
             {
@@ -230,8 +246,12 @@ public partial class MainWindow
 
                     break;
 
-                case Key.S:
-                    ScanScreenTaskAsync().ContinueWith(_ => { });
+                case Key.U:
+                    if (Keyboard.FocusedElement is TextBox)
+                    {
+                        return;
+                    }
+                    ((ICommand)ViewModel?.SubGroupUpdateCmd)?.Execute(null);
                     break;
             }
         }

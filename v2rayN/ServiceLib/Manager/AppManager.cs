@@ -87,6 +87,7 @@ public sealed class AppManager
         SQLiteHelper.Instance.CreateTable<ServerStatItem>();
         SQLiteHelper.Instance.CreateTable<RoutingItem>();
         SQLiteHelper.Instance.CreateTable<ProfileExItem>();
+        SQLiteHelper.Instance.CreateTable<UnblockItem>();
         SQLiteHelper.Instance.CreateTable<DNSItem>();
         SQLiteHelper.Instance.CreateTable<FullConfigTemplateItem>();
 #pragma warning disable CS0618

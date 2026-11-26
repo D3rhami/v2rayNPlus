@@ -46,6 +46,7 @@ public partial class OptionSettingWindow
         cmbCoreType14.ItemsSource = Global.CoreTypes;
 
         cmbMixedConcurrencyCount.ItemsSource = Enumerable.Range(Global.SpeedTestConcurrencyCountMin, 20).ToList();
+        cmbUnblockPageSize.ItemsSource = new List<int> { 10, 16, 25, 32, 50, 100 };
         cmbSpeedTestTimeout.ItemsSource = Enumerable.Range(2, 5).Select(i => i * 5).ToList();
         cmbSpeedTestUrl.ItemsSource = Global.SpeedTestUrls;
         cmbSpeedPingTestUrl.ItemsSource = Global.SpeedPingTestUrls;
@@ -113,6 +114,11 @@ public partial class OptionSettingWindow
             this.Bind(ViewModel, vm => vm.SpeedPingTestUrl, v => v.cmbSpeedPingTestUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.UdpTestTarget, v => v.cmbUdpTestTarget.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MixedConcurrencyCount, v => v.cmbMixedConcurrencyCount.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockPageSize, v => v.cmbUnblockPageSize.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockYtEnabled, v => v.chkUnblockYt.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockNfEnabled, v => v.chkUnblockNf.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockGemEnabled, v => v.chkUnblockGem.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockChatEnabled, v => v.chkUnblockChat.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.EnableHWA, v => v.togEnableHWA.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SubConvertUrl, v => v.cmbSubConvertUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MainGirdOrientation, v => v.cmbMainGirdOrientation.SelectedIndex).DisposeWith(disposables);

@@ -13,6 +13,11 @@ public enum EServerColName
     DelayVal,
     SpeedVal,
     IpInfo,
+    Unblock,
+    YtStatus,
+    NfStatus,
+    GemStatus,
+    ChatStatus,
 
     TodayDown,
     TodayUp,
