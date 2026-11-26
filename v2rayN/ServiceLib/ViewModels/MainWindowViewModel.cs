@@ -533,41 +533,48 @@ public partial class MainWindowViewModel : MyReactiveObject
         {
             await RefreshSubscriptions();
             await RefreshServersDispatcherAsync();
-            NoticeManager.Instance.Enqueue(string.Format(ResUI.SuccessfullyImportedServerViaClipboard, ret));
+            NoticeManager.Instance.SendMessageEx($"Imported {ret} profiles from clipboard");
         }
         else
         {
-            NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
+            NoticeManager.Instance.SendMessageEx("Nothing imported from clipboard - the content is not valid share links (ss:// vmess:// vless:// trojan://)");
         }
     }
 
     public async Task AddUrlContentToCurrentGroupAsync(string url)
     {
+        NoticeManager.Instance.SendMessageEx($"Unblock: fetching {url}");
         var content = await new DownloadService().TryDownloadString(url);
         if (content.IsNullOrEmpty())
         {
             var handler = HttpClientHelper.CreateProxySocketsHttpHandler(AppManager.Instance.GetLocalPort(EInboundProtocol.socks));
             content = await new DownloadService { Handler = handler }.TryDownloadString(url);
+            if (content.IsNullOrEmpty())
+            {
+                NoticeManager.Instance.SendMessageEx("Unblock: fetch failed direct and through the local proxy. Start a working node first, or paste share links (ss:// vmess:// vless:// trojan://) directly with Ctrl+V");
+                return;
+            }
+            NoticeManager.Instance.SendMessageEx($"Unblock: direct fetch failed, fetched through local proxy ({content.Length} chars)");
         }
-        if (content.IsNullOrEmpty())
+        else
         {
-            NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
-            return;
+            NoticeManager.Instance.SendMessageEx($"Unblock: fetched {content.Length} chars");
         }
         var ret = await ConfigHandler.AddBatchServers(_config, content, _config.SubIndexId, false);
         if (ret > 0)
         {
             await RefreshServersDispatcherAsync();
-            NoticeManager.Instance.Enqueue(string.Format(ResUI.SuccessfullyImportedServerViaClipboard, ret));
+            NoticeManager.Instance.SendMessageEx($"Unblock: imported {ret} profiles into the current group");
         }
         else
         {
-            NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
+            NoticeManager.Instance.SendMessageEx("Unblock: no profiles imported from the content");
         }
     }
 
     public async Task AddSubscriptionNewGroupFromUrlAsync(string url)
     {
+        NoticeManager.Instance.SendMessageEx($"Unblock: creating subscription group for {url}");
         var subs = await AppManager.Instance.SubItems();
         var existing = subs?.FirstOrDefault(t => t.Url == url);
         if (existing == null)
@@ -576,12 +583,17 @@ public partial class MainWindowViewModel : MyReactiveObject
             var ret = await ConfigHandler.AddSubItem(_config, new SubItem { Id = string.Empty, Url = url, Remarks = name });
             if (ret == -1)
             {
-                NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
+                NoticeManager.Instance.SendMessageEx("Unblock: subscription creation failed");
                 return;
             }
+            NoticeManager.Instance.SendMessageEx($"Unblock: subscription created [{name}], updating nodes...");
             await RefreshSubscriptions();
             subs = await AppManager.Instance.SubItems();
             existing = subs?.FirstOrDefault(t => t.Url == url);
+        }
+        else
+        {
+            NoticeManager.Instance.SendMessageEx($"Unblock: subscription already exists [{existing.Remarks}], updating nodes...");
         }
         if (existing != null)
         {
