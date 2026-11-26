@@ -295,23 +295,23 @@ public partial class MainWindow
             var trimmed = clipboardData.Trim();
             if (trimmed.StartsWith("http://") || trimmed.StartsWith("https://"))
             {
-                var dialog = new ChoiceDialog(
-                    "URL detected",
-                    $"{trimmed}\nHow to add?",
-                    new List<string> { "As Subscription (create new group)", "As profile links" },
-                    2)
-                {
-                    Owner = this,
-                };
+                var dialog = new UrlDetectedDialog(trimmed) { Owner = this };
                 dialog.ShowDialog();
-                if (dialog.Choice < 0)
+                switch (dialog.Choice)
                 {
-                    return;
-                }
-                if (dialog.Choice == 0)
-                {
-                    await ViewModel.AddSubscriptionFromClipboardUrlAsync(trimmed);
-                    return;
+                    case 0:
+                        await ViewModel.AddUrlContentToCurrentGroupAsync(trimmed);
+                        return;
+
+                    case 1:
+                        await ViewModel.AddSubscriptionNewGroupFromUrlAsync(trimmed);
+                        return;
+
+                    case 2:
+                        break;
+
+                    default:
+                        return;
                 }
             }
             await ViewModel.AddServerViaClipboardAsync(clipboardData);

@@ -541,22 +541,97 @@ public partial class MainWindowViewModel : MyReactiveObject
         }
     }
 
-    public async Task AddSubscriptionFromClipboardUrlAsync(string url)
+    public async Task AddUrlContentToCurrentGroupAsync(string url)
     {
-        var ret = await ConfigHandler.AddSubItem(_config, url);
-        if (ret == -1)
+        var content = await new DownloadService().TryDownloadString(url);
+        if (content.IsNullOrEmpty())
         {
             NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
             return;
         }
-        await RefreshSubscriptions();
-        var sub = (await AppManager.Instance.SubItems()).FirstOrDefault(t => t.Url == url);
-        if (sub != null)
+        var ret = await ConfigHandler.AddBatchServers(_config, content, _config.SubIndexId, false);
+        if (ret > 0)
         {
-            _config.SubIndexId = sub.Id;
+            await RefreshServersDispatcherAsync();
+            NoticeManager.Instance.Enqueue(string.Format(ResUI.SuccessfullyImportedServerViaClipboard, ret));
         }
-        await UpdateSubscriptionProcess(_config.SubIndexId, false);
+        else
+        {
+            NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
+        }
+    }
+
+    public async Task AddSubscriptionNewGroupFromUrlAsync(string url)
+    {
+        var subs = await AppManager.Instance.SubItems();
+        var existing = subs?.FirstOrDefault(t => t.Url == url);
+        if (existing == null)
+        {
+            var name = await BuildUniqueGroupName(url);
+            var ret = await ConfigHandler.AddSubItem(_config, new SubItem { Id = string.Empty, Url = url, Remarks = name });
+            if (ret == -1)
+            {
+                NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
+                return;
+            }
+            await RefreshSubscriptions();
+            subs = await AppManager.Instance.SubItems();
+            existing = subs?.FirstOrDefault(t => t.Url == url);
+        }
+        if (existing != null)
+        {
+            _config.SubIndexId = existing.Id;
+            await UpdateSubscriptionProcess(existing.Id, false);
+        }
         await RefreshServersDispatcherAsync();
+    }
+
+    private async Task<string> BuildUniqueGroupName(string url)
+    {
+        string baseName;
+        try
+        {
+            var uri = new Uri(url);
+            var host = uri.Host.StartsWith("www.") ? uri.Host[4..] : uri.Host;
+            var segments = uri.AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries);
+            baseName = host;
+            if (host.EndsWith("githubusercontent.com") && segments.Length >= 2)
+            {
+                baseName = segments[1];
+            }
+            else if (host.Equals("github.com", StringComparison.OrdinalIgnoreCase) && segments.Length >= 2)
+            {
+                baseName = segments[1];
+            }
+            else if (segments.Length > 0)
+            {
+                var last = Path.GetFileNameWithoutExtension(segments[^1]);
+                if (last.IsNotEmpty() && !last.Equals("main", StringComparison.OrdinalIgnoreCase) && !last.Equals("master", StringComparison.OrdinalIgnoreCase))
+                {
+                    baseName = last;
+                }
+            }
+            if (baseName.Length > 48)
+            {
+                baseName = baseName[..48];
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.SaveLog("AddSubscription", ex);
+            baseName = "import_sub";
+        }
+        var existing = (await AppManager.Instance.SubItems())?.Select(s => s.Remarks).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        if (existing.Contains(baseName))
+        {
+            var n = 2;
+            while (existing.Contains($"{baseName} ({n})"))
+            {
+                n++;
+            }
+            baseName = $"{baseName} ({n})";
+        }
+        return baseName;
     }
 
     public async Task AddServerViaScanAsync()
