@@ -541,6 +541,24 @@ public partial class MainWindowViewModel : MyReactiveObject
         }
     }
 
+    public async Task AddSubscriptionFromClipboardUrlAsync(string url)
+    {
+        var ret = await ConfigHandler.AddSubItem(_config, url);
+        if (ret == -1)
+        {
+            NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
+            return;
+        }
+        await RefreshSubscriptions();
+        var sub = (await AppManager.Instance.SubItems()).FirstOrDefault(t => t.Url == url);
+        if (sub != null)
+        {
+            _config.SubIndexId = sub.Id;
+        }
+        await UpdateSubscriptionProcess(_config.SubIndexId, false);
+        await RefreshServersDispatcherAsync();
+    }
+
     public async Task AddServerViaScanAsync()
     {
         var result = await ScanScreenInteraction.HandleSafe(RxVoid.Default);

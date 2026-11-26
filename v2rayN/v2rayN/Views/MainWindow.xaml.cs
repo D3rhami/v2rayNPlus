@@ -292,6 +292,28 @@ public partial class MainWindow
         var clipboardData = WindowsUtils.GetClipboardData();
         if (clipboardData.IsNotEmpty() && ViewModel != null)
         {
+            var trimmed = clipboardData.Trim();
+            if (trimmed.StartsWith("http://") || trimmed.StartsWith("https://"))
+            {
+                var dialog = new ChoiceDialog(
+                    "URL detected",
+                    $"{trimmed}\nHow to add?",
+                    new List<string> { "As Subscription (create new group)", "As profile links" },
+                    2)
+                {
+                    Owner = this,
+                };
+                dialog.ShowDialog();
+                if (dialog.Choice < 0)
+                {
+                    return;
+                }
+                if (dialog.Choice == 0)
+                {
+                    await ViewModel.AddSubscriptionFromClipboardUrlAsync(trimmed);
+                    return;
+                }
+            }
             await ViewModel.AddServerViaClipboardAsync(clipboardData);
         }
     }
