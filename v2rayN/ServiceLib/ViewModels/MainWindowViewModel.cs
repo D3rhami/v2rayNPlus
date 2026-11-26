@@ -546,6 +546,11 @@ public partial class MainWindowViewModel : MyReactiveObject
         var content = await new DownloadService().TryDownloadString(url);
         if (content.IsNullOrEmpty())
         {
+            var handler = HttpClientHelper.CreateProxySocketsHttpHandler(AppManager.Instance.GetLocalPort(EInboundProtocol.socks));
+            content = await new DownloadService { Handler = handler }.TryDownloadString(url);
+        }
+        if (content.IsNullOrEmpty())
+        {
             NoticeManager.Instance.Enqueue(ResUI.OperationFailed);
             return;
         }

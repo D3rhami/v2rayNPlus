@@ -198,7 +198,7 @@ public partial class ProfilesViewModel : MyReactiveObject
         UnblockTestServerCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await ServerSpeedtest(ESpeedActionType.UnblockTest);
-        }, canEditRemove);
+        });
         SortServerResultCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await SortServer(nameof(EServerColName.DelayVal));
@@ -880,6 +880,14 @@ public partial class ProfilesViewModel : MyReactiveObject
             }
 
             lstSelected = JsonUtils.Deserialize<List<ProfileItem>>(JsonUtils.Serialize(ProfileItems?.OrderBy(t => t.Sort).ToList()));
+        }
+        else if (actionType is ESpeedActionType.UnblockTest)
+        {
+            lstSelected = await GetProfileItems(false);
+            if (lstSelected is null || lstSelected.Count <= 0)
+            {
+                lstSelected = JsonUtils.Deserialize<List<ProfileItem>>(JsonUtils.Serialize(ProfileItems?.OrderBy(t => t.Sort).ToList()));
+            }
         }
         else
         {
