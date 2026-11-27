@@ -15,6 +15,7 @@ public class UnblockStatusColorConverter : IValueConverter
             2 => new SolidColorBrush(Color.FromRgb(0xC6, 0x28, 0x28)),
             3 => new SolidColorBrush(Color.FromRgb(0xEF, 0x6C, 0x00)),
             4 => new SolidColorBrush(Color.FromRgb(0x75, 0x75, 0x75)),
+            5 => new SolidColorBrush(Color.FromRgb(0x9E, 0x9E, 0x9E)),
             _ => new SolidColorBrush(Color.FromRgb(0x9E, 0x9E, 0x9E))
         };
     }

@@ -313,21 +313,6 @@
                     </DataGridTemplateColumn>
 
                     <DataGridTemplateColumn
-                        Width="180"
-                        Header="Unblock"
-                        SortMemberPath="UnblockSummary"
-                        Tag="Unblock">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                    Margin="{StaticResource MarginLr8}"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding Path=UnblockSummary, Mode=OneWay}"
-                                    ToolTip.Tip="{Binding UnblockTooltip, Mode=OneWay}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn
                         Width="90"
                         Header="YouTube"
                         SortMemberPath="YouTubeStatus"

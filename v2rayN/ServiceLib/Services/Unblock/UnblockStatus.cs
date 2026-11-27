@@ -7,6 +7,7 @@ public enum EUnblockStatus
     Lock = 2,
     Risk = 3,
     Fail = 4,
+    Testing = 5,
 }
 
 public class UnblockCheckEvidence

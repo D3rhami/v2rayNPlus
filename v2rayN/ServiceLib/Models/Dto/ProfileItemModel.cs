@@ -29,12 +29,6 @@ public partial class ProfileItemModel : ReactiveObject
     public partial string IpInfo { get; set; }
 
     [Reactive]
-    public partial string UnblockSummary { get; set; } = string.Empty;
-
-    [Reactive]
-    public partial string UnblockTooltip { get; set; } = string.Empty;
-
-    [Reactive]
     public partial string YouTubeText { get; set; } = "—";
 
     [Reactive]

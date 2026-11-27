@@ -278,6 +278,11 @@ public partial class ProfilesView
                     menuSelectAll_Click(null, null);
                     break;
 
+                case Key.S:
+                    lstProfiles.SelectedItems.Clear();
+                    e.Handled = true;
+                    break;
+
                 case Key.C:
                     ViewModel?.Export2ShareUrlAsync(false);
                     break;
@@ -424,10 +429,6 @@ public partial class ProfilesView
                         if (item.Name.Equals("IpInfo", StringComparison.CurrentCultureIgnoreCase))
                         {
                             item2.Visibility = _config.SpeedTestItem.IPAPIUrl.IsNotEmpty() && !_config.UiItem.HideColumnIpInfo ? Visibility.Visible : Visibility.Hidden;
-                        }
-                        if (item.Name.Equals("Unblock", StringComparison.CurrentCultureIgnoreCase))
-                        {
-                            item2.Visibility = !_config.UiItem.HideColumnUnblock ? Visibility.Visible : Visibility.Hidden;
                         }
                         if (item.Name.Equals("YouTubeStatus", StringComparison.CurrentCultureIgnoreCase))
                         {

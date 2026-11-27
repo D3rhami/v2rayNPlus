@@ -360,6 +360,24 @@ public class SpeedtestService(Config config, Func<SpeedTestResult, Task> updateF
 
     private async Task RunUnblockTestAsync(List<ServerTestItem> lstSelected, CancellationToken ct, int pageSize = 0)
     {
+        var enabledServices = _config.SpeedTestItem.UnblockServices ?? Global.UnblockDefaultServices;
+        foreach (var it in lstSelected)
+        {
+            await _updateFunc?.Invoke(new SpeedTestResult
+            {
+                IndexId = it.IndexId,
+                Unblock = new Unblock.UnblockNodeResult
+                {
+                    Services = (from serviceCheckItem in Unblock.UnblockCheckRegistry.DefaultChecks
+                                where enabledServices.Contains(serviceCheckItem.Service)
+                                select new Unblock.UnblockServiceResult { Service = serviceCheckItem.Service, Status = Unblock.EUnblockStatus.Testing }).ToList(),
+                    LatencyMedianMs = -1,
+                    AttemptsOk = 0,
+                    AttemptsTotal = 3
+                }
+            });
+        }
+
         if (pageSize <= 0)
         {
             pageSize = _config.SpeedTestItem.UnblockPageSize ?? Global.UnblockTestPageSize;

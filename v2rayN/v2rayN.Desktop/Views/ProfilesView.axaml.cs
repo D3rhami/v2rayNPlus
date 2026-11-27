@@ -412,10 +412,6 @@ public partial class ProfilesView : ReactiveUserControl<ProfilesViewModel>
                         {
                             item2.IsVisible = _config.SpeedTestItem.IPAPIUrl.IsNotEmpty() && !_config.UiItem.HideColumnIpInfo;
                         }
-                        if (item.Name.Equals("Unblock", StringComparison.CurrentCultureIgnoreCase))
-                        {
-                            item2.IsVisible = !_config.UiItem.HideColumnUnblock;
-                        }
                         if (item.Name.Equals("YouTubeStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
                             item2.IsVisible = !_config.UiItem.HideColumnYouTube;

@@ -13,7 +13,6 @@ public enum EServerColName
     DelayVal,
     SpeedVal,
     IpInfo,
-    Unblock,
     YouTubeStatus,
     NetflixStatus,
     GeminiStatus,

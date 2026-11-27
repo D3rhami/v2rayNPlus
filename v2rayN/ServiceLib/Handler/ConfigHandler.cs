@@ -1204,7 +1204,6 @@ public static class ConfigHandler
                               Speed = t33?.Speed ?? 0,
                               Sort = t33?.Sort ?? 0,
                               IpInfo = t33?.IpInfo ?? string.Empty,
-                              UnblockSummary = UnblockSummaryOf(t44),
                               YouTubeStatus = t44?.YouTubeStatus ?? 0,
                               NetflixStatus = t44?.NetflixStatus ?? 0,
                               GeminiStatus = t44?.GeminiStatus ?? 0,
@@ -1214,28 +1213,6 @@ public static class ConfigHandler
                               TotalDown = (t22?.TotalDown ?? 0).ToString("D16"),
                               TotalUp = (t22?.TotalUp ?? 0).ToString("D16"),
                           }).ToList();
-
-        static string UnblockSymbol(int status)
-        {
-            return status switch
-            {
-                1 => "✔",
-                2 => "✘lock",
-                3 => "⚠",
-                4 => "✘",
-                _ => "—"
-            };
-        }
-
-        static string UnblockSummaryOf(UnblockItem? item)
-        {
-            if (item == null)
-            {
-                return string.Empty;
-            }
-
-            return $"YT {UnblockSymbol(item.YouTubeStatus)} GEM {UnblockSymbol(item.GeminiStatus)} NF {UnblockSymbol(item.NetflixStatus)} CHAT {UnblockSymbol(item.ChatGptStatus)} {item.AttemptsOk}/{item.AttemptsTotal} {item.ExitCountry ?? ""}";
-        }
 
         Enum.TryParse(colName, true, out EServerColName name);
 
@@ -1252,7 +1229,6 @@ public static class ConfigHandler
                 EServerColName.DelayVal => lstProfile.OrderBy(t => t.Delay).ToList(),
                 EServerColName.SpeedVal => lstProfile.OrderBy(t => t.Speed).ToList(),
                 EServerColName.IpInfo => lstProfile.OrderBy(t => t.IpInfo).ToList(),
-                EServerColName.Unblock => lstProfile.OrderBy(t => t.UnblockSummary, StringComparer.Ordinal).ToList(),
                 EServerColName.YouTubeStatus => lstProfile.OrderBy(t => t.YouTubeStatus).ThenBy(t => t.Delay).ToList(),
                 EServerColName.NetflixStatus => lstProfile.OrderBy(t => t.NetflixStatus).ThenBy(t => t.Delay).ToList(),
                 EServerColName.GeminiStatus => lstProfile.OrderBy(t => t.GeminiStatus).ThenBy(t => t.Delay).ToList(),
@@ -1278,7 +1254,6 @@ public static class ConfigHandler
                 EServerColName.DelayVal => lstProfile.OrderByDescending(t => t.Delay).ToList(),
                 EServerColName.SpeedVal => lstProfile.OrderByDescending(t => t.Speed).ToList(),
                 EServerColName.IpInfo => lstProfile.OrderByDescending(t => t.IpInfo).ToList(),
-                EServerColName.Unblock => lstProfile.OrderByDescending(t => t.UnblockSummary, StringComparer.Ordinal).ToList(),
                 EServerColName.YouTubeStatus => lstProfile.OrderByDescending(t => t.YouTubeStatus).ThenByDescending(t => t.Delay).ToList(),
                 EServerColName.NetflixStatus => lstProfile.OrderByDescending(t => t.NetflixStatus).ThenByDescending(t => t.Delay).ToList(),
                 EServerColName.GeminiStatus => lstProfile.OrderByDescending(t => t.GeminiStatus).ThenByDescending(t => t.Delay).ToList(),
@@ -1312,16 +1287,6 @@ public static class ConfigHandler
                 {
                     var maxSort = lstProfile.Max(t => t.Sort) + 10;
                     foreach (var item in lstProfile.Where(item => item.Speed <= 0))
-                    {
-                        ProfileExManager.Instance.SetSort(item.IndexId, maxSort);
-                    }
-
-                    break;
-                }
-            case EServerColName.Unblock:
-                {
-                    var maxSort = lstProfile.Max(t => t.Sort) + 10;
-                    foreach (var item in lstProfile.Where(item => item.UnblockSummary.IsNullOrEmpty()))
                     {
                         ProfileExManager.Instance.SetSort(item.IndexId, maxSort);
                     }

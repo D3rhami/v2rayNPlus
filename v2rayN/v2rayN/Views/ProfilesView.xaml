@@ -395,19 +395,6 @@
                         Header="{x:Static resx:ResUI.LvTestIpInfo}" />
 
                     <base:MyDGTextColumn
-                        x:Name="colUnblock"
-                        Width="180"
-                        Binding="{Binding UnblockSummary}"
-                        ExName="Unblock"
-                        Header="Unblock"
-                        SortMemberPath="UnblockSummary">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="ToolTipService.ToolTip" Value="{Binding UnblockTooltip}" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </base:MyDGTextColumn>
-                    <base:MyDGTextColumn
                         x:Name="colYt"
                         Width="90"
                         Binding="{Binding YouTubeText}"

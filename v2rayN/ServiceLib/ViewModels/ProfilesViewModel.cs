@@ -352,8 +352,6 @@ public partial class ProfilesViewModel : MyReactiveObject
             item.NetflixText = GetUnblockWord(item.NetflixStatus);
             item.GeminiText = GetUnblockWord(item.GeminiStatus);
             item.ChatGptText = GetUnblockWord(item.ChatGptStatus);
-            item.UnblockSummary = $"YT {GetUnblockSummarySymbol(item.YouTubeStatus)} GEM {GetUnblockSummarySymbol(item.GeminiStatus)} NF {GetUnblockSummarySymbol(item.NetflixStatus)} CHAT {GetUnblockSummarySymbol(item.ChatGptStatus)} {unblock.AttemptsOk}/{unblock.AttemptsTotal} {unblock.ExitCountry ?? ""}";
-            item.UnblockTooltip = BuildUnblockTooltip(unblock);
             item.ExitIpU = unblock.ExitIp;
             item.ExitCountryU = unblock.ExitCountry;
         }
@@ -388,80 +386,9 @@ public partial class ProfilesViewModel : MyReactiveObject
             2 => "LOCK",
             3 => "RISK",
             4 => "FAIL",
+            5 => "testing...",
             _ => "—"
         };
-    }
-
-    private static string GetUnblockSummarySymbol(int status)
-    {
-        return status switch
-        {
-            1 => "✔",
-            2 => "✘lock",
-            3 => "⚠",
-            4 => "✘",
-            _ => "—"
-        };
-    }
-
-    private static string BuildUnblockTooltip(ServiceLib.Services.Unblock.UnblockNodeResult unblock)
-    {
-        var lines = new List<string>();
-        foreach (var service in unblock.Services)
-        {
-            var evidence = service.Evidence;
-            lines.Add(evidence == null
-                ? $"{service.Service}: {service.Status}"
-                : $"{service.Service}: {service.Status} ({evidence.HttpStatusCode}, {evidence.FinalUrl ?? ""}, {evidence.ElapsedMs}ms, {evidence.MatchedMarker ?? ""})");
-        }
-        if (unblock.PredictedLockGemini)
-        {
-            lines.Add($"Predicted: Gemini country-lock ({unblock.ExitCountry ?? ""})");
-        }
-        if (unblock.PredictedLockChatGpt)
-        {
-            lines.Add($"Predicted: ChatGPT country-lock ({unblock.ExitCountry ?? ""})");
-        }
-        return string.Join(Environment.NewLine, lines);
-    }
-
-    private static string BuildUnblockSummary(UnblockItem? item)
-    {
-        if (item == null)
-        {
-            return string.Empty;
-        }
-
-        return $"YT {GetUnblockSummarySymbol(item.YouTubeStatus)} GEM {GetUnblockSummarySymbol(item.GeminiStatus)} NF {GetUnblockSummarySymbol(item.NetflixStatus)} CHAT {GetUnblockSummarySymbol(item.ChatGptStatus)} {item.AttemptsOk}/{item.AttemptsTotal} {item.ExitCountry ?? ""}";
-    }
-
-    private static string BuildUnblockTooltip(UnblockItem? item)
-    {
-        if (item == null)
-        {
-            return string.Empty;
-        }
-
-        var lines = new List<string>();
-        if (item.YouTubeStatus > 0)
-        {
-            lines.Add($"YouTube: {GetUnblockWord(item.YouTubeStatus)}");
-        }
-        if (item.NetflixStatus > 0)
-        {
-            lines.Add($"Netflix: {GetUnblockWord(item.NetflixStatus)}");
-        }
-        if (item.GeminiStatus > 0)
-        {
-            lines.Add($"Gemini: {GetUnblockWord(item.GeminiStatus)}");
-        }
-        if (item.ChatGptStatus > 0)
-        {
-            lines.Add($"ChatGPT: {GetUnblockWord(item.ChatGptStatus)}");
-        }
-        lines.Add($"Exit: {item.ExitIp ?? ""} {item.ExitCountry ?? ""}".TrimEnd());
-        lines.Add($"Tested: {item.TestTime ?? ""}");
-        return string.Join(Environment.NewLine, lines);
     }
 
     public async Task UpdateStatistics(ServerSpeedItem update)
@@ -635,8 +562,6 @@ public partial class ProfilesViewModel : MyReactiveObject
             it.NetflixText = GetUnblockWord(unblock.NetflixStatus);
             it.GeminiText = GetUnblockWord(unblock.GeminiStatus);
             it.ChatGptText = GetUnblockWord(unblock.ChatGptStatus);
-            it.UnblockSummary = BuildUnblockSummary(unblock);
-            it.UnblockTooltip = BuildUnblockTooltip(unblock);
             it.ExitIpU = unblock.ExitIp;
             it.ExitCountryU = unblock.ExitCountry;
         }

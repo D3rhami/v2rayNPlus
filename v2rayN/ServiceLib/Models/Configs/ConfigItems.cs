@@ -102,7 +102,6 @@ public class UIItem
     public List<ColumnItem> MainColumnItem { get; set; }
     public List<WindowSizeItem> WindowSizeItem { get; set; }
     public bool HideColumnIpInfo { get; set; }
-    public bool HideColumnUnblock { get; set; }
     public bool HideColumnYouTube { get; set; }
     public bool HideColumnNetflix { get; set; }
     public bool HideColumnGemini { get; set; }
