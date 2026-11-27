@@ -112,7 +112,7 @@
                     Margin="{StaticResource MarginLeftRight4}"
                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                     ToolTip="Bunny Test (YouTube / Netflix / Gemini / ChatGPT)">
-                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="CheckAll" />
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="EasterOutline" />
                 </Button>
             </WrapPanel>
             </DockPanel>
@@ -125,6 +125,8 @@
                 CanUserResizeRows="False"
                 CanUserSortColumns="False"
                 EnableRowVirtualization="True"
+                EnableColumnVirtualization="True"
+                VirtualizingPanel.VirtualizationMode="Recycling"
                 Focusable="True"
                 GridLinesVisibility="All"
                 HeadersVisibility="All"
