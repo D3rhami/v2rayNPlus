@@ -70,6 +70,12 @@
                         PlaceholderText="{x:Static resx:ResUI.MsgServerTitle}"
                         ToolTip.Tip="{x:Static resx:ResUI.MsgServerTitle}" />
 
+                    <ToggleSwitch
+                        x:Name="togHideUnavailable"
+                        Margin="{StaticResource MarginLr4}"
+                        VerticalAlignment="Center"
+                        Content="Hide unavailable" />
+
                     <Button
                        x:Name="btnAutofitColumnWidth"
                        Margin="{StaticResource MarginLr4}"

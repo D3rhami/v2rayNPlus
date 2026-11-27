@@ -19,6 +19,9 @@ public partial class ProfilesViewModel : MyReactiveObject
     private readonly Dictionary<string, bool> _dicHeaderSort = new();
     private SpeedtestService? _speedtestService;
     private string? _pendingSelectIndexId;
+    private const int HideBatchSize = 10;
+    private readonly List<string> _pendingHideIds = new();
+    private bool _hideUnavailable;
 
     #endregion private prop
 
@@ -41,6 +44,9 @@ public partial class ProfilesViewModel : MyReactiveObject
 
     [Reactive]
     public partial string ServerFilter { get; set; }
+
+    [Reactive]
+    public partial bool HideUnavailable { get; set; }
 
     #endregion ObservableCollection
 
@@ -76,6 +82,7 @@ public partial class ProfilesViewModel : MyReactiveObject
     public ReactiveCommand<RxVoid, RxVoid> SortServerResultCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> RemoveInvalidServerResultCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> FastRealPingCmd { get; }
+    public ReactiveCommand<RxVoid, RxVoid> ToggleHideUnavailableCmd { get; }
 
     //servers export
     public ReactiveCommand<RxVoid, RxVoid> Export2ClientConfigCmd { get; }
@@ -113,6 +120,9 @@ public partial class ProfilesViewModel : MyReactiveObject
         this.WhenAnyValue(x => x.ServerFilter)
             .Where(y => y != null && _serverFilter != y)
             .SubscribeAsync(async _ => await ServerFilterChanged());
+        this.WhenAnyValue(x => x.HideUnavailable)
+            .Where(y => _hideUnavailable != y)
+            .SubscribeAsync(async _ => await ApplyHideUnavailable());
 
         //servers delete
         EditServerCmd = ReactiveCommand.CreateFromTask(async () =>
@@ -207,6 +217,11 @@ public partial class ProfilesViewModel : MyReactiveObject
         {
             await RemoveInvalidServerResult();
         });
+        ToggleHideUnavailableCmd = ReactiveCommand.CreateFromTask(async () =>
+        {
+            HideUnavailable = !HideUnavailable;
+            await Task.CompletedTask;
+        });
         //servers export
         Export2ClientConfigCmd = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -267,6 +282,8 @@ public partial class ProfilesViewModel : MyReactiveObject
         SelectedProfile = new();
         SelectedSub = new();
         SelectedMoveToGroup = new();
+        _hideUnavailable = _config.UiItem.HideUnavailable;
+        HideUnavailable = _hideUnavailable;
 
         await RefreshSubscriptions();
         //await RefreshServers();
@@ -285,6 +302,10 @@ public partial class ProfilesViewModel : MyReactiveObject
     {
         if (result.IndexId.IsNullOrEmpty())
         {
+            if (result.Delay == ResUI.SpeedtestingCompleted)
+            {
+                FlushHiddenBatch();
+            }
             NoticeManager.Instance.SendMessageEx(result.Delay);
             NoticeManager.Instance.Enqueue(result.Delay);
             return;
@@ -299,6 +320,14 @@ public partial class ProfilesViewModel : MyReactiveObject
         {
             item.Delay = result.Delay.ToInt();
             item.DelayVal = result.Delay ?? string.Empty;
+            if (HideUnavailable && result.Unblock == null && item.Delay < 0)
+            {
+                _pendingHideIds.Add(result.IndexId);
+                if (_pendingHideIds.Count >= HideBatchSize)
+                {
+                    FlushHiddenBatch();
+                }
+            }
         }
         if (result.Speed.IsNotEmpty())
         {
@@ -329,6 +358,26 @@ public partial class ProfilesViewModel : MyReactiveObject
             item.ExitCountryU = unblock.ExitCountry;
         }
         await Task.CompletedTask;
+    }
+
+    private void FlushHiddenBatch()
+    {
+        if (_pendingHideIds.Count == 0)
+        {
+            return;
+        }
+        var hideSet = _pendingHideIds.ToHashSet();
+        _pendingHideIds.Clear();
+        if (!HideUnavailable)
+        {
+            return;
+        }
+        var remaining = ProfileItems.Where(t => !hideSet.Contains(t.IndexId)).ToList();
+        if (remaining.Count == ProfileItems.Count)
+        {
+            return;
+        }
+        ProfileItems.ReplaceRange(remaining);
     }
 
     private static string GetUnblockWord(int status)
@@ -463,6 +512,24 @@ public partial class ProfilesViewModel : MyReactiveObject
         }
     }
 
+    private async Task ApplyHideUnavailable()
+    {
+        _hideUnavailable = HideUnavailable;
+        _config.UiItem.HideUnavailable = HideUnavailable;
+        await ConfigHandler.SaveConfig(_config);
+        if (HideUnavailable)
+        {
+            if (ProfileItems.Any(t => t.Delay < 0))
+            {
+                ProfileItems.ReplaceRange(ProfileItems.Where(t => t.Delay >= 0).ToList());
+            }
+        }
+        else
+        {
+            await RefreshServers();
+        }
+    }
+
     public async Task RefreshServers()
     {
         RefreshServersRequested.Publish();
@@ -546,6 +613,11 @@ public partial class ProfilesViewModel : MyReactiveObject
                         TotalDown = t22 == null ? "" : Utils.HumanFy(t22.TotalDown),
                         TotalUp = t22 == null ? "" : Utils.HumanFy(t22.TotalUp)
                     }).OrderBy(t => t.Sort).ToList();
+
+        if (HideUnavailable)
+        {
+            lstModel = lstModel.Where(t => t.Delay >= 0).ToList();
+        }
 
         foreach (var it in lstModel)
         {

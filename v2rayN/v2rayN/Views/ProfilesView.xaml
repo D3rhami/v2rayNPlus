@@ -69,6 +69,15 @@
                     Style="{StaticResource DefTextBox}"
                     ToolTip="{x:Static resx:ResUI.MsgServerTitle}" />
 
+                <ToggleButton
+                    x:Name="togHideUnavailable"
+                    Margin="{StaticResource MarginLeftRight4}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    AutomationProperties.Name="Hide unavailable"
+                    Content="Hide unavailable"
+                    FontSize="{DynamicResource StdFontSize}" />
+
                 <Button
                     x:Name="btnAutofitColumnWidth"
                     Width="30"
