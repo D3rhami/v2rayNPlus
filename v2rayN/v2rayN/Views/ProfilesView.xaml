@@ -111,7 +111,7 @@
                     Height="30"
                     Margin="{StaticResource MarginLeftRight4}"
                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                    ToolTip="Unblock Test (YouTube / Netflix / Gemini / ChatGPT)">
+                    ToolTip="Bunny Test (YouTube / Netflix / Gemini / ChatGPT)">
                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="CheckAll" />
                 </Button>
             </WrapPanel>
@@ -192,7 +192,7 @@
                         <MenuItem
                             x:Name="menuUnblockTestServer"
                             Height="{StaticResource MenuItemHeight}"
-                            Header="Unblock Test"
+                            Header="Bunny Test"
                             InputGestureText="Ctrl+Alt+B" />
                         <MenuItem
                             x:Name="menuSortServerResult"

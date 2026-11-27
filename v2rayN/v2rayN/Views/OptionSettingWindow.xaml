@@ -104,7 +104,7 @@
                                         <TextBlock
                                             FontSize="11"
                                             Style="{StaticResource ToolbarTextBlock}"
-                                            Text="Unblock batch size"
+                                            Text="Bunny batch size"
                                             TextWrapping="Wrap" />
                                         <ComboBox
                                             x:Name="cmbUnblockPageSize"
@@ -208,7 +208,7 @@
                                                 VerticalAlignment="Center"
                                                 FontSize="11"
                                                 Style="{StaticResource ToolbarTextBlock}"
-                                                Text="Unblock: test YouTube" />
+                                                Text="Bunny: test YouTube" />
                                             <CheckBox
                                                 x:Name="chkUnblockYouTube"
                                                 Margin="0"
@@ -221,7 +221,7 @@
                                                 VerticalAlignment="Center"
                                                 FontSize="11"
                                                 Style="{StaticResource ToolbarTextBlock}"
-                                                Text="Unblock: test Netflix" />
+                                                Text="Bunny: test Netflix" />
                                             <CheckBox
                                                 x:Name="chkUnblockNetflix"
                                                 Margin="0"
@@ -234,7 +234,7 @@
                                                 VerticalAlignment="Center"
                                                 FontSize="11"
                                                 Style="{StaticResource ToolbarTextBlock}"
-                                                Text="Unblock: test Gemini" />
+                                                Text="Bunny: test Gemini" />
                                             <CheckBox
                                                 x:Name="chkUnblockGemini"
                                                 Margin="0"
@@ -247,7 +247,7 @@
                                                 VerticalAlignment="Center"
                                                 FontSize="11"
                                                 Style="{StaticResource ToolbarTextBlock}"
-                                                Text="Unblock: test ChatGPT" />
+                                                Text="Bunny: test ChatGPT" />
                                             <CheckBox
                                                 x:Name="chkUnblockChatGpt"
                                                 Margin="0"

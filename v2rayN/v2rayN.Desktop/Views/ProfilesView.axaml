@@ -160,7 +160,7 @@
                             InputGesture="Ctrl+T" />
                         <MenuItem
                             x:Name="menuUnblockTestServer"
-                            Header="Unblock Test"
+                            Header="Bunny Test"
                             InputGesture="Ctrl+Alt+B" />
                         <MenuItem x:Name="menuUdpTestServer" Header="{x:Static resx:ResUI.menuUdpTestServer}" />
                         <MenuItem x:Name="menuSortServerResult" Header="{x:Static resx:ResUI.menuSortServerResult}" />

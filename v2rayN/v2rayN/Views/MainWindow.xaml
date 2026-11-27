@@ -301,15 +301,15 @@
                             <MenuItem
                                 x:Name="menuUnblockTest"
                                 Padding="{StaticResource MarginLeftRight8}"
-                                AutomationProperties.Name="Unblock Test"
-                                ToolTip="Unblock Test: checks every node in the current group for real latency (3 tries) and whether YouTube, Netflix, Gemini and ChatGPT actually work through it (OK / LOCK / RISK / FAIL). Results fill the Unblock columns in the table.">
+                                AutomationProperties.Name="Bunny Test"
+                                ToolTip="Bunny Test: checks every node in the current group for real latency (3 tries) and whether YouTube, Netflix, Gemini and ChatGPT actually work through it (OK / LOCK / RISK / FAIL). Results fill the Unblock columns in the table.">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon
                                             Margin="{StaticResource MarginRight8}"
                                             VerticalAlignment="Center"
-                                            Kind="ShieldCheckOutline" />
-                                        <TextBlock VerticalAlignment="Center" Text="Unblock Test" />
+                                            Kind="EasterOutline" />
+                                        <TextBlock VerticalAlignment="Center" Text="Bunny Test" />
                                     </StackPanel>
                                 </MenuItem.Header>
                             </MenuItem>

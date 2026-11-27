@@ -103,7 +103,7 @@
                                         <TextBlock
                                             Classes="lbl"
                                             Margin="0,0,0,2"
-                                            Text="Unblock batch size"
+                                            Text="Bunny batch size"
                                             TextWrapping="Wrap" />
                                         <ComboBox x:Name="cmbUnblockPageSize" Classes="inp" />
                                     </StackPanel>
@@ -176,7 +176,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Unblock: test YouTube" />
+                                                Text="Bunny: test YouTube" />
                                             <CheckBox x:Name="chkUnblockYouTube" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -184,7 +184,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Unblock: test Netflix" />
+                                                Text="Bunny: test Netflix" />
                                             <CheckBox x:Name="chkUnblockNetflix" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -192,7 +192,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Unblock: test Gemini" />
+                                                Text="Bunny: test Gemini" />
                                             <CheckBox x:Name="chkUnblockGemini" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -200,7 +200,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Unblock: test ChatGPT" />
+                                                Text="Bunny: test ChatGPT" />
                                             <CheckBox x:Name="chkUnblockChatGpt" VerticalAlignment="Center" />
                                         </StackPanel>
                                     </WrapPanel>
