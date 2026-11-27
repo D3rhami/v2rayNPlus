@@ -65,6 +65,10 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
     [Reactive] public partial bool UnblockNetflixEnabled { get; set; }
     [Reactive] public partial bool UnblockGeminiEnabled { get; set; }
     [Reactive] public partial bool UnblockChatGptEnabled { get; set; }
+    [Reactive] public partial bool ShowColumnYouTube { get; set; }
+    [Reactive] public partial bool ShowColumnNetflix { get; set; }
+    [Reactive] public partial bool ShowColumnGemini { get; set; }
+    [Reactive] public partial bool ShowColumnChatGpt { get; set; }
     [Reactive] public partial bool EnableHWA { get; set; }
     [Reactive] public partial string SubConvertUrl { get; set; }
     [Reactive] public partial int MainGirdOrientation { get; set; }
@@ -215,6 +219,10 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         UnblockNetflixEnabled = svc.Contains("Netflix");
         UnblockGeminiEnabled = svc.Contains("Gemini");
         UnblockChatGptEnabled = svc.Contains("ChatGPT");
+        ShowColumnYouTube = !_config.UiItem.HideColumnYouTube;
+        ShowColumnNetflix = !_config.UiItem.HideColumnNetflix;
+        ShowColumnGemini = !_config.UiItem.HideColumnGemini;
+        ShowColumnChatGpt = !_config.UiItem.HideColumnChatGpt;
         RootCertProvider = _config.GuiItem.RootCertProvider;
 
         #endregion UI
@@ -426,6 +434,10 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
             unblockServices.Add("ChatGPT");
         }
         _config.SpeedTestItem.UnblockServices = unblockServices;
+        _config.UiItem.HideColumnYouTube = !ShowColumnYouTube;
+        _config.UiItem.HideColumnNetflix = !ShowColumnNetflix;
+        _config.UiItem.HideColumnGemini = !ShowColumnGemini;
+        _config.UiItem.HideColumnChatGpt = !ShowColumnChatGpt;
         _config.GuiItem.RootCertProvider = RootCertProvider;
 
         //systemProxy

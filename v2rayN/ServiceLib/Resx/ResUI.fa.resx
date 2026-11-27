@@ -733,7 +733,7 @@
     <value>فعال کردن Mux Multiplexing</value>
   </data>
   <data name="TbSettingsN" xml:space="preserve">
-    <value>تنظیمات PattN</value>
+    <value>تنظیمات اولیه</value>
   </data>
   <data name="TbSettingsPass" xml:space="preserve">
     <value>مجوز احراز هویت</value>

@@ -252,6 +252,11 @@ public partial class ProfilesViewModel : MyReactiveObject
             .ObserveOn(RxSchedulers.MainThreadScheduler)
             .SubscribeAsync(async result => await UpdateStatistics(result));
 
+        AppEvents.UnblockTestCurrentGroupRequested
+            .AsObservable()
+            .ObserveOn(RxSchedulers.MainThreadScheduler)
+            .Subscribe(_ => UnblockTestWholeList());
+
         #endregion AppEvents
 
         _ = Init();
@@ -920,6 +925,25 @@ public partial class ProfilesViewModel : MyReactiveObject
             await Task.CompletedTask;
         });
         _speedtestService?.RunLoop(actionType, lstSelected);
+    }
+
+    private void UnblockTestWholeList()
+    {
+        var lstSelected = JsonUtils.Deserialize<List<ProfileItem>>(JsonUtils.Serialize(ProfileItems?.OrderBy(t => t.Sort).ToList()));
+        if (lstSelected is null || lstSelected.Count <= 0)
+        {
+            return;
+        }
+
+        _speedtestService ??= new SpeedtestService(_config, async (SpeedTestResult result) =>
+        {
+            RxSchedulers.MainThreadScheduler.Schedule(() =>
+            {
+                _ = SetSpeedTestResult(result);
+            });
+            await Task.CompletedTask;
+        });
+        _speedtestService?.RunLoop(ESpeedActionType.UnblockTest, lstSelected);
     }
 
     public void ServerSpeedtestStop()

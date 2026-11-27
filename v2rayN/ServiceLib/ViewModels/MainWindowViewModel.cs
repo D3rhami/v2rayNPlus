@@ -47,6 +47,7 @@ public partial class MainWindowViewModel : MyReactiveObject
     public ReactiveCommand<RxVoid, RxVoid> AddServerViaClipboardCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> AddServerViaScanCmd { get; }
     public ReactiveCommand<RxVoid, RxVoid> AddServerViaImageCmd { get; }
+    public ReactiveCommand<RxVoid, RxVoid> UnblockTestCurrentGroupCmd { get; }
 
     //Subscription
     public ReactiveCommand<RxVoid, RxVoid> SubSettingCmd { get; }
@@ -190,6 +191,11 @@ public partial class MainWindowViewModel : MyReactiveObject
         AddServerViaImageCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await AddServerViaImageAsync();
+        });
+        UnblockTestCurrentGroupCmd = ReactiveCommand.CreateFromTask(async () =>
+        {
+            AppEvents.UnblockTestCurrentGroupRequested.Publish();
+            await Task.CompletedTask;
         });
 
         //Subscription

@@ -119,6 +119,10 @@ public partial class OptionSettingWindow
             this.Bind(ViewModel, vm => vm.UnblockNetflixEnabled, v => v.chkUnblockNetflix.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.UnblockGeminiEnabled, v => v.chkUnblockGemini.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.UnblockChatGptEnabled, v => v.chkUnblockChatGpt.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnYouTube, v => v.chkShowColYouTube.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnNetflix, v => v.chkShowColNetflix.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnGemini, v => v.chkShowColGemini.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnChatGpt, v => v.chkShowColChatGpt.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.EnableHWA, v => v.togEnableHWA.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SubConvertUrl, v => v.cmbSubConvertUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MainGirdOrientation, v => v.cmbMainGirdOrientation.SelectedIndex).DisposeWith(disposables);
