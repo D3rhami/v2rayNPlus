@@ -388,7 +388,7 @@ public partial class ProfilesViewModel : MyReactiveObject
             2 => "LOCK",
             3 => "RISK",
             4 => "FAIL",
-            5 => "testing...",
+            5 => ResUI.SpTestingWord,
             _ => "—"
         };
     }
@@ -686,7 +686,7 @@ public partial class ProfilesViewModel : MyReactiveObject
         {
             return;
         }
-        if (await ShowYesNoInteraction.HandleSafe($"This will remove {lstSelected.Count} selected profile(s) from the current group. Continue?") == false)
+        if (await ShowYesNoInteraction.HandleSafe(string.Format(ResUI.SpRemoveSelectedConfirm, lstSelected.Count)) == false)
         {
             return;
         }
@@ -710,10 +710,10 @@ public partial class ProfilesViewModel : MyReactiveObject
         var count = await ConfigHandler.CountDuplicateServers(_config, _config.SubIndexId);
         if (count == 0)
         {
-            NoticeManager.Instance.SendMessageEx("Bunny: no duplicate profiles found");
+            NoticeManager.Instance.SendMessageEx(ResUI.SpNoDuplicateProfiles);
             return;
         }
-        if (await ShowYesNoInteraction.HandleSafe($"This will remove {count} duplicate profiles from the current group. Continue?") == false)
+        if (await ShowYesNoInteraction.HandleSafe(string.Format(ResUI.SpRemoveDuplicatesConfirm, count)) == false)
         {
             return;
         }
@@ -845,10 +845,10 @@ public partial class ProfilesViewModel : MyReactiveObject
                      select t).Count();
         if (count == 0)
         {
-            NoticeManager.Instance.SendMessageEx("Bunny: no unavailable profiles to remove");
+            NoticeManager.Instance.SendMessageEx(ResUI.SpNoUnavailableProfiles);
             return;
         }
-        if (await ShowYesNoInteraction.HandleSafe($"This will remove {count} unavailable profiles (failed test) from the current group. Continue?") == false)
+        if (await ShowYesNoInteraction.HandleSafe(string.Format(ResUI.SpRemoveUnavailableConfirm, count)) == false)
         {
             return;
         }

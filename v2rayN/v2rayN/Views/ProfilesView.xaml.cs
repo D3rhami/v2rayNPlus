@@ -89,9 +89,9 @@ public partial class ProfilesView
             {
                 var message = interaction.Input;
                 var dialog = new ChoiceDialog(
-                    "Remove confirmation",
+                    ResUI.SpRemoveConfirmation,
                     message,
-                    new List<string> { "Yes, remove", "Cancel" },
+                    new List<string> { ResUI.SpYesRemove, ResUI.TbCancel },
                     1)
                 {
                     Owner = Window.GetWindow(this),

@@ -47,7 +47,7 @@ jobs:
     with:
       release_tag: ${{ inputs.release_tag }}
       artifact_name: WebAPI-release-packages
-      file_pattern: 'PattN-*-WebAPI*.zip'
+      file_pattern: 'v2rayNPlus-*-WebAPI*.zip'
     secrets: { GPG_PRIVATE_KEY: "${{ secrets.GPG_PRIVATE_KEY }}" }
 
   release-web-manifest:

@@ -365,12 +365,12 @@ jobs:
           $publishDirectory = Join-Path $env:RUNNER_TEMP 'v2rayN.WebAPI-win-x64'
           $dist = Join-Path $env:RUNNER_TEMP 'v2rayN.WebAPI-win-x64-dist'
           python v2rayN/v2rayN.WebAPI/Scripts/web-release-assets.py package --rid win-x64 --publish $publishDirectory --dist $dist
-          $fullZip = Join-Path $dist 'PattN-windows-64-WebAPI.zip'
-          $appOnlyZip = Join-Path $dist 'PattN-windows-64-WebAPI-update.zip'
+          $fullZip = Join-Path $dist 'v2rayNPlus-windows-64-WebAPI.zip'
+          $appOnlyZip = Join-Path $dist 'v2rayNPlus-windows-64-WebAPI-update.zip'
           if (-not (Test-Path -LiteralPath $fullZip -PathType Leaf) -or -not (Test-Path -LiteralPath $appOnlyZip -PathType Leaf)) {
             throw 'Windows release ZIPs were not created.'
           }
-          $extracted = Join-Path $env:RUNNER_TEMP 'PattN-windows-64-WebAPI-smoke'
+          $extracted = Join-Path $env:RUNNER_TEMP 'v2rayNPlus-windows-64-WebAPI-smoke'
           Expand-Archive -LiteralPath $fullZip -DestinationPath $extracted -Force
           & ./v2rayN/v2rayN.WebAPI/Tests/Integration/Test-Windows.ps1 -Mode startup -PublishDirectory $extracted
           "Windows full-install ZIP: $fullZip"
@@ -507,12 +507,12 @@ jobs:
           $publishDirectory = Join-Path $env:RUNNER_TEMP 'v2rayN.WebAPI-win-arm64'
           $dist = Join-Path $env:RUNNER_TEMP 'v2rayN.WebAPI-win-arm64-dist'
           python v2rayN/v2rayN.WebAPI/Scripts/web-release-assets.py package --rid win-arm64 --publish $publishDirectory --dist $dist
-          $fullZip = Join-Path $dist 'PattN-windows-arm64-WebAPI.zip'
-          $appOnlyZip = Join-Path $dist 'PattN-windows-arm64-WebAPI-update.zip'
+          $fullZip = Join-Path $dist 'v2rayNPlus-windows-arm64-WebAPI.zip'
+          $appOnlyZip = Join-Path $dist 'v2rayNPlus-windows-arm64-WebAPI-update.zip'
           if (-not (Test-Path -LiteralPath $fullZip -PathType Leaf) -or -not (Test-Path -LiteralPath $appOnlyZip -PathType Leaf)) {
             throw 'Windows ARM64 release ZIPs were not created.'
           }
-          $extracted = Join-Path $env:RUNNER_TEMP 'PattN-windows-arm64-WebAPI-smoke'
+          $extracted = Join-Path $env:RUNNER_TEMP 'v2rayNPlus-windows-arm64-WebAPI-smoke'
           Expand-Archive -LiteralPath $fullZip -DestinationPath $extracted -Force
           & ./v2rayN/v2rayN.WebAPI/Tests/Integration/Test-Windows.ps1 -Mode startup -PublishDirectory $extracted
           "Windows ARM64 full-install ZIP: $fullZip"
@@ -1038,7 +1038,7 @@ jobs:
             --dist release-assets \
             --repository "${{ github.repository }}"
       - name: Smoke-test full API ZIP
-        run: bash v2rayN/v2rayN.WebAPI/Tests/Integration/test-full-zip-runtime.sh release-assets/PattN-linux-64-WebAPI.zip
+        run: bash v2rayN/v2rayN.WebAPI/Tests/Integration/test-full-zip-runtime.sh release-assets/v2rayNPlus-linux-64-WebAPI.zip
       - uses: actions/upload-artifact@v7
         with:
           name: WebAPI-release-packages

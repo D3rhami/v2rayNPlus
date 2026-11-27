@@ -10,7 +10,7 @@
     xmlns:resx="clr-namespace:ServiceLib.Resx;assembly=ServiceLib"
     xmlns:view="clr-namespace:v2rayN.Views"
     xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
-    Title="PattN"
+    Title="v2rayNPlus"
     Width="1200"
     Height="800"
     MinWidth="800"
@@ -301,15 +301,15 @@
                             <MenuItem
                                 x:Name="menuUnblockTest"
                                 Padding="{StaticResource MarginLeftRight8}"
-                                AutomationProperties.Name="Bunny Test"
-                                ToolTip="Bunny Test: checks every node in the current group for real latency (3 tries) and whether YouTube, Netflix, Gemini and ChatGPT actually work through it (OK / LOCK / RISK / FAIL). Results fill the Unblock columns in the table. Shortcut: Ctrl+Alt+B">
+                                AutomationProperties.Name="{x:Static resx:ResUI.menuBunnyTest}"
+                                ToolTip="{x:Static resx:ResUI.SpBunnyTestToolbarTip}">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon
                                             Margin="{StaticResource MarginRight8}"
                                             VerticalAlignment="Center"
                                             Kind="EasterOutline" />
-                                        <TextBlock VerticalAlignment="Center" Text="Bunny Test" />
+                                        <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.menuBunnyTest}" />
                                     </StackPanel>
                                 </MenuItem.Header>
                             </MenuItem>

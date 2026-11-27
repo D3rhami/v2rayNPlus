@@ -188,7 +188,7 @@ public sealed partial class V2rayRuntime
 
             var candidates = ParseWebReleaseCandidates(releaseJson, allowPrerelease);
             if (candidates.Count == 0)
-                return WebUpdateReleaseCheck.Failed("No PattN releases with Web update packages were found for this channel.");
+                return WebUpdateReleaseCheck.Failed("No v2rayNPlus releases with Web update packages were found for this channel.");
             candidates.Sort((left, right) => new ServiceLib.Models.Dto.SemanticVersion(right.Version)
                 .CompareTo(new ServiceLib.Models.Dto.SemanticVersion(left.Version)));
             var selected = candidates[0];

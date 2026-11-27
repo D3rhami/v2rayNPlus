@@ -73,11 +73,11 @@ jobs:
         mkdir -p "$GITHUB_WORKSPACE/dist/deb"
         rsync -av "$HOME/debbuild/" "$GITHUB_WORKSPACE/dist/deb/" || true
 
-        find "$GITHUB_WORKSPACE/dist/deb" -name "v2rayn_*_amd64.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/PattN-linux-64.deb" \; || true
-        find "$GITHUB_WORKSPACE/dist/deb" -name "v2rayn_*_arm64.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/PattN-linux-arm64.deb" \; || true
-        find "$GITHUB_WORKSPACE/dist/deb" -name "v2rayn_*_riscv64.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/PattN-linux-riscv64.deb" \; || true
-        find "$GITHUB_WORKSPACE/dist/deb" -name "v2rayn_*_ppc64el.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/PattN-linux-ppc64le.deb" \; || true
-        find "$GITHUB_WORKSPACE/dist/deb" -name "v2rayn_*_loong64.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/PattN-linux-loong64.deb" \; || true
+        find "$GITHUB_WORKSPACE/dist/deb" -name "v2raynplus_*_amd64.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/v2rayNPlus-linux-64.deb" \; || true
+        find "$GITHUB_WORKSPACE/dist/deb" -name "v2raynplus_*_arm64.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/v2rayNPlus-linux-arm64.deb" \; || true
+        find "$GITHUB_WORKSPACE/dist/deb" -name "v2raynplus_*_riscv64.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/v2rayNPlus-linux-riscv64.deb" \; || true
+        find "$GITHUB_WORKSPACE/dist/deb" -name "v2raynplus_*_ppc64el.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/v2rayNPlus-linux-ppc64le.deb" \; || true
+        find "$GITHUB_WORKSPACE/dist/deb" -name "v2raynplus_*_loong64.deb" -exec mv {} "$GITHUB_WORKSPACE/dist/deb/v2rayNPlus-linux-loong64.deb" \; || true
 
         echo "==== Dist tree ===="
         ls -R "$GITHUB_WORKSPACE/dist/deb" || true
@@ -137,11 +137,11 @@ jobs:
         mkdir -p "$GITHUB_WORKSPACE/dist/rpm"
         rsync -av "$HOME/rpmbuild/RPMS/" "$GITHUB_WORKSPACE/dist/rpm/" || true
 
-        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2rayN-*-1*.x86_64.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/PattN-linux-rhel-64.rpm" \; || true
-        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2rayN-*-1*.aarch64.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/PattN-linux-rhel-arm64.rpm" \; || true
-        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2rayN-*-1*.riscv64.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/PattN-linux-rhel-riscv64.rpm" \; || true
-        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2rayN-*-1*.ppc64le.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/PattN-linux-rhel-ppc64le.rpm" \; || true
-        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2rayN-*-1*.loongarch64.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/PattN-linux-rhel-loong64.rpm" \; || true
+        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2raynplus-*-1*.x86_64.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/v2rayNPlus-linux-rhel-64.rpm" \; || true
+        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2raynplus-*-1*.aarch64.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/v2rayNPlus-linux-rhel-arm64.rpm" \; || true
+        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2raynplus-*-1*.riscv64.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/v2rayNPlus-linux-rhel-riscv64.rpm" \; || true
+        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2raynplus-*-1*.ppc64le.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/v2rayNPlus-linux-rhel-ppc64le.rpm" \; || true
+        find "$GITHUB_WORKSPACE/dist/rpm" -name "v2raynplus-*-1*.loongarch64.rpm" -exec mv {} "$GITHUB_WORKSPACE/dist/rpm/v2rayNPlus-linux-rhel-loong64.rpm" \; || true
 
         echo "==== Dist tree ===="
         ls -R "$GITHUB_WORKSPACE/dist/rpm" || true
@@ -172,7 +172,7 @@ jobs:
       run: |
         mkdir -p "$GITHUB_WORKSPACE/dist/arch"
         rsync -av "$HOME/archbuild/" "$GITHUB_WORKSPACE/dist/arch/" || true
-        find "$GITHUB_WORKSPACE/dist/arch" -name "pattn-bin-*-x86_64.pkg.tar.zst" -exec mv {} "$GITHUB_WORKSPACE/dist/arch/PattN-linux-arch-64.pkg.tar.zst" \; || true
+        find "$GITHUB_WORKSPACE/dist/arch" -name "v2raynplus-bin-*-x86_64.pkg.tar.zst" -exec mv {} "$GITHUB_WORKSPACE/dist/arch/v2rayNPlus-linux-arch-64.pkg.tar.zst" \; || true
         echo "==== Dist tree ===="
         ls -R "$GITHUB_WORKSPACE/dist/arch" || true
     - name: Upload pacman artifact
@@ -205,8 +205,8 @@ jobs:
         mkdir -p "$GITHUB_WORKSPACE/dist/deb-x86"
         rsync -av "$HOME/debbuild/" "$GITHUB_WORKSPACE/dist/deb-x86/" || true
 
-        find "$GITHUB_WORKSPACE/dist/deb-x86" -name "v2rayn_*_i386.deb" \
-          -exec mv {} "$GITHUB_WORKSPACE/dist/deb-x86/PattN-linux-86.deb" \; || true
+        find "$GITHUB_WORKSPACE/dist/deb-x86" -name "v2raynplus_*_i386.deb" \
+          -exec mv {} "$GITHUB_WORKSPACE/dist/deb-x86/v2rayNPlus-linux-86.deb" \; || true
 
         echo "==== Dist tree ===="
         ls -R "$GITHUB_WORKSPACE/dist/deb-x86" || true
@@ -270,8 +270,8 @@ jobs:
         mkdir -p "$GITHUB_WORKSPACE/dist/rpm-x86"
         rsync -av "$HOME/rpmbuild/RPMS/" "$GITHUB_WORKSPACE/dist/rpm-x86/" || true
 
-        find "$GITHUB_WORKSPACE/dist/rpm-x86" -name "v2rayN-*-1*.i686.rpm" \
-          -exec mv {} "$GITHUB_WORKSPACE/dist/rpm-x86/PattN-linux-rhel-86.rpm" \; || true
+        find "$GITHUB_WORKSPACE/dist/rpm-x86" -name "v2raynplus-*-1*.i686.rpm" \
+          -exec mv {} "$GITHUB_WORKSPACE/dist/rpm-x86/v2rayNPlus-linux-rhel-86.rpm" \; || true
 
         echo "==== Dist tree ===="
         ls -R "$GITHUB_WORKSPACE/dist/rpm-x86" || true

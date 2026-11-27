@@ -390,7 +390,7 @@ public class SpeedtestService(Config config, Func<SpeedTestResult, Task> updateF
         {
             ct.ThrowIfCancellationRequested();
 
-            await UpdateFunc("", $"Bunny testing page {pageNo}/{totalPages} ({lstSelected.Count} configs)");
+            await UpdateFunc("", string.Format(ResUI.SpBunnyTestingPage, pageNo, totalPages, lstSelected.Count));
 
             var lst = lstTest[pageNo - 1];
             var ret = await RunUnblockPageAsync(lst, ct);

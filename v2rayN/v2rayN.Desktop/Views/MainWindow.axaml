@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resx="clr-namespace:ServiceLib.Resx;assembly=ServiceLib"
     xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
-    Title="PattN"
+    Title="v2rayNPlus"
     Width="1200"
     Height="800"
     MinWidth="600"
@@ -104,11 +104,6 @@
                     </MenuItem>
 
                     <MenuItem x:Name="menuReload" Header="{x:Static resx:ResUI.menuReload}" />
-
-                    <MenuItem x:Name="menuPromotion" Header="{x:Static resx:ResUI.menuPromotion}" />
-
-                    <!--  PattN: Donate, after the Telegram channel, opens the window of PattN's donation wallets  -->
-                    <MenuItem x:Name="menuDonate" Header="{x:Static resx:ResUI.menuDonate}" />
 
                     <MenuItem x:Name="menuClose" Header="{x:Static resx:ResUI.menuExit}" />
                 </Menu>

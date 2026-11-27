@@ -122,18 +122,18 @@ for asset in "$full_x64" "$full_arm64" "$full_riscv64" "$full_loong64" \
   "$full_windows" "$update_windows" "$full_windows_arm64" "$update_windows_arm64"; do
   test -s "$temporary/dist/$asset"
 done
-test "$full_x64" = "PattN-linux-64-WebAPI.zip"
-test "$full_arm64" = "PattN-linux-arm64-WebAPI.zip"
-test "$full_riscv64" = "PattN-linux-riscv64-WebAPI.zip"
-test "$full_loong64" = "PattN-linux-loong64-WebAPI.zip"
-test "$update_x64" = "PattN-linux-64-WebAPI-update.zip"
-test "$update_arm64" = "PattN-linux-arm64-WebAPI-update.zip"
-test "$update_riscv64" = "PattN-linux-riscv64-WebAPI-update.zip"
-test "$update_loong64" = "PattN-linux-loong64-WebAPI-update.zip"
-test "$full_windows" = "PattN-windows-64-WebAPI.zip"
-test "$update_windows" = "PattN-windows-64-WebAPI-update.zip"
-test "$full_windows_arm64" = "PattN-windows-arm64-WebAPI.zip"
-test "$update_windows_arm64" = "PattN-windows-arm64-WebAPI-update.zip"
+test "$full_x64" = "v2rayNPlus-linux-64-WebAPI.zip"
+test "$full_arm64" = "v2rayNPlus-linux-arm64-WebAPI.zip"
+test "$full_riscv64" = "v2rayNPlus-linux-riscv64-WebAPI.zip"
+test "$full_loong64" = "v2rayNPlus-linux-loong64-WebAPI.zip"
+test "$update_x64" = "v2rayNPlus-linux-64-WebAPI-update.zip"
+test "$update_arm64" = "v2rayNPlus-linux-arm64-WebAPI-update.zip"
+test "$update_riscv64" = "v2rayNPlus-linux-riscv64-WebAPI-update.zip"
+test "$update_loong64" = "v2rayNPlus-linux-loong64-WebAPI-update.zip"
+test "$full_windows" = "v2rayNPlus-windows-64-WebAPI.zip"
+test "$update_windows" = "v2rayNPlus-windows-64-WebAPI-update.zip"
+test "$full_windows_arm64" = "v2rayNPlus-windows-arm64-WebAPI.zip"
+test "$update_windows_arm64" = "v2rayNPlus-windows-arm64-WebAPI-update.zip"
 
 python3 - "$temporary/dist/$full_x64" "$temporary/dist/$update_x64" "$temporary/dist/$full_windows" "$temporary/dist/$update_windows" "$web_root/.env.example" <<'PY'
 from pathlib import Path
@@ -249,7 +249,7 @@ fi
 
 python3 "$web_root/Scripts/web-update-manifest.py" write \
   --version 7.25.3 \
-  --repository patterniha/PattN \
+  --repository D3rhami/v2rayNPlus \
   --commit 0123456789abcdef \
   --build-date 2026-09-28T00:00:00Z \
   --dist "$temporary/dist" \
@@ -257,13 +257,13 @@ python3 "$web_root/Scripts/web-update-manifest.py" write \
 python3 "$web_root/Scripts/web-update-manifest.py" verify \
   --manifest "$temporary/dist/WebAPI-update.json" \
   --dist "$temporary/dist" \
-  --repository patterniha/PattN \
+  --repository D3rhami/v2rayNPlus \
   --version 7.25.3
 
 if python3 "$web_root/Scripts/web-update-manifest.py" verify \
   --manifest "$temporary/dist/WebAPI-update.json" \
   --dist "$temporary/dist" \
-  --repository patterniha/PattN \
+  --repository D3rhami/v2rayNPlus \
   --version 7.25.4 2>/dev/null; then
   echo "Expected the wrong requested release version to be rejected" >&2
   exit 1
@@ -294,7 +294,7 @@ packages = {package["rid"]: package for package in manifest["packages"]}
 assert set(packages) == set(expected), packages
 for rid, asset in expected.items():
     package = packages[rid]
-    url = f"https://github.com/patterniha/PattN/releases/download/7.25.3/{asset}"
+    url = f"https://github.com/D3rhami/v2rayNPlus/releases/download/7.25.3/{asset}"
     assert asset.endswith("-WebAPI-update.zip"), asset
     assert package["asset"] == asset, package
     assert package["url"] == url, package
@@ -307,7 +307,7 @@ PY
 # A dev identity must never become a release manifest.
 if python3 "$web_root/Scripts/web-update-manifest.py" write \
   --version 7.25.3-dev \
-  --repository patterniha/PattN \
+  --repository D3rhami/v2rayNPlus \
   --commit 0123456789abcdef \
   --build-date 2026-09-28T00:00:00Z \
   --dist "$temporary/dist" \
@@ -324,7 +324,7 @@ cp -a "$temporary/dist/WebAPI-update.json" "$temporary/tampered/WebAPI-update.js
 if python3 "$web_root/Scripts/web-update-manifest.py" verify \
   --manifest "$temporary/tampered/WebAPI-update.json" \
   --dist "$temporary/tampered" \
-  --repository patterniha/PattN 2>/dev/null; then
+  --repository D3rhami/v2rayNPlus 2>/dev/null; then
   echo "Expected the tampered manifest to be rejected" >&2
   exit 1
 fi
@@ -415,7 +415,7 @@ for variant in \
   embedded-bin symlink duplicate traversal; do
   if python3 "$web_root/Scripts/web-update-manifest.py" write \
     --version 7.25.3 \
-    --repository patterniha/PattN \
+    --repository D3rhami/v2rayNPlus \
     --commit 0123456789abcdef \
     --build-date 2026-09-28T00:00:00Z \
     --dist "$temporary/identity-tamper/$variant" \
@@ -453,7 +453,7 @@ rm -f "$temporary/without-exotic/$full_riscv64" "$temporary/without-exotic/$upda
   "$temporary/without-exotic/WebAPI-update.json"
 python3 "$web_root/Scripts/web-update-manifest.py" write \
   --version 7.25.3 \
-  --repository patterniha/PattN \
+  --repository D3rhami/v2rayNPlus \
   --commit 0123456789abcdef \
   --build-date 2026-09-28T00:00:00Z \
   --dist "$temporary/without-exotic" \
@@ -471,7 +471,7 @@ PY
 rm -f "$temporary/without-exotic/$update_arm64"
 if python3 "$web_root/Scripts/web-update-manifest.py" write \
   --version 7.25.3 \
-  --repository patterniha/PattN \
+  --repository D3rhami/v2rayNPlus \
   --commit 0123456789abcdef \
   --build-date 2026-09-28T00:00:00Z \
   --dist "$temporary/without-exotic" \
@@ -484,7 +484,7 @@ cp -a "$temporary/dist/$update_riscv64" "$temporary/without-exotic/$update_riscv
 cp -a "$temporary/dist/$update_arm64" "$temporary/without-exotic/$update_arm64"
 if python3 "$web_root/Scripts/web-update-manifest.py" write \
   --version 7.25.3 \
-  --repository patterniha/PattN \
+  --repository D3rhami/v2rayNPlus \
   --commit 0123456789abcdef \
   --build-date 2026-09-28T00:00:00Z \
   --dist "$temporary/without-exotic" \

@@ -40,7 +40,7 @@ public class WebReleaseChannelTests
     {
         await WebReleaseChannel.BuildReleaseIndexUrl("patterniha/PattN")
             .Should().BeEqualTo("https://api.github.com/repos/patterniha/PattN/releases?per_page=100");
-        await WebReleaseChannel.DefaultRepository.Should().BeEqualTo("patterniha/PattN");
+        await WebReleaseChannel.DefaultRepository.Should().BeEqualTo("D3rhami/v2rayNPlus");
 
         var rejected = false;
         try { _ = WebReleaseChannel.BuildReleaseIndexUrl("patterniha/PattN/../../evil"); }
@@ -55,7 +55,7 @@ public class WebReleaseChannelTests
     {
         var repository = "patterniha/PattN";
         var tag = "7.25.3";
-        var asset = "PattN-linux-64-WebAPI-update.zip";
+        var asset = "v2rayNPlus-linux-64-WebAPI-update.zip";
         var trusted = $"https://github.com/{repository}/releases/download/{tag}/{asset}";
 
         await WebReleaseChannel.IsTrustedAssetUrl(trusted, repository, tag, asset).Should().BeTrue();
@@ -78,22 +78,22 @@ public class WebReleaseChannelTests
     {
         await WebUpdatePackageStager.ArtifactArch("linux-x64").Should().BeEqualTo("64");
         await WebUpdatePackageStager.ArtifactArch("linux-arm64").Should().BeEqualTo("arm64");
-        await WebUpdatePackageStager.FullInstallAssetName("linux-x64").Should().BeEqualTo("PattN-linux-64-WebAPI.zip");
-        await WebUpdatePackageStager.FullInstallAssetName("linux-arm64").Should().BeEqualTo("PattN-linux-arm64-WebAPI.zip");
-        await WebUpdatePackageStager.AppOnlyAssetName("linux-x64").Should().BeEqualTo("PattN-linux-64-WebAPI-update.zip");
-        await WebUpdatePackageStager.AppOnlyAssetName("linux-arm64").Should().BeEqualTo("PattN-linux-arm64-WebAPI-update.zip");
+        await WebUpdatePackageStager.FullInstallAssetName("linux-x64").Should().BeEqualTo("v2rayNPlus-linux-64-WebAPI.zip");
+        await WebUpdatePackageStager.FullInstallAssetName("linux-arm64").Should().BeEqualTo("v2rayNPlus-linux-arm64-WebAPI.zip");
+        await WebUpdatePackageStager.AppOnlyAssetName("linux-x64").Should().BeEqualTo("v2rayNPlus-linux-64-WebAPI-update.zip");
+        await WebUpdatePackageStager.AppOnlyAssetName("linux-arm64").Should().BeEqualTo("v2rayNPlus-linux-arm64-WebAPI-update.zip");
         await WebUpdatePackageStager.ArtifactArch("win-x64").Should().BeEqualTo("64");
-        await WebUpdatePackageStager.FullInstallAssetName("win-x64").Should().BeEqualTo("PattN-windows-64-WebAPI.zip");
-        await WebUpdatePackageStager.AppOnlyAssetName("win-x64").Should().BeEqualTo("PattN-windows-64-WebAPI-update.zip");
+        await WebUpdatePackageStager.FullInstallAssetName("win-x64").Should().BeEqualTo("v2rayNPlus-windows-64-WebAPI.zip");
+        await WebUpdatePackageStager.AppOnlyAssetName("win-x64").Should().BeEqualTo("v2rayNPlus-windows-64-WebAPI-update.zip");
         await WebUpdatePackageStager.ArtifactArch("linux-riscv64").Should().BeEqualTo("riscv64");
-        await WebUpdatePackageStager.FullInstallAssetName("linux-riscv64").Should().BeEqualTo("PattN-linux-riscv64-WebAPI.zip");
-        await WebUpdatePackageStager.AppOnlyAssetName("linux-riscv64").Should().BeEqualTo("PattN-linux-riscv64-WebAPI-update.zip");
+        await WebUpdatePackageStager.FullInstallAssetName("linux-riscv64").Should().BeEqualTo("v2rayNPlus-linux-riscv64-WebAPI.zip");
+        await WebUpdatePackageStager.AppOnlyAssetName("linux-riscv64").Should().BeEqualTo("v2rayNPlus-linux-riscv64-WebAPI-update.zip");
         await WebUpdatePackageStager.ArtifactArch("linux-loongarch64").Should().BeEqualTo("loong64");
-        await WebUpdatePackageStager.FullInstallAssetName("linux-loongarch64").Should().BeEqualTo("PattN-linux-loong64-WebAPI.zip");
-        await WebUpdatePackageStager.AppOnlyAssetName("linux-loongarch64").Should().BeEqualTo("PattN-linux-loong64-WebAPI-update.zip");
+        await WebUpdatePackageStager.FullInstallAssetName("linux-loongarch64").Should().BeEqualTo("v2rayNPlus-linux-loong64-WebAPI.zip");
+        await WebUpdatePackageStager.AppOnlyAssetName("linux-loongarch64").Should().BeEqualTo("v2rayNPlus-linux-loong64-WebAPI-update.zip");
         await WebUpdatePackageStager.ArtifactArch("win-arm64").Should().BeEqualTo("arm64");
-        await WebUpdatePackageStager.FullInstallAssetName("win-arm64").Should().BeEqualTo("PattN-windows-arm64-WebAPI.zip");
-        await WebUpdatePackageStager.AppOnlyAssetName("win-arm64").Should().BeEqualTo("PattN-windows-arm64-WebAPI-update.zip");
+        await WebUpdatePackageStager.FullInstallAssetName("win-arm64").Should().BeEqualTo("v2rayNPlus-windows-arm64-WebAPI.zip");
+        await WebUpdatePackageStager.AppOnlyAssetName("win-arm64").Should().BeEqualTo("v2rayNPlus-windows-arm64-WebAPI-update.zip");
         await WebUpdatePackageStager.IsSupportedRid("linux-riscv64").Should().BeTrue();
         await WebUpdatePackageStager.IsSupportedRid("linux-loongarch64").Should().BeTrue();
         await WebUpdatePackageStager.IsSupportedRid("win-arm64").Should().BeTrue();

@@ -11,9 +11,9 @@
 		<SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<CETCompat>false</CETCompat>
-		<AssemblyName>PattN</AssemblyName>
-		<AssemblyTitle>PattN</AssemblyTitle>
-		<Product>PattN</Product>
+		<AssemblyName>v2rayNPlus</AssemblyName>
+		<AssemblyTitle>v2rayNPlus</AssemblyTitle>
+		<Product>v2rayNPlus</Product>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -74,7 +74,7 @@
                         x:Name="togHideUnavailable"
                         Margin="{StaticResource MarginLr4}"
                         VerticalAlignment="Center"
-                        Content="Hide unavailable" />
+                        Content="{x:Static resx:ResUI.SpHideUnavailable}" />
 
                     <Button
                        x:Name="btnAutofitColumnWidth"
@@ -160,7 +160,7 @@
                             InputGesture="Ctrl+T" />
                         <MenuItem
                             x:Name="menuUnblockTestServer"
-                            Header="Bunny Test"
+                            Header="{x:Static resx:ResUI.menuBunnyTest}"
                             InputGesture="Ctrl+Alt+B" />
                         <MenuItem x:Name="menuUdpTestServer" Header="{x:Static resx:ResUI.menuUdpTestServer}" />
                         <MenuItem x:Name="menuSortServerResult" Header="{x:Static resx:ResUI.menuSortServerResult}" />
@@ -314,7 +314,7 @@
 
                     <DataGridTemplateColumn
                         Width="90"
-                        Header="YouTube"
+                        Header="{x:Static resx:ResUI.SpColYouTube}"
                         SortMemberPath="YouTubeStatus"
                         Tag="YouTubeStatus">
                         <DataGridTemplateColumn.CellTemplate>
@@ -330,7 +330,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn
                         Width="90"
-                        Header="Netflix"
+                        Header="{x:Static resx:ResUI.SpColNetflix}"
                         SortMemberPath="NetflixStatus"
                         Tag="NetflixStatus">
                         <DataGridTemplateColumn.CellTemplate>
@@ -346,7 +346,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn
                         Width="85"
-                        Header="Gemini"
+                        Header="{x:Static resx:ResUI.SpColGemini}"
                         SortMemberPath="GeminiStatus"
                         Tag="GeminiStatus">
                         <DataGridTemplateColumn.CellTemplate>
@@ -362,7 +362,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn
                         Width="95"
-                        Header="ChatGPT"
+                        Header="{x:Static resx:ResUI.SpColChatGpt}"
                         SortMemberPath="ChatGptStatus"
                         Tag="ChatGptStatus">
                         <DataGridTemplateColumn.CellTemplate>

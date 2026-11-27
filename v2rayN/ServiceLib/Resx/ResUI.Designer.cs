@@ -7736,5 +7736,251 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("TransportPathTip6", resourceCulture);
             }
         }
+
+        public static string menuBunnyTest {
+            get {
+                return ResourceManager.GetString("menuBunnyTest", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyBatchSize {
+            get {
+                return ResourceManager.GetString("SpBunnyBatchSize", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyTestYoutube {
+            get {
+                return ResourceManager.GetString("SpBunnyTestYoutube", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyTestNetflix {
+            get {
+                return ResourceManager.GetString("SpBunnyTestNetflix", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyTestGemini {
+            get {
+                return ResourceManager.GetString("SpBunnyTestGemini", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyTestChatGpt {
+            get {
+                return ResourceManager.GetString("SpBunnyTestChatGpt", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyTestToolbarTip {
+            get {
+                return ResourceManager.GetString("SpBunnyTestToolbarTip", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyTestTableTip {
+            get {
+                return ResourceManager.GetString("SpBunnyTestTableTip", resourceCulture);
+            }
+        }
+
+        public static string TbAppBehavior {
+            get {
+                return ResourceManager.GetString("TbAppBehavior", resourceCulture);
+            }
+        }
+
+        public static string SpHideUnavailable {
+            get {
+                return ResourceManager.GetString("SpHideUnavailable", resourceCulture);
+            }
+        }
+
+        public static string SpRemoveUnavailable {
+            get {
+                return ResourceManager.GetString("SpRemoveUnavailable", resourceCulture);
+            }
+        }
+
+        public static string SpRemoveDuplicates {
+            get {
+                return ResourceManager.GetString("SpRemoveDuplicates", resourceCulture);
+            }
+        }
+
+        public static string SpRemoveUnavailableTip {
+            get {
+                return ResourceManager.GetString("SpRemoveUnavailableTip", resourceCulture);
+            }
+        }
+
+        public static string SpRemoveDuplicatesTip {
+            get {
+                return ResourceManager.GetString("SpRemoveDuplicatesTip", resourceCulture);
+            }
+        }
+
+        public static string SpRemoveConfirmation {
+            get {
+                return ResourceManager.GetString("SpRemoveConfirmation", resourceCulture);
+            }
+        }
+
+        public static string SpYesRemove {
+            get {
+                return ResourceManager.GetString("SpYesRemove", resourceCulture);
+            }
+        }
+
+        public static string SpRemoveSelectedConfirm {
+            get {
+                return ResourceManager.GetString("SpRemoveSelectedConfirm", resourceCulture);
+            }
+        }
+
+        public static string SpRemoveDuplicatesConfirm {
+            get {
+                return ResourceManager.GetString("SpRemoveDuplicatesConfirm", resourceCulture);
+            }
+        }
+
+        public static string SpRemoveUnavailableConfirm {
+            get {
+                return ResourceManager.GetString("SpRemoveUnavailableConfirm", resourceCulture);
+            }
+        }
+
+        public static string SpNoDuplicateProfiles {
+            get {
+                return ResourceManager.GetString("SpNoDuplicateProfiles", resourceCulture);
+            }
+        }
+
+        public static string SpNoUnavailableProfiles {
+            get {
+                return ResourceManager.GetString("SpNoUnavailableProfiles", resourceCulture);
+            }
+        }
+
+        public static string SpTestingWord {
+            get {
+                return ResourceManager.GetString("SpTestingWord", resourceCulture);
+            }
+        }
+
+        public static string SpShowColYouTube {
+            get {
+                return ResourceManager.GetString("SpShowColYouTube", resourceCulture);
+            }
+        }
+
+        public static string SpShowColNetflix {
+            get {
+                return ResourceManager.GetString("SpShowColNetflix", resourceCulture);
+            }
+        }
+
+        public static string SpShowColGemini {
+            get {
+                return ResourceManager.GetString("SpShowColGemini", resourceCulture);
+            }
+        }
+
+        public static string SpShowColChatGpt {
+            get {
+                return ResourceManager.GetString("SpShowColChatGpt", resourceCulture);
+            }
+        }
+
+        public static string SpColYouTube {
+            get {
+                return ResourceManager.GetString("SpColYouTube", resourceCulture);
+            }
+        }
+
+        public static string SpColNetflix {
+            get {
+                return ResourceManager.GetString("SpColNetflix", resourceCulture);
+            }
+        }
+
+        public static string SpColGemini {
+            get {
+                return ResourceManager.GetString("SpColGemini", resourceCulture);
+            }
+        }
+
+        public static string SpColChatGpt {
+            get {
+                return ResourceManager.GetString("SpColChatGpt", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyTestingPage {
+            get {
+                return ResourceManager.GetString("SpBunnyTestingPage", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogFetching {
+            get {
+                return ResourceManager.GetString("SpBunnyLogFetching", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogFetchFailed {
+            get {
+                return ResourceManager.GetString("SpBunnyLogFetchFailed", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogFetchedViaProxy {
+            get {
+                return ResourceManager.GetString("SpBunnyLogFetchedViaProxy", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogFetched {
+            get {
+                return ResourceManager.GetString("SpBunnyLogFetched", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogImported {
+            get {
+                return ResourceManager.GetString("SpBunnyLogImported", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogNothingImported {
+            get {
+                return ResourceManager.GetString("SpBunnyLogNothingImported", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogCreatingSub {
+            get {
+                return ResourceManager.GetString("SpBunnyLogCreatingSub", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogSubFailed {
+            get {
+                return ResourceManager.GetString("SpBunnyLogSubFailed", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogSubCreated {
+            get {
+                return ResourceManager.GetString("SpBunnyLogSubCreated", resourceCulture);
+            }
+        }
+
+        public static string SpBunnyLogSubExists {
+            get {
+                return ResourceManager.GetString("SpBunnyLogSubExists", resourceCulture);
+            }
+        }
     }
 }

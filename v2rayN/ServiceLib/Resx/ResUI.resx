@@ -1813,7 +1813,7 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
     <value>PreSharedKey</value>
   </data>
   <data name="menuExport2InnerUri" xml:space="preserve">
-    <value>Export PattN Internal Share Link to Clipboard</value>
+    <value>Export v2rayNPlus Internal Share Link to Clipboard</value>
   </data>
   <data name="MsgCheckUpdateHasNewVersion" xml:space="preserve">
     <value>{0} has a new version available: {1}</value>
@@ -1879,7 +1879,7 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
     <value>Root Certificate Provider</value>
   </data>
   <data name="TbRootCertificateProviderTip" xml:space="preserve">
-    <value>Only applies to the PattN GUI's downloads and network requests. Does not affect the core's certificate validation.</value>
+    <value>Only applies to the v2rayNPlus GUI's downloads and network requests. Does not affect the core's certificate validation.</value>
   </data>
   <data name="TbProxyDialResolveStrategy" xml:space="preserve">
     <value>Proxy Dial Resolution Strategy</value>
@@ -2041,7 +2041,7 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
     <value>Use a port from 1024 to 65532 for the Aether listen port</value>
   </data>
   <data name="MsgAetherListenPortLocalProxy" xml:space="preserve">
-    <value>The Aether listen port and the three ports after it cannot include the local ports of PattN: the mixed port and the six ports after it</value>
+    <value>The Aether listen port and the three ports after it cannot include the local ports of v2rayNPlus: the mixed port and the six ports after it</value>
   </data>
   <data name="MsgAetherListenPortInUse" xml:space="preserve">
     <value>Port {0}, which the Aether core listens on, is taken by another program or reserved by the system; change the Aether listen port in the settings, or the ports of the command</value>
@@ -2590,7 +2590,7 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
     <value>Aether core licenses</value>
   </data>
   <data name="MsgXrayRunCopyFailed" xml:space="preserve">
-    <value>On Windows PattN runs Xray-core as {0}, a copy of xray.exe, and that copy could not be made the same as xray.exe: {1}</value>
+    <value>On Windows v2rayNPlus runs Xray-core as {0}, a copy of xray.exe, and that copy could not be made the same as xray.exe: {1}</value>
   </data>
   <data name="MsgXrayCopyInUse" xml:space="preserve">
     <value>Xray-core was not updated: an Xray still runs from {0}, as a speed or latency test does; update again once it has ended</value>
@@ -2678,5 +2678,128 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
   </data>
   <data name="TransportPathTip6" xml:space="preserve">
     <value>XDRIVE remote folder</value>
+  </data>
+  <data name="menuBunnyTest" xml:space="preserve">
+    <value>Bunny Test</value>
+  </data>
+  <data name="SpBunnyBatchSize" xml:space="preserve">
+    <value>Bunny batch size</value>
+  </data>
+  <data name="SpBunnyTestYoutube" xml:space="preserve">
+    <value>Bunny: test YouTube</value>
+  </data>
+  <data name="SpBunnyTestNetflix" xml:space="preserve">
+    <value>Bunny: test Netflix</value>
+  </data>
+  <data name="SpBunnyTestGemini" xml:space="preserve">
+    <value>Bunny: test Gemini</value>
+  </data>
+  <data name="SpBunnyTestChatGpt" xml:space="preserve">
+    <value>Bunny: test ChatGPT</value>
+  </data>
+  <data name="SpBunnyTestToolbarTip" xml:space="preserve">
+    <value>Bunny Test: checks every node in the current group for real latency (3 tries) and whether YouTube, Netflix, Gemini and ChatGPT actually work through it (OK / LOCK / RISK / FAIL). Results fill the Unblock columns in the table. Shortcut: Ctrl+Alt+B</value>
+  </data>
+  <data name="SpBunnyTestTableTip" xml:space="preserve">
+    <value>Bunny Test (YouTube / Netflix / Gemini / ChatGPT) — one click, or Ctrl+Alt+B</value>
+  </data>
+  <data name="TbAppBehavior" xml:space="preserve">
+    <value>2. App behavior</value>
+  </data>
+  <data name="SpHideUnavailable" xml:space="preserve">
+    <value>Hide unavailable</value>
+  </data>
+  <data name="SpRemoveUnavailable" xml:space="preserve">
+    <value>Remove unavailable</value>
+  </data>
+  <data name="SpRemoveDuplicates" xml:space="preserve">
+    <value>Remove duplicates</value>
+  </data>
+  <data name="SpRemoveUnavailableTip" xml:space="preserve">
+    <value>Remove all unavailable profiles (failed test). Shortcut: Ctrl+Alt+R</value>
+  </data>
+  <data name="SpRemoveDuplicatesTip" xml:space="preserve">
+    <value>Remove duplicate profiles. Shortcut: Ctrl+Alt+D</value>
+  </data>
+  <data name="SpRemoveConfirmation" xml:space="preserve">
+    <value>Remove confirmation</value>
+  </data>
+  <data name="SpYesRemove" xml:space="preserve">
+    <value>Yes, remove</value>
+  </data>
+  <data name="SpRemoveSelectedConfirm" xml:space="preserve">
+    <value>This will remove {0} selected profile(s) from the current group. Continue?</value>
+  </data>
+  <data name="SpRemoveDuplicatesConfirm" xml:space="preserve">
+    <value>This will remove {0} duplicate profiles from the current group. Continue?</value>
+  </data>
+  <data name="SpRemoveUnavailableConfirm" xml:space="preserve">
+    <value>This will remove {0} unavailable profiles (failed test) from the current group. Continue?</value>
+  </data>
+  <data name="SpNoDuplicateProfiles" xml:space="preserve">
+    <value>Bunny: no duplicate profiles found</value>
+  </data>
+  <data name="SpNoUnavailableProfiles" xml:space="preserve">
+    <value>Bunny: no unavailable profiles to remove</value>
+  </data>
+  <data name="SpTestingWord" xml:space="preserve">
+    <value>testing...</value>
+  </data>
+  <data name="SpShowColYouTube" xml:space="preserve">
+    <value>Show YouTube column</value>
+  </data>
+  <data name="SpShowColNetflix" xml:space="preserve">
+    <value>Show Netflix column</value>
+  </data>
+  <data name="SpShowColGemini" xml:space="preserve">
+    <value>Show Gemini column</value>
+  </data>
+  <data name="SpShowColChatGpt" xml:space="preserve">
+    <value>Show ChatGPT column</value>
+  </data>
+  <data name="SpColYouTube" xml:space="preserve">
+    <value>YouTube</value>
+  </data>
+  <data name="SpColNetflix" xml:space="preserve">
+    <value>Netflix</value>
+  </data>
+  <data name="SpColGemini" xml:space="preserve">
+    <value>Gemini</value>
+  </data>
+  <data name="SpColChatGpt" xml:space="preserve">
+    <value>ChatGPT</value>
+  </data>
+  <data name="SpBunnyTestingPage" xml:space="preserve">
+    <value>Bunny testing page {0}/{1} ({2} configs)</value>
+  </data>
+  <data name="SpBunnyLogFetching" xml:space="preserve">
+    <value>Bunny: fetching {0}</value>
+  </data>
+  <data name="SpBunnyLogFetchFailed" xml:space="preserve">
+    <value>Bunny: fetch failed direct and through the local proxy. Start a working node first, or paste share links (ss:// vmess:// vless:// trojan://) directly with Ctrl+V</value>
+  </data>
+  <data name="SpBunnyLogFetchedViaProxy" xml:space="preserve">
+    <value>Bunny: direct fetch failed, fetched through local proxy ({0} chars)</value>
+  </data>
+  <data name="SpBunnyLogFetched" xml:space="preserve">
+    <value>Bunny: fetched {0} chars</value>
+  </data>
+  <data name="SpBunnyLogImported" xml:space="preserve">
+    <value>Bunny: imported {0} profiles into the current group</value>
+  </data>
+  <data name="SpBunnyLogNothingImported" xml:space="preserve">
+    <value>Bunny: no profiles imported from the content</value>
+  </data>
+  <data name="SpBunnyLogCreatingSub" xml:space="preserve">
+    <value>Bunny: creating subscription group for {0}</value>
+  </data>
+  <data name="SpBunnyLogSubFailed" xml:space="preserve">
+    <value>Bunny: subscription creation failed</value>
+  </data>
+  <data name="SpBunnyLogSubCreated" xml:space="preserve">
+    <value>Bunny: subscription created [{0}], updating nodes...</value>
+  </data>
+  <data name="SpBunnyLogSubExists" xml:space="preserve">
+    <value>Bunny: subscription already exists [{0}], updating nodes...</value>
   </data>
 </root>

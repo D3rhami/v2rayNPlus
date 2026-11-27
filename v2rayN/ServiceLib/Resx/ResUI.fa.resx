@@ -1792,7 +1792,7 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
     <value>PreSharedKey</value>
   </data>
   <data name="menuExport2InnerUri" xml:space="preserve">
-    <value>Export PattN Internal Share Link to Clipboard</value>
+    <value>Export v2rayNPlus Internal Share Link to Clipboard</value>
   </data>
   <data name="MsgCheckUpdateHasNewVersion" xml:space="preserve">
     <value>{0} has a new version available: {1}</value>
@@ -1909,7 +1909,7 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
     <value>برای پورت شنود Aether پورتی از 1024 تا 65532 وارد کنید</value>
   </data>
   <data name="MsgAetherListenPortLocalProxy" xml:space="preserve">
-    <value>پورت شنود Aether و سه پورت پس از آن نباید پورت‌های محلی PattN را در بر بگیرند: پورت Mixed و شش پورت پس از آن</value>
+    <value>پورت شنود Aether و سه پورت پس از آن نباید پورت‌های محلی v2rayNPlus را در بر بگیرند: پورت Mixed و شش پورت پس از آن</value>
   </data>
   <data name="MsgAetherListenPortInUse" xml:space="preserve">
     <value>پورت {0} که هستهٔ Aether روی آن گوش می‌دهد، در اختیار برنامهٔ دیگری است یا سیستم آن را رزرو کرده است؛ پورت شنود Aether را در تنظیمات، یا پورت‌های فرمان را تغییر دهید</value>
@@ -2458,7 +2458,7 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
     <value>مجوزهای هسته Aether</value>
   </data>
   <data name="MsgXrayRunCopyFailed" xml:space="preserve">
-    <value>PattN در ویندوز هسته Xray را با نام {0}، که کپی xray.exe است، اجرا می‌کند و این کپی با xray.exe یکسان نشد: {1}</value>
+    <value>v2rayNPlus در ویندوز هسته Xray را با نام {0}، که کپی xray.exe است، اجرا می‌کند و این کپی با xray.exe یکسان نشد: {1}</value>
   </data>
   <data name="MsgXrayCopyInUse" xml:space="preserve">
     <value>هسته Xray به‌روز نشد: یک Xray هنوز از {0} اجرا می‌شود، مثل یک تست سرعت یا تأخیر؛ پس از پایان آن دوباره به‌روز کنید</value>
@@ -2516,5 +2516,128 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
   </data>
   <data name="FillCorrectFakeIPv4Range" xml:space="preserve">
     <value>لطفاً یک محدوده CIDR معتبر IPv4 با حداقل دو آدرس وارد کنید، برای مثال 198.18.0.0/15.</value>
+  </data>
+  <data name="menuBunnyTest" xml:space="preserve">
+    <value>تست بانی</value>
+  </data>
+  <data name="SpBunnyBatchSize" xml:space="preserve">
+    <value>اندازه دسته تست بانی</value>
+  </data>
+  <data name="SpBunnyTestYoutube" xml:space="preserve">
+    <value>بانی: تست یوتیوب</value>
+  </data>
+  <data name="SpBunnyTestNetflix" xml:space="preserve">
+    <value>بانی: تست نتفلیکس</value>
+  </data>
+  <data name="SpBunnyTestGemini" xml:space="preserve">
+    <value>بانی: تست جمینای</value>
+  </data>
+  <data name="SpBunnyTestChatGpt" xml:space="preserve">
+    <value>بانی: تست ChatGPT</value>
+  </data>
+  <data name="SpBunnyTestToolbarTip" xml:space="preserve">
+    <value>تست بانی: برای هر نود گروه فعلی، تاخیر واقعی (۳ تلاش) و اینکه آیا یوتیوب، نتفلیکس، جمینای و ChatGPT واقعا از طریق آن کار می‌کنند را بررسی می‌کند (OK / LOCK / RISK / FAIL). نتایج در ستون‌های Unblock جدول پر می‌شوند. کلید میانبر: Ctrl+Alt+B</value>
+  </data>
+  <data name="SpBunnyTestTableTip" xml:space="preserve">
+    <value>تست بانی (یوتیوب / نتفلیکس / جمینای / ChatGPT) — با یک کلیک، یا Ctrl+Alt+B</value>
+  </data>
+  <data name="TbAppBehavior" xml:space="preserve">
+    <value>۲. رفتار برنامه</value>
+  </data>
+  <data name="SpHideUnavailable" xml:space="preserve">
+    <value>مخفی‌سازی ناموفق‌ها</value>
+  </data>
+  <data name="SpRemoveUnavailable" xml:space="preserve">
+    <value>حذف ناموفق‌ها</value>
+  </data>
+  <data name="SpRemoveDuplicates" xml:space="preserve">
+    <value>حذف تکراری‌ها</value>
+  </data>
+  <data name="SpRemoveUnavailableTip" xml:space="preserve">
+    <value>حذف همه پروفایل‌های ناموفق (رد شده در تست). کلید میانبر: Ctrl+Alt+R</value>
+  </data>
+  <data name="SpRemoveDuplicatesTip" xml:space="preserve">
+    <value>حذف پروفایل‌های تکراری. کلید میانبر: Ctrl+Alt+D</value>
+  </data>
+  <data name="SpRemoveConfirmation" xml:space="preserve">
+    <value>تأیید حذف</value>
+  </data>
+  <data name="SpYesRemove" xml:space="preserve">
+    <value>بله، حذف کن</value>
+  </data>
+  <data name="SpRemoveSelectedConfirm" xml:space="preserve">
+    <value>{0} پروفایل انتخاب‌شده از گروه فعلی حذف خواهند شد. ادامه می‌دهید؟</value>
+  </data>
+  <data name="SpRemoveDuplicatesConfirm" xml:space="preserve">
+    <value>{0} پروفایل تکراری از گروه فعلی حذف خواهند شد. ادامه می‌دهید؟</value>
+  </data>
+  <data name="SpRemoveUnavailableConfirm" xml:space="preserve">
+    <value>{0} پروفایل ناموفق (رد شده در تست) از گروه فعلی حذف خواهند شد. ادامه می‌دهید؟</value>
+  </data>
+  <data name="SpNoDuplicateProfiles" xml:space="preserve">
+    <value>بانی: هیچ پروفایل تکراری پیدا نشد</value>
+  </data>
+  <data name="SpNoUnavailableProfiles" xml:space="preserve">
+    <value>بانی: هیچ پروفایل ناموفقی برای حذف وجود ندارد</value>
+  </data>
+  <data name="SpTestingWord" xml:space="preserve">
+    <value>در حال تست...</value>
+  </data>
+  <data name="SpShowColYouTube" xml:space="preserve">
+    <value>نمایش ستون یوتیوب</value>
+  </data>
+  <data name="SpShowColNetflix" xml:space="preserve">
+    <value>نمایش ستون نتفلیکس</value>
+  </data>
+  <data name="SpShowColGemini" xml:space="preserve">
+    <value>نمایش ستون جمینای</value>
+  </data>
+  <data name="SpShowColChatGpt" xml:space="preserve">
+    <value>نمایش ستون ChatGPT</value>
+  </data>
+  <data name="SpColYouTube" xml:space="preserve">
+    <value>YouTube</value>
+  </data>
+  <data name="SpColNetflix" xml:space="preserve">
+    <value>Netflix</value>
+  </data>
+  <data name="SpColGemini" xml:space="preserve">
+    <value>Gemini</value>
+  </data>
+  <data name="SpColChatGpt" xml:space="preserve">
+    <value>ChatGPT</value>
+  </data>
+  <data name="SpBunnyTestingPage" xml:space="preserve">
+    <value>تست بانی صفحه {0}/{1} ({2} کانفیگ)</value>
+  </data>
+  <data name="SpBunnyLogFetching" xml:space="preserve">
+    <value>بانی: در حال دریافت {0}</value>
+  </data>
+  <data name="SpBunnyLogFetchFailed" xml:space="preserve">
+    <value>بانی: دریافت هم مستقیم و هم از طریق پروکسی محلی ناموفق بود. ابتدا یک نود فعال راه‌اندازی کنید، یا لینک‌ها (ss:// vmess:// vless:// trojan://) را مستقیما با Ctrl+V بچسبانید</value>
+  </data>
+  <data name="SpBunnyLogFetchedViaProxy" xml:space="preserve">
+    <value>بانی: دریافت مستقیم ناموفق بود، از طریق پروکسی محلی دریافت شد ({0} کاراکتر)</value>
+  </data>
+  <data name="SpBunnyLogFetched" xml:space="preserve">
+    <value>بانی: {0} کاراکتر دریافت شد</value>
+  </data>
+  <data name="SpBunnyLogImported" xml:space="preserve">
+    <value>بانی: {0} پروفایل به گروه فعلی اضافه شد</value>
+  </data>
+  <data name="SpBunnyLogNothingImported" xml:space="preserve">
+    <value>بانی: هیچ پروفایلی از محتوا اضافه نشد</value>
+  </data>
+  <data name="SpBunnyLogCreatingSub" xml:space="preserve">
+    <value>بانی: در حال ساخت گروه اشتراک برای {0}</value>
+  </data>
+  <data name="SpBunnyLogSubFailed" xml:space="preserve">
+    <value>بانی: ساخت اشتراک ناموفق بود</value>
+  </data>
+  <data name="SpBunnyLogSubCreated" xml:space="preserve">
+    <value>بانی: اشتراک ساخته شد [{0}]، در حال به‌روزرسانی نودها...</value>
+  </data>
+  <data name="SpBunnyLogSubExists" xml:space="preserve">
+    <value>بانی: اشتراک از قبل وجود دارد [{0}]، در حال به‌روزرسانی نودها...</value>
   </data>
 </root>

@@ -103,7 +103,7 @@
                                         <TextBlock
                                             Classes="lbl"
                                             Margin="0,0,0,2"
-                                            Text="Bunny batch size"
+                                            Text="{x:Static resx:ResUI.SpBunnyBatchSize}"
                                             TextWrapping="Wrap" />
                                         <ComboBox x:Name="cmbUnblockPageSize" Classes="inp" />
                                     </StackPanel>
@@ -176,7 +176,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Bunny: test YouTube" />
+                                                Text="{x:Static resx:ResUI.SpBunnyTestYoutube}" />
                                             <CheckBox x:Name="chkUnblockYouTube" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -184,7 +184,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Bunny: test Netflix" />
+                                                Text="{x:Static resx:ResUI.SpBunnyTestNetflix}" />
                                             <CheckBox x:Name="chkUnblockNetflix" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -192,7 +192,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Bunny: test Gemini" />
+                                                Text="{x:Static resx:ResUI.SpBunnyTestGemini}" />
                                             <CheckBox x:Name="chkUnblockGemini" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -200,7 +200,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Bunny: test ChatGPT" />
+                                                Text="{x:Static resx:ResUI.SpBunnyTestChatGpt}" />
                                             <CheckBox x:Name="chkUnblockChatGpt" VerticalAlignment="Center" />
                                         </StackPanel>
                                     </WrapPanel>
@@ -217,7 +217,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Show YouTube column" />
+                                                Text="{x:Static resx:ResUI.SpShowColYouTube}" />
                                             <CheckBox x:Name="chkShowColYouTube" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -225,7 +225,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Show Netflix column" />
+                                                Text="{x:Static resx:ResUI.SpShowColNetflix}" />
                                             <CheckBox x:Name="chkShowColNetflix" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -233,7 +233,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Show Gemini column" />
+                                                Text="{x:Static resx:ResUI.SpShowColGemini}" />
                                             <CheckBox x:Name="chkShowColGemini" VerticalAlignment="Center" />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,12,0" Orientation="Horizontal">
@@ -241,7 +241,7 @@
                                                 Classes="lbl"
                                                 Margin="0,0,4,0"
                                                 VerticalAlignment="Center"
-                                                Text="Show ChatGPT column" />
+                                                Text="{x:Static resx:ResUI.SpShowColChatGpt}" />
                                             <CheckBox x:Name="chkShowColChatGpt" VerticalAlignment="Center" />
                                         </StackPanel>
                                     </WrapPanel>
@@ -389,7 +389,7 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem Header="2. App behavior">
+            <TabItem Header="{x:Static resx:ResUI.TbAppBehavior}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <Grid Margin="{StaticResource Margin8}" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>

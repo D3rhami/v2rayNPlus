@@ -24,7 +24,7 @@ SING_VER="${SING_VER:-}"
 
 # Not the .deb's v2rayn: the AUR's v2rayn is upstream v2rayN, which AUR helpers would offer as an update to a
 # package of that name (see provides/conflicts in write_pkgbuild).
-PKGNAME="pattn-bin"
+PKGNAME="v2raynplus-bin"
 PROJECT_HINT="v2rayN.Desktop/v2rayN.Desktop.csproj"
 OUTPUT_DIR="${HOME}/archbuild"
 RID="linux-x64"
@@ -463,11 +463,11 @@ set -euo pipefail
 DIR="/opt/v2rayN"
 cd "$DIR"
 
-if [[ -x "$DIR/PattN" ]]; then
-  exec "$DIR/PattN" "$@"
+if [[ -x "$DIR/v2rayNPlus" ]]; then
+  exec "$DIR/v2rayNPlus" "$@"
 fi
 
-for dll in PattN.dll; do
+for dll in v2rayNPlus.dll; do
   if [[ -f "$DIR/$dll" ]]; then
     exec /usr/bin/dotnet "$DIR/$dll" "$@"
   fi
@@ -523,7 +523,7 @@ depends=('bash' 'coreutils' 'desktop-file-utils' 'xdg-utils'
 options=('!strip' '!debug' '!emptydirs')
 # the AUR's pattn is a source build of PattN, and its v2rayn (upstream v2rayN) installs the same /usr/bin/v2rayn
 # and v2rayn.desktop: pacman replaces either rather than installing both
-provides=('pattn')
+provides=('v2raynplus' 'v2rayn')
 conflicts=('pattn' 'v2rayn')
 
 package() {
@@ -582,7 +582,7 @@ package_binary() {
 
   find "$stage/opt/v2rayN" -type d -exec chmod 0755 {} +
   find "$stage/opt/v2rayN" -type f -exec chmod 0644 {} +
-  [[ -f "$stage/opt/v2rayN/PattN" ]] && chmod 0755 "$stage/opt/v2rayN/PattN" || true
+  [[ -f "$stage/opt/v2rayN/v2rayNPlus" ]] && chmod 0755 "$stage/opt/v2rayN/v2rayNPlus" || true
 
   # Core binaries must be executable before installation: ordinary users cannot
   # chmod the root-owned files installed by pacman.

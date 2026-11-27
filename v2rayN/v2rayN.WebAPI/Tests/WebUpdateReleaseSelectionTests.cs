@@ -36,7 +36,7 @@ public class WebUpdateReleaseSelectionTests
             "draft": false,
             "prerelease": false,
             "assets": [
-              { "name": "PattN-linux-64.zip", "browser_download_url": "https://github.com/patterniha/PattN/releases/download/7.25.4/PattN-linux-64.zip", "size": 1024 }
+              { "name": "v2rayNPlus-linux-64.zip", "browser_download_url": "https://github.com/patterniha/PattN/releases/download/7.25.4/v2rayNPlus-linux-64.zip", "size": 1024 }
             ]
           },
           {
@@ -45,7 +45,7 @@ public class WebUpdateReleaseSelectionTests
             "prerelease": false,
             "assets": [
               { "name": "WebAPI-update.json", "browser_download_url": "https://github.com/patterniha/PattN/releases/download/7.25.3/WebAPI-update.json", "size": 512 },
-              { "name": "PattN-linux-64-WebAPI-update.zip", "browser_download_url": "https://github.com/patterniha/PattN/releases/download/7.25.3/PattN-linux-64-WebAPI-update.zip", "size": 4096 }
+              { "name": "v2rayNPlus-linux-64-WebAPI-update.zip", "browser_download_url": "https://github.com/patterniha/PattN/releases/download/7.25.3/v2rayNPlus-linux-64-WebAPI-update.zip", "size": 4096 }
             ]
           },
           {
@@ -69,7 +69,7 @@ public class WebUpdateReleaseSelectionTests
         await selected.Version.Should().BeEqualTo("7.25.3");
         await selected.IsPrerelease.Should().BeFalse();
         await selected.ManifestUrl.Should().BeEqualTo("https://github.com/patterniha/PattN/releases/download/7.25.3/WebAPI-update.json");
-        await selected.Assets.ContainsKey("PattN-linux-64-WebAPI-update.zip").Should().BeTrue();
+        await selected.Assets.ContainsKey("v2rayNPlus-linux-64-WebAPI-update.zip").Should().BeTrue();
 
         var withPrerelease = V2rayRuntime.ParseWebReleaseCandidates(ReleaseIndex, allowPrerelease: true);
         await withPrerelease.Count.Should().BeEqualTo(2);

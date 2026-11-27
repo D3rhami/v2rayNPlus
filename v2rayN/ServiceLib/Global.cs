@@ -2,7 +2,7 @@ namespace ServiceLib;
 
 public class Global
 {
-    public const string AppName = "PattN";
+    public const string AppName = "v2rayNPlus";
     public const string GithubUrl = "https://github.com";
     public const string GithubApiUrl = "https://api.github.com/repos";
     public const string GeoUrl = "https://github.com/Chocolate4U/Iran-v2ray-rules/releases/latest/download/{0}.dat";
@@ -12,21 +12,6 @@ public class Global
     public const string PsiphonServersUrl = "https://s3.amazonaws.com//psiphon/web/mjr4-p23r-puwl/server_list_compressed";
     public const string PsiphonServersFileName = "psiphon_servers.dat";
     public const string PsiphonServersStampFileName = "psiphon_servers.stamp";
-
-    public const string PromotionUrl = @"aHR0cHM6Ly90Lm1lL3BhdHRfY2hhbm5lbF94";
-
-    // PattN: the wallets the Donate window lists, network and address; an address is copied exactly as written here
-    public static readonly IReadOnlyList<(string Network, string Address)> DonationWallets =
-    [
-        ("USDT (BEP20)", "0x76a768B53Ca77B43086946315f0BDF21156bF424"),
-        ("USDT (TRC20)", "TU5gKvKqcXPn8itp1DouBCwcqGHMemBm8o"),
-        ("TON (TON)", "UQAc-mZB3y7uxWHKiMmq0ORZEYgycWDWZ4V1k73HsXvTJx-i"),
-        ("BTC (BTC)", "bc1q8cptsn497hlfay6ypaaladldlrjalvx2ah233g"),
-    ];
-
-    // PattN: the author's ID the Donate window shows below the wallets, a link to the author's Telegram
-    public const string AuthorId = "@patterniha";
-    public const string AuthorTelegramUrl = "https://t.me/patterniha";
 
     public const string ConfigFileName = "guiNConfig.json";
     public const string CoreConfigFileName = "config.json";
@@ -110,7 +95,7 @@ public class Global
     public const int MinFontSize = 8;
     public const int MinFontSizeCount = 13;
     public const string RebootAs = "rebootas";
-    public const string AvaAssets = "avares://PattN/Assets/";
+    public const string AvaAssets = "avares://v2rayNPlus/Assets/";
     public const string LocalAppData = "V2RAYN_LOCAL_APPLICATION_DATA_V2";
     public const string V2RayLocalAsset = "V2RAY_LOCATION_ASSET";
     public const string XrayLocalAsset = "XRAY_LOCATION_ASSET";

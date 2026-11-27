@@ -728,7 +728,7 @@ write_spec_file() {
 %undefine _debugsource_packages
 %global __requires_exclude ^liblttng-ust\.so\..*$
 
-Name:           v2rayN
+Name:           v2raynplus
 Version:        __VERSION__
 Release:        1%{?dist}
 Summary:        PattN (Avalonia) GUI client for Linux
@@ -746,6 +746,8 @@ Requires:       xdg-utils >= 1.1.3
 Requires:       coreutils >= 9.4
 Requires:       bash >= 5.2.21
 Requires:       freetype >= 2.13
+Obsoletes:      v2rayN < %{version}-%{release}
+Provides:       v2rayN = %{version}-%{release}
 
 %description
 PattN Linux for Red Hat Enterprise Linux
@@ -765,7 +767,7 @@ cp -a * %{buildroot}/opt/v2rayN/
 
 find %{buildroot}/opt/v2rayN -type d -exec chmod 0755 {} +
 find %{buildroot}/opt/v2rayN -type f -exec chmod 0644 {} +
-[ -f %{buildroot}/opt/v2rayN/PattN ] && chmod 0755 %{buildroot}/opt/v2rayN/PattN || :
+[ -f %{buildroot}/opt/v2rayN/v2rayNPlus ] && chmod 0755 %{buildroot}/opt/v2rayN/v2rayNPlus || :
 # PattN: the Aether core and the two programs it runs keep their execute bits
 for f in aether lyrebird psiphon-tunnel-core; do [ -f %{buildroot}/opt/v2rayN/bin/aether/$f ] && chmod 0755 %{buildroot}/opt/v2rayN/bin/aether/$f || :; done
 
@@ -775,9 +777,9 @@ install -m0755 /dev/stdin %{buildroot}%{_bindir}/v2rayn << 'EOF'
 set -euo pipefail
 DIR="/opt/v2rayN"
 
-if [[ -x "$DIR/PattN" ]]; then exec "$DIR/PattN" "$@"; fi
+if [[ -x "$DIR/v2rayNPlus" ]]; then exec "$DIR/v2rayNPlus" "$@"; fi
 
-for dll in PattN.dll; do
+for dll in v2rayNPlus.dll; do
   if [[ -f "$DIR/$dll" ]]; then exec /usr/bin/dotnet "$DIR/$dll" "$@"; fi
 done
 
@@ -871,7 +873,7 @@ package_binary() {
   fi
 
   echo "Build done for $short. RPM at:"
-  for f in "${RPM_TOPDIR}/RPMS/${archdir}/v2rayN-${VERSION}-1"*.rpm; do
+  for f in "${RPM_TOPDIR}/RPMS/${archdir}/v2raynplus-${VERSION}-1"*.rpm; do
     [[ -e "$f" ]] || continue
     echo "  $f"
     BUILT_RPMS+=("$f")

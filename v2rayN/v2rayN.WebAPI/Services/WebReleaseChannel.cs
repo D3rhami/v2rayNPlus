@@ -9,7 +9,7 @@ namespace v2rayN.WebAPI.Services;
 /// </summary>
 internal static partial class WebReleaseChannel
 {
-    public const string DefaultRepository = "patterniha/PattN";
+    public const string DefaultRepository = "D3rhami/v2rayNPlus";
     public const string ManifestAssetName = "WebAPI-update.json";
     private const string ApiBase = "https://api.github.com/repos";
 

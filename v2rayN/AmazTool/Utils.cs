@@ -46,7 +46,7 @@ internal class Utils
             : StringComparison.Ordinal;
     }
 
-    public static string V2rayN => "PattN";
+    public static string V2rayN => "v2rayNPlus";
 
     public static void StartV2RayN()
     {

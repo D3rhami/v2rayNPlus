@@ -549,7 +549,7 @@ public partial class MainWindowViewModel : MyReactiveObject
 
     public async Task AddUrlContentToCurrentGroupAsync(string url)
     {
-        NoticeManager.Instance.SendMessageEx($"Bunny: fetching {url}");
+        NoticeManager.Instance.SendMessageEx(string.Format(ResUI.SpBunnyLogFetching, url));
         var content = await new DownloadService().TryDownloadString(url);
         if (content.IsNullOrEmpty())
         {
@@ -557,30 +557,30 @@ public partial class MainWindowViewModel : MyReactiveObject
             content = await new DownloadService { Handler = handler }.TryDownloadString(url);
             if (content.IsNullOrEmpty())
             {
-                NoticeManager.Instance.SendMessageEx("Bunny: fetch failed direct and through the local proxy. Start a working node first, or paste share links (ss:// vmess:// vless:// trojan://) directly with Ctrl+V");
+                NoticeManager.Instance.SendMessageEx(ResUI.SpBunnyLogFetchFailed);
                 return;
             }
-            NoticeManager.Instance.SendMessageEx($"Bunny: direct fetch failed, fetched through local proxy ({content.Length} chars)");
+            NoticeManager.Instance.SendMessageEx(string.Format(ResUI.SpBunnyLogFetchedViaProxy, content.Length));
         }
         else
         {
-            NoticeManager.Instance.SendMessageEx($"Bunny: fetched {content.Length} chars");
+            NoticeManager.Instance.SendMessageEx(string.Format(ResUI.SpBunnyLogFetched, content.Length));
         }
         var ret = await ConfigHandler.AddBatchServers(_config, content, _config.SubIndexId, false);
         if (ret > 0)
         {
             await RefreshServersDispatcherAsync();
-            NoticeManager.Instance.SendMessageEx($"Bunny: imported {ret} profiles into the current group");
+            NoticeManager.Instance.SendMessageEx(string.Format(ResUI.SpBunnyLogImported, ret));
         }
         else
         {
-            NoticeManager.Instance.SendMessageEx("Bunny: no profiles imported from the content");
+            NoticeManager.Instance.SendMessageEx(ResUI.SpBunnyLogNothingImported);
         }
     }
 
     public async Task AddSubscriptionNewGroupFromUrlAsync(string url)
     {
-        NoticeManager.Instance.SendMessageEx($"Bunny: creating subscription group for {url}");
+        NoticeManager.Instance.SendMessageEx(string.Format(ResUI.SpBunnyLogCreatingSub, url));
         var subs = await AppManager.Instance.SubItems();
         var existing = subs?.FirstOrDefault(t => t.Url == url);
         if (existing == null)
@@ -589,17 +589,17 @@ public partial class MainWindowViewModel : MyReactiveObject
             var ret = await ConfigHandler.AddSubItem(_config, new SubItem { Id = string.Empty, Url = url, Remarks = name });
             if (ret == -1)
             {
-                NoticeManager.Instance.SendMessageEx("Bunny: subscription creation failed");
+                NoticeManager.Instance.SendMessageEx(ResUI.SpBunnyLogSubFailed);
                 return;
             }
-            NoticeManager.Instance.SendMessageEx($"Bunny: subscription created [{name}], updating nodes...");
+            NoticeManager.Instance.SendMessageEx(string.Format(ResUI.SpBunnyLogSubCreated, name));
             await RefreshSubscriptions();
             subs = await AppManager.Instance.SubItems();
             existing = subs?.FirstOrDefault(t => t.Url == url);
         }
         else
         {
-            NoticeManager.Instance.SendMessageEx($"Bunny: subscription already exists [{existing.Remarks}], updating nodes...");
+            NoticeManager.Instance.SendMessageEx(string.Format(ResUI.SpBunnyLogSubExists, existing.Remarks));
         }
         if (existing != null)
         {

@@ -10,7 +10,7 @@
     <WebVersion Condition="'$(WebVersion)' == ''">0.0.0-dev</WebVersion>
     <WebCommit Condition="'$(WebCommit)' == ''">unknown</WebCommit>
     <WebBuildDate Condition="'$(WebBuildDate)' == ''">unknown</WebBuildDate>
-    <WebRepository Condition="'$(WebRepository)' == ''">patterniha/PattN</WebRepository>
+    <WebRepository Condition="'$(WebRepository)' == ''">D3rhami/v2rayNPlus</WebRepository>
   </PropertyGroup>
 
   <ItemGroup>

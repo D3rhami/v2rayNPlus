@@ -677,11 +677,11 @@ set -euo pipefail
 DIR="/opt/v2rayN"
 cd "$DIR"
 
-if [[ -x "$DIR/PattN" ]]; then
-  exec "$DIR/PattN" "$@"
+if [[ -x "$DIR/v2rayNPlus" ]]; then
+  exec "$DIR/v2rayNPlus" "$@"
 fi
 
-for dll in PattN.dll; do
+for dll in v2rayNPlus.dll; do
   if [[ -f "$DIR/$dll" ]]; then
     exec /usr/bin/dotnet "$DIR/$dll" "$@"
   fi
@@ -778,13 +778,13 @@ package_binary() {
 
   mkdir -p "$workdir/debian"
   cat > "$workdir/debian/control" <<EOF_CONTROL
-Source: v2rayn
+Source: v2raynplus
 Section: net
 Priority: optional
 Maintainer: 2dust <noreply@github.com>
 Standards-Version: 4.7.0
 
-Package: v2rayn
+Package: v2raynplus
 Architecture: ${deb_arch}
 Description: PattN
 EOF_CONTROL
@@ -824,13 +824,16 @@ EOF_CONTROL
   fi
 
   cat > "$debian_dir/control" <<EOF_CONTROL2
-Package: v2rayn
+Package: v2raynplus
 Version: ${VERSION}
 Architecture: ${deb_arch}
 Maintainer: 2dust <noreply@github.com>
 Homepage: https://github.com/patterniha/PattN
 Section: net
 Priority: optional
+Provides: v2rayn
+Conflicts: v2rayn
+Replaces: v2rayn
 Depends: ${final_depends}
 Description: PattN (Avalonia) GUI client for Linux
  Support vless / vmess / Trojan / http / socks / Anytls / Hysteria2 /
@@ -839,7 +842,7 @@ EOF_CONTROL2
 
   find "$stage/opt/v2rayN" -type d -exec chmod 0755 {} +
   find "$stage/opt/v2rayN" -type f -exec chmod 0644 {} +
-  [[ -f "$stage/opt/v2rayN/PattN" ]] && chmod 0755 "$stage/opt/v2rayN/PattN" || true
+  [[ -f "$stage/opt/v2rayN/v2rayNPlus" ]] && chmod 0755 "$stage/opt/v2rayN/v2rayNPlus" || true
 
   # Core binaries must be executable before installation: ordinary users cannot
   # chmod the root-owned files installed by dpkg.
@@ -850,7 +853,7 @@ EOF_CONTROL2
     fi
   done
 
-  deb_out="$OUTPUT_DIR/v2rayn_${VERSION}_${deb_arch}.deb"
+  deb_out="$OUTPUT_DIR/v2raynplus_${VERSION}_${deb_arch}.deb"
   dpkg-deb --root-owner-group --build "$stage" "$deb_out"
 
   echo "Build done for $short. DEB at:"
