@@ -737,7 +737,7 @@ public partial class ProfilesViewModel : MyReactiveObject
         {
             return;
         }
-        if (await ShowYesNoInteraction.HandleSafe(ResUI.RemoveServer) == false)
+        if (await ShowYesNoInteraction.HandleSafe($"This will remove {lstSelected.Count} selected profile(s) from the current group. Continue?") == false)
         {
             return;
         }
@@ -758,7 +758,7 @@ public partial class ProfilesViewModel : MyReactiveObject
 
     private async Task RemoveDuplicateServer()
     {
-        if (await ShowYesNoInteraction.HandleSafe(ResUI.RemoveServer) == false)
+        if (await ShowYesNoInteraction.HandleSafe("This will remove duplicate profiles from the current group. Continue?") == false)
         {
             return;
         }
@@ -880,7 +880,7 @@ public partial class ProfilesViewModel : MyReactiveObject
 
     public async Task RemoveInvalidServerResult()
     {
-        if (await ShowYesNoInteraction.HandleSafe(ResUI.RemoveServer) == false)
+        if (await ShowYesNoInteraction.HandleSafe("This will remove all unavailable profiles (failed test) from the current group. Continue?") == false)
         {
             return;
         }

@@ -88,8 +88,16 @@ public partial class ProfilesView
             ViewModel.ShowYesNoInteraction.RegisterHandler(interaction =>
             {
                 var message = interaction.Input;
-                var result = UI.ShowYesNo(message) != MessageBoxResult.No;
-                interaction.SetOutput(result);
+                var dialog = new ChoiceDialog(
+                    "Remove confirmation",
+                    message,
+                    new List<string> { "Yes, remove", "Cancel" },
+                    1)
+                {
+                    Owner = Window.GetWindow(this),
+                };
+                var confirmed = dialog.ShowDialog() == true && dialog.Choice == 0;
+                interaction.SetOutput(confirmed);
             }).DisposeWith(disposables);
 
             ViewModel.SaveFileDialogInteraction.RegisterHandler(async interaction =>

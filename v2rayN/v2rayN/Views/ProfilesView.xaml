@@ -29,6 +29,30 @@
                     VerticalAlignment="Center"
                     DockPanel.Dock="Right"
                     Content="Hide unavailable" />
+                <Button
+                    x:Name="btnRemoveUnavailable"
+                    Margin="{StaticResource MarginLeftRight4}"
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Right"
+                    Background="#1c2029"
+                    BorderBrush="#334155"
+                    BorderThickness="1"
+                    Foreground="#93c5fd"
+                    Content="Remove unavailable"
+                    FontSize="{DynamicResource StdFontSize}"
+                    Command="{Binding RemoveInvalidServerResultCmd}" />
+                <Button
+                    x:Name="btnRemoveDuplicates"
+                    Margin="{StaticResource MarginLeftRight4}"
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Right"
+                    Background="#1c2029"
+                    BorderBrush="#334155"
+                    BorderThickness="1"
+                    Foreground="#93c5fd"
+                    Content="Remove duplicates"
+                    FontSize="{DynamicResource StdFontSize}"
+                    Command="{Binding RemoveDuplicateServerCmd}" />
                 <WrapPanel Margin="{StaticResource Margin4}">
                 <ListBox
                     x:Name="lstGroup"
