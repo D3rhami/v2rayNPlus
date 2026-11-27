@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace v2rayN.Views;
 
@@ -26,6 +28,7 @@ public partial class UrlDetectedDialog
         };
         lstOptions.ItemsSource = items;
         lstOptions.SelectedIndex = 0;
+        lstOptions.PreviewMouseLeftButtonUp += LstOptions_PreviewMouseLeftButtonUp;
         PreviewKeyDown += (_, e) =>
         {
             if (e.Key == Key.Escape)
@@ -51,6 +54,22 @@ public partial class UrlDetectedDialog
         if (lstOptions.SelectedIndex >= 0)
         {
             Confirm();
+        }
+    }
+
+    private void LstOptions_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        var hit = lstOptions.InputHitTest(e.GetPosition(lstOptions)) as DependencyObject;
+        while (hit != null && !ReferenceEquals(hit, lstOptions))
+        {
+            if (hit is ListBoxItem item)
+            {
+                Choice = lstOptions.ItemContainerGenerator.IndexFromContainer(item);
+                DialogResult = true;
+                e.Handled = true;
+                return;
+            }
+            hit = VisualTreeHelper.GetParent(hit);
         }
     }
 
