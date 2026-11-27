@@ -35,28 +35,28 @@ public partial class ProfileItemModel : ReactiveObject
     public partial string UnblockTooltip { get; set; } = string.Empty;
 
     [Reactive]
-    public partial string YtText { get; set; } = "—";
+    public partial string YouTubeText { get; set; } = "—";
 
     [Reactive]
-    public partial string NfText { get; set; } = "—";
+    public partial string NetflixText { get; set; } = "—";
 
     [Reactive]
-    public partial string GemText { get; set; } = "—";
+    public partial string GeminiText { get; set; } = "—";
 
     [Reactive]
-    public partial string ChatText { get; set; } = "—";
+    public partial string ChatGptText { get; set; } = "—";
 
     [Reactive]
-    public partial int YtStatus { get; set; }
+    public partial int YouTubeStatus { get; set; }
 
     [Reactive]
-    public partial int NfStatus { get; set; }
+    public partial int NetflixStatus { get; set; }
 
     [Reactive]
-    public partial int GemStatus { get; set; }
+    public partial int GeminiStatus { get; set; }
 
     [Reactive]
-    public partial int ChatStatus { get; set; }
+    public partial int ChatGptStatus { get; set; }
 
     public string? ExitIpU { get; set; }
 

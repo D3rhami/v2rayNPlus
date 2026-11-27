@@ -419,21 +419,21 @@ public partial class ProfilesView
                         {
                             item2.Visibility = !_config.UiItem.HideColumnUnblock ? Visibility.Visible : Visibility.Hidden;
                         }
-                        if (item.Name.Equals("YtStatus", StringComparison.CurrentCultureIgnoreCase))
+                        if (item.Name.Equals("YouTubeStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            item2.Visibility = !_config.UiItem.HideColumnYt ? Visibility.Visible : Visibility.Hidden;
+                            item2.Visibility = !_config.UiItem.HideColumnYouTube ? Visibility.Visible : Visibility.Hidden;
                         }
-                        if (item.Name.Equals("NfStatus", StringComparison.CurrentCultureIgnoreCase))
+                        if (item.Name.Equals("NetflixStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            item2.Visibility = !_config.UiItem.HideColumnNf ? Visibility.Visible : Visibility.Hidden;
+                            item2.Visibility = !_config.UiItem.HideColumnNetflix ? Visibility.Visible : Visibility.Hidden;
                         }
-                        if (item.Name.Equals("GemStatus", StringComparison.CurrentCultureIgnoreCase))
+                        if (item.Name.Equals("GeminiStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            item2.Visibility = !_config.UiItem.HideColumnGem ? Visibility.Visible : Visibility.Hidden;
+                            item2.Visibility = !_config.UiItem.HideColumnGemini ? Visibility.Visible : Visibility.Hidden;
                         }
-                        if (item.Name.Equals("ChatStatus", StringComparison.CurrentCultureIgnoreCase))
+                        if (item.Name.Equals("ChatGptStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            item2.Visibility = !_config.UiItem.HideColumnChat ? Visibility.Visible : Visibility.Hidden;
+                            item2.Visibility = !_config.UiItem.HideColumnChatGpt ? Visibility.Visible : Visibility.Hidden;
                         }
                     }
                 }

@@ -310,15 +310,15 @@ public partial class ProfilesViewModel : MyReactiveObject
             var nf = unblock.Services.FirstOrDefault(t => t.Service == "Netflix");
             var gem = unblock.Services.FirstOrDefault(t => t.Service == "Gemini");
             var chat = unblock.Services.FirstOrDefault(t => t.Service == "ChatGPT");
-            item.YtStatus = yt == null ? 0 : (int)yt.Status;
-            item.NfStatus = nf == null ? 0 : (int)nf.Status;
-            item.GemStatus = gem == null ? 0 : (int)gem.Status;
-            item.ChatStatus = chat == null ? 0 : (int)chat.Status;
-            item.YtText = GetUnblockSymbol(item.YtStatus);
-            item.NfText = GetUnblockSymbol(item.NfStatus);
-            item.GemText = GetUnblockSymbol(item.GemStatus);
-            item.ChatText = GetUnblockSymbol(item.ChatStatus);
-            item.UnblockSummary = $"YT {item.YtText} GEM {item.GemText} NF {item.NfText} CHAT {item.ChatText} {unblock.AttemptsOk}/{unblock.AttemptsTotal} {unblock.ExitCountry ?? ""}";
+            item.YouTubeStatus = yt == null ? 0 : (int)yt.Status;
+            item.NetflixStatus = nf == null ? 0 : (int)nf.Status;
+            item.GeminiStatus = gem == null ? 0 : (int)gem.Status;
+            item.ChatGptStatus = chat == null ? 0 : (int)chat.Status;
+            item.YouTubeText = GetUnblockWord(item.YouTubeStatus);
+            item.NetflixText = GetUnblockWord(item.NetflixStatus);
+            item.GeminiText = GetUnblockWord(item.GeminiStatus);
+            item.ChatGptText = GetUnblockWord(item.ChatGptStatus);
+            item.UnblockSummary = $"YT {GetUnblockSummarySymbol(item.YouTubeStatus)} GEM {GetUnblockSummarySymbol(item.GeminiStatus)} NF {GetUnblockSummarySymbol(item.NetflixStatus)} CHAT {GetUnblockSummarySymbol(item.ChatGptStatus)} {unblock.AttemptsOk}/{unblock.AttemptsTotal} {unblock.ExitCountry ?? ""}";
             item.UnblockTooltip = BuildUnblockTooltip(unblock);
             item.ExitIpU = unblock.ExitIp;
             item.ExitCountryU = unblock.ExitCountry;
@@ -326,7 +326,19 @@ public partial class ProfilesViewModel : MyReactiveObject
         await Task.CompletedTask;
     }
 
-    private static string GetUnblockSymbol(int status)
+    private static string GetUnblockWord(int status)
+    {
+        return status switch
+        {
+            1 => "OK",
+            2 => "LOCK",
+            3 => "RISK",
+            4 => "FAIL",
+            _ => "—"
+        };
+    }
+
+    private static string GetUnblockSummarySymbol(int status)
     {
         return status switch
         {
@@ -366,7 +378,7 @@ public partial class ProfilesViewModel : MyReactiveObject
             return string.Empty;
         }
 
-        return $"YT {GetUnblockSymbol(item.YtStatus)} GEM {GetUnblockSymbol(item.GemStatus)} NF {GetUnblockSymbol(item.NfStatus)} CHAT {GetUnblockSymbol(item.ChatStatus)} {item.AttemptsOk}/{item.AttemptsTotal} {item.ExitCountry ?? ""}";
+        return $"YT {GetUnblockSummarySymbol(item.YouTubeStatus)} GEM {GetUnblockSummarySymbol(item.GeminiStatus)} NF {GetUnblockSummarySymbol(item.NetflixStatus)} CHAT {GetUnblockSummarySymbol(item.ChatGptStatus)} {item.AttemptsOk}/{item.AttemptsTotal} {item.ExitCountry ?? ""}";
     }
 
     private static string BuildUnblockTooltip(UnblockItem? item)
@@ -377,21 +389,21 @@ public partial class ProfilesViewModel : MyReactiveObject
         }
 
         var lines = new List<string>();
-        if (item.YtStatus > 0)
+        if (item.YouTubeStatus > 0)
         {
-            lines.Add($"YouTube: {GetUnblockSymbol(item.YtStatus)}");
+            lines.Add($"YouTube: {GetUnblockWord(item.YouTubeStatus)}");
         }
-        if (item.NfStatus > 0)
+        if (item.NetflixStatus > 0)
         {
-            lines.Add($"Netflix: {GetUnblockSymbol(item.NfStatus)}");
+            lines.Add($"Netflix: {GetUnblockWord(item.NetflixStatus)}");
         }
-        if (item.GemStatus > 0)
+        if (item.GeminiStatus > 0)
         {
-            lines.Add($"Gemini: {GetUnblockSymbol(item.GemStatus)}");
+            lines.Add($"Gemini: {GetUnblockWord(item.GeminiStatus)}");
         }
-        if (item.ChatStatus > 0)
+        if (item.ChatGptStatus > 0)
         {
-            lines.Add($"ChatGPT: {GetUnblockSymbol(item.ChatStatus)}");
+            lines.Add($"ChatGPT: {GetUnblockWord(item.ChatGptStatus)}");
         }
         lines.Add($"Exit: {item.ExitIp ?? ""} {item.ExitCountry ?? ""}".TrimEnd());
         lines.Add($"Tested: {item.TestTime ?? ""}");
@@ -538,14 +550,14 @@ public partial class ProfilesViewModel : MyReactiveObject
                 continue;
             }
 
-            it.YtStatus = unblock.YtStatus;
-            it.NfStatus = unblock.NfStatus;
-            it.GemStatus = unblock.GemStatus;
-            it.ChatStatus = unblock.ChatStatus;
-            it.YtText = GetUnblockSymbol(unblock.YtStatus);
-            it.NfText = GetUnblockSymbol(unblock.NfStatus);
-            it.GemText = GetUnblockSymbol(unblock.GemStatus);
-            it.ChatText = GetUnblockSymbol(unblock.ChatStatus);
+            it.YouTubeStatus = unblock.YouTubeStatus;
+            it.NetflixStatus = unblock.NetflixStatus;
+            it.GeminiStatus = unblock.GeminiStatus;
+            it.ChatGptStatus = unblock.ChatGptStatus;
+            it.YouTubeText = GetUnblockWord(unblock.YouTubeStatus);
+            it.NetflixText = GetUnblockWord(unblock.NetflixStatus);
+            it.GeminiText = GetUnblockWord(unblock.GeminiStatus);
+            it.ChatGptText = GetUnblockWord(unblock.ChatGptStatus);
             it.UnblockSummary = BuildUnblockSummary(unblock);
             it.UnblockTooltip = BuildUnblockTooltip(unblock);
             it.ExitIpU = unblock.ExitIp;

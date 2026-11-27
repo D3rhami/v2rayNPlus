@@ -339,66 +339,66 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn
-                        Width="60"
-                        Header="YT"
-                        SortMemberPath="YtStatus"
-                        Tag="YtStatus">
+                        Width="90"
+                        Header="YouTube"
+                        SortMemberPath="YouTubeStatus"
+                        Tag="YouTubeStatus">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock
                                     Margin="{StaticResource MarginLr8}"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Foreground="{Binding YtStatus, Converter={StaticResource UnblockStatusColorConverter}}"
-                                    Text="{Binding Path=YtText, Mode=OneWay}" />
+                                    Foreground="{Binding YouTubeStatus, Converter={StaticResource UnblockStatusColorConverter}}"
+                                    Text="{Binding Path=YouTubeText, Mode=OneWay}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn
-                        Width="60"
-                        Header="NF"
-                        SortMemberPath="NfStatus"
-                        Tag="NfStatus">
+                        Width="90"
+                        Header="Netflix"
+                        SortMemberPath="NetflixStatus"
+                        Tag="NetflixStatus">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock
                                     Margin="{StaticResource MarginLr8}"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Foreground="{Binding NfStatus, Converter={StaticResource UnblockStatusColorConverter}}"
-                                    Text="{Binding Path=NfText, Mode=OneWay}" />
+                                    Foreground="{Binding NetflixStatus, Converter={StaticResource UnblockStatusColorConverter}}"
+                                    Text="{Binding Path=NetflixText, Mode=OneWay}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn
-                        Width="70"
-                        Header="GEM"
-                        SortMemberPath="GemStatus"
-                        Tag="GemStatus">
+                        Width="85"
+                        Header="Gemini"
+                        SortMemberPath="GeminiStatus"
+                        Tag="GeminiStatus">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock
                                     Margin="{StaticResource MarginLr8}"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Foreground="{Binding GemStatus, Converter={StaticResource UnblockStatusColorConverter}}"
-                                    Text="{Binding Path=GemText, Mode=OneWay}" />
+                                    Foreground="{Binding GeminiStatus, Converter={StaticResource UnblockStatusColorConverter}}"
+                                    Text="{Binding Path=GeminiText, Mode=OneWay}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn
-                        Width="70"
-                        Header="CHAT"
-                        SortMemberPath="ChatStatus"
-                        Tag="ChatStatus">
+                        Width="95"
+                        Header="ChatGPT"
+                        SortMemberPath="ChatGptStatus"
+                        Tag="ChatGptStatus">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock
                                     Margin="{StaticResource MarginLr8}"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Foreground="{Binding ChatStatus, Converter={StaticResource UnblockStatusColorConverter}}"
-                                    Text="{Binding Path=ChatText, Mode=OneWay}" />
+                                    Foreground="{Binding ChatGptStatus, Converter={StaticResource UnblockStatusColorConverter}}"
+                                    Text="{Binding Path=ChatGptText, Mode=OneWay}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

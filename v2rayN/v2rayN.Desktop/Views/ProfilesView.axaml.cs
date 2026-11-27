@@ -415,21 +415,21 @@ public partial class ProfilesView : ReactiveUserControl<ProfilesViewModel>
                         {
                             item2.IsVisible = !_config.UiItem.HideColumnUnblock;
                         }
-                        if (item.Name.Equals("YtStatus", StringComparison.CurrentCultureIgnoreCase))
+                        if (item.Name.Equals("YouTubeStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            item2.IsVisible = !_config.UiItem.HideColumnYt;
+                            item2.IsVisible = !_config.UiItem.HideColumnYouTube;
                         }
-                        if (item.Name.Equals("NfStatus", StringComparison.CurrentCultureIgnoreCase))
+                        if (item.Name.Equals("NetflixStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            item2.IsVisible = !_config.UiItem.HideColumnNf;
+                            item2.IsVisible = !_config.UiItem.HideColumnNetflix;
                         }
-                        if (item.Name.Equals("GemStatus", StringComparison.CurrentCultureIgnoreCase))
+                        if (item.Name.Equals("GeminiStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            item2.IsVisible = !_config.UiItem.HideColumnGem;
+                            item2.IsVisible = !_config.UiItem.HideColumnGemini;
                         }
-                        if (item.Name.Equals("ChatStatus", StringComparison.CurrentCultureIgnoreCase))
+                        if (item.Name.Equals("ChatGptStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            item2.IsVisible = !_config.UiItem.HideColumnChat;
+                            item2.IsVisible = !_config.UiItem.HideColumnChatGpt;
                         }
                     }
                 }

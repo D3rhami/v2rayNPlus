@@ -61,10 +61,10 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
     [Reactive] public partial string UdpTestTarget { get; set; }
     [Reactive] public partial int MixedConcurrencyCount { get; set; }
     [Reactive] public partial int UnblockPageSize { get; set; }
-    [Reactive] public partial bool UnblockYtEnabled { get; set; }
-    [Reactive] public partial bool UnblockNfEnabled { get; set; }
-    [Reactive] public partial bool UnblockGemEnabled { get; set; }
-    [Reactive] public partial bool UnblockChatEnabled { get; set; }
+    [Reactive] public partial bool UnblockYouTubeEnabled { get; set; }
+    [Reactive] public partial bool UnblockNetflixEnabled { get; set; }
+    [Reactive] public partial bool UnblockGeminiEnabled { get; set; }
+    [Reactive] public partial bool UnblockChatGptEnabled { get; set; }
     [Reactive] public partial bool EnableHWA { get; set; }
     [Reactive] public partial string SubConvertUrl { get; set; }
     [Reactive] public partial int MainGirdOrientation { get; set; }
@@ -211,10 +211,10 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         IPAPIUrl = _config.SpeedTestItem.IPAPIUrl;
         UnblockPageSize = _config.SpeedTestItem.UnblockPageSize ?? Global.UnblockTestPageSize;
         var svc = _config.SpeedTestItem.UnblockServices ?? Global.UnblockDefaultServices;
-        UnblockYtEnabled = svc.Contains("YouTube");
-        UnblockNfEnabled = svc.Contains("Netflix");
-        UnblockGemEnabled = svc.Contains("Gemini");
-        UnblockChatEnabled = svc.Contains("ChatGPT");
+        UnblockYouTubeEnabled = svc.Contains("YouTube");
+        UnblockNetflixEnabled = svc.Contains("Netflix");
+        UnblockGeminiEnabled = svc.Contains("Gemini");
+        UnblockChatGptEnabled = svc.Contains("ChatGPT");
         RootCertProvider = _config.GuiItem.RootCertProvider;
 
         #endregion UI
@@ -409,19 +409,19 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         _config.SpeedTestItem.IPAPIUrl = IPAPIUrl;
         _config.SpeedTestItem.UnblockPageSize = UnblockPageSize;
         var unblockServices = new List<string>();
-        if (UnblockYtEnabled)
+        if (UnblockYouTubeEnabled)
         {
             unblockServices.Add("YouTube");
         }
-        if (UnblockNfEnabled)
+        if (UnblockNetflixEnabled)
         {
             unblockServices.Add("Netflix");
         }
-        if (UnblockGemEnabled)
+        if (UnblockGeminiEnabled)
         {
             unblockServices.Add("Gemini");
         }
-        if (UnblockChatEnabled)
+        if (UnblockChatGptEnabled)
         {
             unblockServices.Add("ChatGPT");
         }

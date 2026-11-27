@@ -115,10 +115,10 @@ public partial class OptionSettingWindow
             this.Bind(ViewModel, vm => vm.UdpTestTarget, v => v.cmbUdpTestTarget.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MixedConcurrencyCount, v => v.cmbMixedConcurrencyCount.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.UnblockPageSize, v => v.cmbUnblockPageSize.Text).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.UnblockYtEnabled, v => v.chkUnblockYt.IsChecked).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.UnblockNfEnabled, v => v.chkUnblockNf.IsChecked).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.UnblockGemEnabled, v => v.chkUnblockGem.IsChecked).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.UnblockChatEnabled, v => v.chkUnblockChat.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockYouTubeEnabled, v => v.chkUnblockYouTube.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockNetflixEnabled, v => v.chkUnblockNetflix.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockGeminiEnabled, v => v.chkUnblockGemini.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockChatGptEnabled, v => v.chkUnblockChatGpt.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.EnableHWA, v => v.togEnableHWA.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SubConvertUrl, v => v.cmbSubConvertUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MainGirdOrientation, v => v.cmbMainGirdOrientation.SelectedIndex).DisposeWith(disposables);

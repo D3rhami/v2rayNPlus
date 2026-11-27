@@ -380,53 +380,53 @@
                     </base:MyDGTextColumn>
                     <base:MyDGTextColumn
                         x:Name="colYt"
-                        Width="60"
-                        Binding="{Binding YtText}"
-                        ExName="YtStatus"
-                        Header="YT">
+                        Width="90"
+                        Binding="{Binding YouTubeText}"
+                        ExName="YouTubeStatus"
+                        Header="YouTube">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Right" />
-                                <Setter Property="Foreground" Value="{Binding YtStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
+                                <Setter Property="Foreground" Value="{Binding YouTubeStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
                     <base:MyDGTextColumn
                         x:Name="colNf"
-                        Width="60"
-                        Binding="{Binding NfText}"
-                        ExName="NfStatus"
-                        Header="NF">
+                        Width="90"
+                        Binding="{Binding NetflixText}"
+                        ExName="NetflixStatus"
+                        Header="Netflix">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Right" />
-                                <Setter Property="Foreground" Value="{Binding NfStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
+                                <Setter Property="Foreground" Value="{Binding NetflixStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
                     <base:MyDGTextColumn
                         x:Name="colGem"
-                        Width="70"
-                        Binding="{Binding GemText}"
-                        ExName="GemStatus"
-                        Header="GEM">
+                        Width="85"
+                        Binding="{Binding GeminiText}"
+                        ExName="GeminiStatus"
+                        Header="Gemini">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Right" />
-                                <Setter Property="Foreground" Value="{Binding GemStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
+                                <Setter Property="Foreground" Value="{Binding GeminiStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
                     <base:MyDGTextColumn
                         x:Name="colChat"
-                        Width="70"
-                        Binding="{Binding ChatText}"
-                        ExName="ChatStatus"
-                        Header="CHAT">
+                        Width="95"
+                        Binding="{Binding ChatGptText}"
+                        ExName="ChatGptStatus"
+                        Header="ChatGPT">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Right" />
-                                <Setter Property="Foreground" Value="{Binding ChatStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
+                                <Setter Property="Foreground" Value="{Binding ChatGptStatus, Converter={StaticResource UnblockStatusColorConverter}}" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>

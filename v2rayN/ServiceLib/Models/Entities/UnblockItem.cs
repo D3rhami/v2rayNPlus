@@ -10,10 +10,14 @@ public class UnblockItem
     public int LatencyMedianMs { get; set; }
     public int AttemptsOk { get; set; }
     public int AttemptsTotal { get; set; }
-    public int YtStatus { get; set; }
-    public int NfStatus { get; set; }
-    public int GemStatus { get; set; }
-    public int ChatStatus { get; set; }
+    [Column("YtStatus")]
+    public int YouTubeStatus { get; set; }
+    [Column("NfStatus")]
+    public int NetflixStatus { get; set; }
+    [Column("GemStatus")]
+    public int GeminiStatus { get; set; }
+    [Column("ChatStatus")]
+    public int ChatGptStatus { get; set; }
     public string? EvidenceJson { get; set; }
     public bool PredictedLockGemini { get; set; }
     public bool PredictedLockChatGpt { get; set; }

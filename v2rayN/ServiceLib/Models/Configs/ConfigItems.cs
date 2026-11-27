@@ -103,10 +103,10 @@ public class UIItem
     public List<WindowSizeItem> WindowSizeItem { get; set; }
     public bool HideColumnIpInfo { get; set; }
     public bool HideColumnUnblock { get; set; }
-    public bool HideColumnYt { get; set; }
-    public bool HideColumnNf { get; set; }
-    public bool HideColumnGem { get; set; }
-    public bool HideColumnChat { get; set; }
+    public bool HideColumnYouTube { get; set; }
+    public bool HideColumnNetflix { get; set; }
+    public bool HideColumnGemini { get; set; }
+    public bool HideColumnChatGpt { get; set; }
     public int? FrozenColumnCount { get; set; }
 }
 
