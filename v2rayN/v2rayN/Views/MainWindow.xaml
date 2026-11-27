@@ -304,13 +304,10 @@
                                 AutomationProperties.Name="Unblock Test">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image
-                                            Width="24"
-                                            Height="24"
+                                        <materialDesign:PackIcon
                                             Margin="{StaticResource MarginRight8}"
                                             VerticalAlignment="Center"
-                                            RenderOptions.BitmapScalingMode="HighQuality"
-                                            Source="/Resources/unblock-test-logo.png" />
+                                            Kind="ShieldCheckOutline" />
                                         <TextBlock VerticalAlignment="Center" Text="Unblock Test" />
                                     </StackPanel>
                                 </MenuItem.Header>
