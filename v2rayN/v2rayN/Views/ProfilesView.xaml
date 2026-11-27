@@ -22,7 +22,14 @@
     </UserControl.Resources>
     <Grid>
         <DockPanel>
-            <WrapPanel Margin="{StaticResource Margin4}" DockPanel.Dock="Top">
+            <DockPanel Margin="{StaticResource Margin4}" DockPanel.Dock="Top" LastChildFill="False">
+                <CheckBox
+                    x:Name="togHideUnavailable"
+                    Margin="{StaticResource MarginLeftRight8}"
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Right"
+                    Content="Hide unavailable" />
+                <WrapPanel Margin="{StaticResource Margin4}">
                 <ListBox
                     x:Name="lstGroup"
                     MaxHeight="200"
@@ -98,17 +105,8 @@
                     ToolTip="{x:Static resx:ResUI.menuMixedTestServer}">
                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="Speedometer" />
                 </Button>
-                <TextBlock
-                    Margin="{StaticResource MarginLeftRight8}"
-                    VerticalAlignment="Center"
-                    Style="{StaticResource ToolbarTextBlock}"
-                    Text="Hide unavailable" />
-                <ToggleButton
-                    x:Name="togHideUnavailable"
-                    Margin="{StaticResource MarginLeftRight8}"
-                    HorizontalAlignment="Left"
-                    AutomationProperties.Name="Hide unavailable" />
             </WrapPanel>
+            </DockPanel>
             <DataGrid
                 x:Name="lstProfiles"
                 materialDesign:DataGridAssist.CellPadding="2,2"
