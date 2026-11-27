@@ -808,9 +808,13 @@ public partial class ProfilesViewModel : MyReactiveObject
 
     public async Task RemoveInvalidServerResult()
     {
+        if (await ShowYesNoInteraction.HandleSafe(ResUI.RemoveServer) == false)
+        {
+            return;
+        }
         var count = await ConfigHandler.RemoveInvalidServerResult(_config, _config.SubIndexId);
         await RefreshServers();
-        NoticeManager.Instance.Enqueue(string.Format(ResUI.RemoveInvalidServerResultTip, count));
+        NoticeManager.Instance.SendMessageEx(string.Format(ResUI.RemoveInvalidServerResultTip, count));
     }
 
     //move server
