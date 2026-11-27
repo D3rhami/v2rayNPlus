@@ -105,6 +105,15 @@
                     ToolTip="{x:Static resx:ResUI.menuMixedTestServer}">
                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="Speedometer" />
                 </Button>
+                <Button
+                    x:Name="btnUnblockTest"
+                    Width="30"
+                    Height="30"
+                    Margin="{StaticResource MarginLeftRight4}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                    ToolTip="Unblock Test (YouTube / Netflix / Gemini / ChatGPT)">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="CheckAll" />
+                </Button>
             </WrapPanel>
             </DockPanel>
             <DataGrid
@@ -310,30 +319,16 @@
                         ExName="Remarks"
                         Header="{x:Static resx:ResUI.LvRemarks}" />
                     <base:MyDGTextColumn
-                        Width="120"
-                        Binding="{Binding Address}"
-                        ExName="Address"
-                        Header="{x:Static resx:ResUI.LvAddress}" />
-                    <base:MyDGTextColumn
                         Width="60"
                         Binding="{Binding Port}"
                         ExName="Port"
                         Header="{x:Static resx:ResUI.LvPort}" />
                     <base:MyDGTextColumn
                         Width="100"
-                        Binding="{Binding Network}"
-                        ExName="Network"
-                        Header="{x:Static resx:ResUI.LvTransportProtocol}" />
-                    <base:MyDGTextColumn
-                        Width="100"
-                        Binding="{Binding StreamSecurity}"
-                        ExName="StreamSecurity"
-                        Header="{x:Static resx:ResUI.LvTLS}" />
-                    <base:MyDGTextColumn
-                        Width="100"
                         Binding="{Binding SubRemarks}"
                         ExName="SubRemarks"
-                        Header="{x:Static resx:ResUI.LvSubscription}" />
+                        Header="{x:Static resx:ResUI.LvSubscription}"
+                        Visibility="Hidden" />
                     <base:MyDGTextColumn
                         Width="100"
                         Binding="{Binding DelayVal}"
@@ -457,6 +452,22 @@
                         Binding="{Binding TotalDown}"
                         ExName="TotalDown"
                         Header="{x:Static resx:ResUI.LvTotalDownloadDataAmount}" />
+
+                    <base:MyDGTextColumn
+                        Width="120"
+                        Binding="{Binding Address}"
+                        ExName="Address"
+                        Header="{x:Static resx:ResUI.LvAddress}" />
+                    <base:MyDGTextColumn
+                        Width="100"
+                        Binding="{Binding Network}"
+                        ExName="Network"
+                        Header="{x:Static resx:ResUI.LvTransportProtocol}" />
+                    <base:MyDGTextColumn
+                        Width="100"
+                        Binding="{Binding StreamSecurity}"
+                        ExName="StreamSecurity"
+                        Header="{x:Static resx:ResUI.LvTLS}" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

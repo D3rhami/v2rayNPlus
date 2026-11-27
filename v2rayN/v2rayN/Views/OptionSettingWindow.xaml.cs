@@ -123,6 +123,7 @@ public partial class OptionSettingWindow
             this.Bind(ViewModel, vm => vm.ShowColumnNetflix, v => v.chkShowColNetflix.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.ShowColumnGemini, v => v.chkShowColGemini.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.ShowColumnChatGpt, v => v.chkShowColChatGpt.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnSubGroup, v => v.chkShowColSubGroup.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.EnableHWA, v => v.togEnableHWA.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SubConvertUrl, v => v.cmbSubConvertUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MainGirdOrientation, v => v.cmbMainGirdOrientation.SelectedIndex).DisposeWith(disposables);

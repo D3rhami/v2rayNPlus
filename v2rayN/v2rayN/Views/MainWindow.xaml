@@ -301,7 +301,8 @@
                             <MenuItem
                                 x:Name="menuUnblockTest"
                                 Padding="{StaticResource MarginLeftRight8}"
-                                AutomationProperties.Name="Unblock Test">
+                                AutomationProperties.Name="Unblock Test"
+                                ToolTip="Unblock Test: checks every node in the current group for real latency (3 tries) and whether YouTube, Netflix, Gemini and ChatGPT actually work through it (OK / LOCK / RISK / FAIL). Results fill the Unblock columns in the table.">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon
@@ -309,41 +310,6 @@
                                             VerticalAlignment="Center"
                                             Kind="ShieldCheckOutline" />
                                         <TextBlock VerticalAlignment="Center" Text="Unblock Test" />
-                                    </StackPanel>
-                                </MenuItem.Header>
-                            </MenuItem>
-                        </Menu>
-                        <Separator />
-                        <Menu Margin="0,1" Style="{StaticResource ToolbarMenu}">
-                            <MenuItem
-                                x:Name="menuPromotion"
-                                Padding="{StaticResource MarginLeftRight8}"
-                                AutomationProperties.Name="{x:Static resx:ResUI.menuPromotion}">
-                                <MenuItem.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon
-                                            Margin="{StaticResource MarginRight8}"
-                                            VerticalAlignment="Center"
-                                            Kind="VolumeHigh" />
-                                        <TextBlock Text="{x:Static resx:ResUI.menuPromotion}" />
-                                    </StackPanel>
-                                </MenuItem.Header>
-                            </MenuItem>
-                        </Menu>
-                        <Separator />
-                        <!--  PattN: Donate, after the Telegram channel, opens the window of PattN's donation wallets  -->
-                        <Menu Margin="0,1" Style="{StaticResource ToolbarMenu}">
-                            <MenuItem
-                                x:Name="menuDonate"
-                                Padding="{StaticResource MarginLeftRight8}"
-                                AutomationProperties.Name="{x:Static resx:ResUI.menuDonate}">
-                                <MenuItem.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon
-                                            Margin="{StaticResource MarginRight8}"
-                                            VerticalAlignment="Center"
-                                            Kind="Heart" />
-                                        <TextBlock Text="{x:Static resx:ResUI.menuDonate}" />
                                     </StackPanel>
                                 </MenuItem.Header>
                             </MenuItem>

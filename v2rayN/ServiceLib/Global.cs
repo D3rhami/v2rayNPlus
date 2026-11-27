@@ -117,7 +117,7 @@ public class Global
     public const string XrayLocalCert = "XRAY_LOCATION_CERT";
     public const int SpeedTestPageSize = 16;
     public const int SpeedTestConcurrencyCountMin = 10;
-    public static readonly int UnblockTestPageSize = 25;
+    public static readonly int UnblockTestPageSize = 50;
     public static List<string> UnblockDefaultServices => new List<string> { "YouTube", "Netflix", "Gemini", "ChatGPT" };
     public const string LinuxBash = "/bin/bash";
     public const string StringTrue = "true";

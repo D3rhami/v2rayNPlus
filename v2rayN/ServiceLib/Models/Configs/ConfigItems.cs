@@ -107,6 +107,7 @@ public class UIItem
     public bool HideColumnNetflix { get; set; }
     public bool HideColumnGemini { get; set; }
     public bool HideColumnChatGpt { get; set; }
+    public bool HideColumnSubGroup { get; set; } = true;
     public bool HideUnavailable { get; set; }
     public int? FrozenColumnCount { get; set; }
 }

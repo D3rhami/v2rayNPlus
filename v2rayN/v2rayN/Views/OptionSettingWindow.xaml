@@ -633,6 +633,26 @@
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Right" />
                                 </Grid>
+
+                                <Grid Height="34" Margin="0,3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Style="{StaticResource ToolbarTextBlock}"
+                                        Text="Show Subs group column"
+                                        TextTrimming="CharacterEllipsis" />
+                                    <CheckBox
+                                        x:Name="chkShowColSubGroup"
+                                        Grid.Column="1"
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right" />
+                                </Grid>
                             </StackPanel>
                         </materialDesign:Card>
 

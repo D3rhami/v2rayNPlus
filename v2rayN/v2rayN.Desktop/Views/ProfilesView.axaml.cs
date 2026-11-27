@@ -432,6 +432,10 @@ public partial class ProfilesView : ReactiveUserControl<ProfilesViewModel>
                         {
                             item2.IsVisible = !_config.UiItem.HideColumnChatGpt;
                         }
+                        if (item.Name.Equals("SubRemarks", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.IsVisible = !_config.UiItem.HideColumnSubGroup;
+                        }
                     }
                 }
             }

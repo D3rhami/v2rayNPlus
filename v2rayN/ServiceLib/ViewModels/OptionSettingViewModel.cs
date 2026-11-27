@@ -69,6 +69,7 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
     [Reactive] public partial bool ShowColumnNetflix { get; set; }
     [Reactive] public partial bool ShowColumnGemini { get; set; }
     [Reactive] public partial bool ShowColumnChatGpt { get; set; }
+    [Reactive] public partial bool ShowColumnSubGroup { get; set; }
     [Reactive] public partial bool EnableHWA { get; set; }
     [Reactive] public partial string SubConvertUrl { get; set; }
     [Reactive] public partial int MainGirdOrientation { get; set; }
@@ -223,6 +224,7 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         ShowColumnNetflix = !_config.UiItem.HideColumnNetflix;
         ShowColumnGemini = !_config.UiItem.HideColumnGemini;
         ShowColumnChatGpt = !_config.UiItem.HideColumnChatGpt;
+        ShowColumnSubGroup = !_config.UiItem.HideColumnSubGroup;
         RootCertProvider = _config.GuiItem.RootCertProvider;
 
         #endregion UI
@@ -438,6 +440,7 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         _config.UiItem.HideColumnNetflix = !ShowColumnNetflix;
         _config.UiItem.HideColumnGemini = !ShowColumnGemini;
         _config.UiItem.HideColumnChatGpt = !ShowColumnChatGpt;
+        _config.UiItem.HideColumnSubGroup = !ShowColumnSubGroup;
         _config.GuiItem.RootCertProvider = RootCertProvider;
 
         //systemProxy

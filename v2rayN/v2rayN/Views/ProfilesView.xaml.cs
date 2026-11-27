@@ -68,6 +68,7 @@ public partial class ProfilesView
 
             //servers ping
             this.BindCommand(ViewModel, vm => vm.MixedTestServerCmd, v => v.menuMixedTestServer).DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.UnblockTestServerCmd, v => v.btnUnblockTest).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.TcpingServerCmd, v => v.menuTcpingServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.RealPingServerCmd, v => v.menuRealPingServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.UdpTestServerCmd, v => v.menuUdpTestServer).DisposeWith(disposables);
@@ -435,6 +436,10 @@ public partial class ProfilesView
                         if (item.Name.Equals("ChatGptStatus", StringComparison.CurrentCultureIgnoreCase))
                         {
                             item2.Visibility = !_config.UiItem.HideColumnChatGpt ? Visibility.Visible : Visibility.Hidden;
+                        }
+                        if (item.Name.Equals("SubRemarks", StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            item2.Visibility = !_config.UiItem.HideColumnSubGroup ? Visibility.Visible : Visibility.Hidden;
                         }
                     }
                 }
