@@ -51,6 +51,7 @@ public partial class OptionSettingWindow : WindowBase<OptionSettingViewModel>
 
         cmbMixedConcurrencyCount.ItemsSource = Enumerable.Range(Global.SpeedTestConcurrencyCountMin, 20).ToList();
         cmbSpeedTestTimeout.ItemsSource = Enumerable.Range(2, 5).Select(i => i * 5).ToList();
+        cmbUnblockPageSize.ItemsSource = new List<int> { 10, 16, 25, 32, 50, 100 };
         cmbSpeedTestUrl.ItemsSource = Global.SpeedTestUrls;
         cmbSpeedPingTestUrl.ItemsSource = Global.SpeedPingTestUrls;
         cmbUdpTestTarget.ItemsSource = Global.UdpTestTargets;
@@ -69,7 +70,6 @@ public partial class OptionSettingWindow : WindowBase<OptionSettingViewModel>
         this.WhenActivated(disposables =>
         {
             this.Bind(ViewModel, vm => vm.LocalPort, v => v.txtlocalPort.Text).DisposeWith(disposables);
-            // PattN: the Aether listen port, under the mixed port
             this.Bind(ViewModel, vm => vm.AetherListenPort, v => v.txtAetherListenPort.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SecondLocalPortEnabled, v => v.togSecondLocalPortEnabled.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.UdpEnabled, v => v.togudpEnabled.IsChecked).DisposeWith(disposables);
@@ -104,19 +104,31 @@ public partial class OptionSettingWindow : WindowBase<OptionSettingViewModel>
             this.Bind(ViewModel, vm => vm.AutoRun, v => v.togAutoRun.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.EnableStatistics, v => v.togEnableStatistics.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.DisplayRealTimeSpeed, v => v.togDisplayRealTimeSpeed.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.EnableHWA, v => v.togEnableHWA.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.KeepOlderDedupl, v => v.togKeepOlderDedupl.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.EnableAutoAdjustMainLvColWidth, v => v.togEnableAutoAdjustMainLvColWidth.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.AutoHideStartup, v => v.togAutoHideStartup.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.Hide2TrayWhenClose, v => v.togHide2TrayWhenClose.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MacOSShowInDock, v => v.togMacOSShowInDock.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.EnableDragDropSort, v => v.togEnableDragDropSort.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.DoubleClick2Activate, v => v.togDoubleClick2Activate.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.AutoUpdateInterval, v => v.txtautoUpdateInterval.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.TrayMenuServersLimit, v => v.txttrayMenuServersLimit.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.CurrentFontFamily, v => v.cmbcurrentFontFamily.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SpeedTestTimeout, v => v.cmbSpeedTestTimeout.SelectedValue).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SpeedTestUrl, v => v.cmbSpeedTestUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SpeedPingTestUrl, v => v.cmbSpeedPingTestUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.UdpTestTarget, v => v.cmbUdpTestTarget.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MixedConcurrencyCount, v => v.cmbMixedConcurrencyCount.SelectedValue).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockPageSize, v => v.cmbUnblockPageSize.SelectedValue).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockYouTubeEnabled, v => v.chkUnblockYouTube.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockNetflixEnabled, v => v.chkUnblockNetflix.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockGeminiEnabled, v => v.chkUnblockGemini.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.UnblockChatGptEnabled, v => v.chkUnblockChatGpt.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnYouTube, v => v.chkShowColYouTube.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnNetflix, v => v.chkShowColNetflix.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnGemini, v => v.chkShowColGemini.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.ShowColumnChatGpt, v => v.chkShowColChatGpt.IsChecked).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SubConvertUrl, v => v.cmbSubConvertUrl.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.MainGirdOrientation, view => view.cmbMainGirdOrientation.SelectedIndex).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.GeoFileSourceUrl, v => v.cmbGetFilesSourceUrl.Text).DisposeWith(disposables);
