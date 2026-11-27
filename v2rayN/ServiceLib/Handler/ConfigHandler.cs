@@ -1388,6 +1388,26 @@ public static class ConfigHandler
             return new Tuple<int, int>(0, 0);
         }
 
+        var lstRemove = GetDuplicateProfileItems(config, lstProfile);
+
+        await RemoveServers(config, lstRemove);
+
+        return new Tuple<int, int>(lstProfile.Count, lstProfile.Count - lstRemove.Count);
+    }
+
+    public static async Task<int> CountDuplicateServers(Config config, string subId)
+    {
+        var lstProfile = await AppManager.Instance.ProfileItems(subId);
+        if (lstProfile == null)
+        {
+            return 0;
+        }
+
+        return GetDuplicateProfileItems(config, lstProfile).Count;
+    }
+
+    private static List<ProfileItem> GetDuplicateProfileItems(Config config, List<ProfileItem> lstProfile)
+    {
         List<ProfileItem> lstKeep = [];
         List<ProfileItem> lstRemove = [];
         if (!config.GuiItem.KeepOlderDedupl)
@@ -1412,9 +1432,7 @@ public static class ConfigHandler
                 lstKeep.Add(item);
             }
         }
-        await RemoveServers(config, lstRemove);
-
-        return new Tuple<int, int>(lstProfile.Count, lstKeep.Count);
+        return lstRemove;
     }
 
     /// <summary>

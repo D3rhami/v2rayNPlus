@@ -6794,6 +6794,12 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("TbSettingsN", resourceCulture);
             }
         }
+
+        public static string TbAutoCloseIn {
+            get {
+                return ResourceManager.GetString("TbAutoCloseIn", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 New Port for LAN 的本地化字符串。

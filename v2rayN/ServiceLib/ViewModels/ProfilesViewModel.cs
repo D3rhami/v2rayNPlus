@@ -22,6 +22,8 @@ public partial class ProfilesViewModel : MyReactiveObject
     private const int HideBatchSize = 10;
     private readonly List<string> _pendingHideIds = new();
     private bool _hideUnavailable;
+    private bool _suppressAutoSelect;
+    private bool _suppressAutoSelectOnce;
 
     #endregion private prop
 
@@ -470,6 +472,9 @@ public partial class ProfilesViewModel : MyReactiveObject
     {
         var lstModel = await GetProfileItemsEx(_config.SubIndexId, _serverFilter);
 
+        var suppressAutoSelect = _suppressAutoSelect || _suppressAutoSelectOnce;
+        _suppressAutoSelectOnce = false;
+
         ProfileItems.ReplaceRange(lstModel ?? []);
         if (lstModel?.Count > 0)
         {
@@ -479,11 +484,30 @@ public partial class ProfilesViewModel : MyReactiveObject
                 selected = lstModel.FirstOrDefault(t => t.IndexId == _pendingSelectIndexId);
                 _pendingSelectIndexId = null;
             }
-            selected ??= lstModel.FirstOrDefault(t => t.IndexId == _config.IndexId);
-            SelectedProfile = selected ?? lstModel.First();
+            if (selected == null && !suppressAutoSelect)
+            {
+                selected = lstModel.FirstOrDefault(t => t.IndexId == _config.IndexId);
+                SelectedProfile = selected ?? lstModel.First();
+            }
+            else if (selected != null)
+            {
+                SelectedProfile = selected;
+            }
         }
 
         await DispatcherRefreshServersBizInteraction.HandleSafe(RxVoid.Default);
+    }
+
+    public void ClearSelection()
+    {
+        _suppressAutoSelect = true;
+        SelectedProfiles = [];
+        SelectedProfile = null;
+    }
+
+    public void ResumeAutoSelect()
+    {
+        _suppressAutoSelect = false;
     }
 
     public async Task RefreshSubscriptions()
@@ -615,7 +639,7 @@ public partial class ProfilesViewModel : MyReactiveObject
         {
             return;
         }
-        var item = await AppManager.Instance.GetProfileItem(SelectedProfile.IndexId);
+        var item = await AppManager.Instance.GetProfileItem(SelectedProfile?.IndexId);
         if (item is null)
         {
             NoticeManager.Instance.Enqueue(ResUI.PleaseSelectServer);
@@ -683,7 +707,13 @@ public partial class ProfilesViewModel : MyReactiveObject
 
     private async Task RemoveDuplicateServer()
     {
-        if (await ShowYesNoInteraction.HandleSafe("This will remove duplicate profiles from the current group. Continue?") == false)
+        var count = await ConfigHandler.CountDuplicateServers(_config, _config.SubIndexId);
+        if (count == 0)
+        {
+            NoticeManager.Instance.SendMessageEx("Bunny: no duplicate profiles found");
+            return;
+        }
+        if (await ShowYesNoInteraction.HandleSafe($"This will remove {count} duplicate profiles from the current group. Continue?") == false)
         {
             return;
         }
@@ -746,7 +776,7 @@ public partial class ProfilesViewModel : MyReactiveObject
 
     public async Task ShareServerAsync()
     {
-        var item = await AppManager.Instance.GetProfileItem(SelectedProfile.IndexId);
+        var item = await AppManager.Instance.GetProfileItem(SelectedProfile?.IndexId);
         if (item is null)
         {
             NoticeManager.Instance.Enqueue(ResUI.PleaseSelectServer);
@@ -800,18 +830,31 @@ public partial class ProfilesViewModel : MyReactiveObject
             return;
         }
         _dicHeaderSort[colName] = !asc;
+        _suppressAutoSelectOnce = true;
         await RefreshServers();
     }
 
     public async Task RemoveInvalidServerResult()
     {
-        if (await ShowYesNoInteraction.HandleSafe("This will remove all unavailable profiles (failed test) from the current group. Continue?") == false)
+        var lstModel = await AppManager.Instance.ProfileModels(_config.SubIndexId, "");
+        lstModel.RemoveAll(t => t.ConfigType.IsComplexType());
+        var lstProfileExs = await ProfileExManager.Instance.GetProfileExs();
+        var count = (from t in lstModel
+                     join t2 in lstProfileExs on t.IndexId equals t2.IndexId
+                     where t2.Delay == -1
+                     select t).Count();
+        if (count == 0)
+        {
+            NoticeManager.Instance.SendMessageEx("Bunny: no unavailable profiles to remove");
+            return;
+        }
+        if (await ShowYesNoInteraction.HandleSafe($"This will remove {count} unavailable profiles (failed test) from the current group. Continue?") == false)
         {
             return;
         }
-        var count = await ConfigHandler.RemoveInvalidServerResult(_config, _config.SubIndexId);
+        var removedCount = await ConfigHandler.RemoveInvalidServerResult(_config, _config.SubIndexId);
         await RefreshServers();
-        NoticeManager.Instance.SendMessageEx(string.Format(ResUI.RemoveInvalidServerResultTip, count));
+        NoticeManager.Instance.SendMessageEx(string.Format(ResUI.RemoveInvalidServerResultTip, removedCount));
     }
 
     //move server
@@ -834,7 +877,7 @@ public partial class ProfilesViewModel : MyReactiveObject
     public async Task MoveServer(EMove eMove)
     {
         var lstProfile = ProfileItems?.Select(t => t.IndexId).ToList() ?? [];
-        var index = lstProfile.IndexOf(SelectedProfile.IndexId);
+        var index = lstProfile.IndexOf(SelectedProfile?.IndexId);
         if (index < 0)
         {
             NoticeManager.Instance.Enqueue(ResUI.PleaseSelectServer);
@@ -954,7 +997,7 @@ public partial class ProfilesViewModel : MyReactiveObject
 
     private async Task Export2ClientConfigAsync(bool blClipboard)
     {
-        var item = await AppManager.Instance.GetProfileItem(SelectedProfile.IndexId);
+        var item = await AppManager.Instance.GetProfileItem(SelectedProfile?.IndexId);
         if (item is null)
         {
             NoticeManager.Instance.Enqueue(ResUI.PleaseSelectServer);

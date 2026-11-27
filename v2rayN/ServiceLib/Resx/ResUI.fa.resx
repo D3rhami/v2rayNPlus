@@ -735,6 +735,9 @@
   <data name="TbSettingsN" xml:space="preserve">
     <value>تنظیمات اولیه</value>
   </data>
+  <data name="TbAutoCloseIn" xml:space="preserve">
+    <value>بستن خودکار تا {0} ثانیه دیگر</value>
+  </data>
   <data name="TbSettingsPass" xml:space="preserve">
     <value>مجوز احراز هویت</value>
   </data>

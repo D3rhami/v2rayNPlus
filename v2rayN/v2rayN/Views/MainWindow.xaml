@@ -302,7 +302,7 @@
                                 x:Name="menuUnblockTest"
                                 Padding="{StaticResource MarginLeftRight8}"
                                 AutomationProperties.Name="Bunny Test"
-                                ToolTip="Bunny Test: checks every node in the current group for real latency (3 tries) and whether YouTube, Netflix, Gemini and ChatGPT actually work through it (OK / LOCK / RISK / FAIL). Results fill the Unblock columns in the table.">
+                                ToolTip="Bunny Test: checks every node in the current group for real latency (3 tries) and whether YouTube, Netflix, Gemini and ChatGPT actually work through it (OK / LOCK / RISK / FAIL). Results fill the Unblock columns in the table. Shortcut: Ctrl+Alt+B">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon

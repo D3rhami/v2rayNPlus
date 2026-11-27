@@ -738,6 +738,9 @@
   <data name="TbSettingsN" xml:space="preserve">
     <value>Basic settings</value>
   </data>
+  <data name="TbAutoCloseIn" xml:space="preserve">
+    <value>Auto close in {0}s</value>
+  </data>
   <data name="TbSettingsPass" xml:space="preserve">
     <value>Auth pass</value>
   </data>

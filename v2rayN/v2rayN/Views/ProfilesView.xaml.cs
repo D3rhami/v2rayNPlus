@@ -192,6 +192,10 @@ public partial class ProfilesView
         if (ViewModel != null)
         {
             ViewModel.SelectedProfiles = lstProfiles.SelectedItems.Cast<ProfileItemModel>().ToList();
+            if (lstProfiles.SelectedItems.Count > 0)
+            {
+                ViewModel.ResumeAutoSelect();
+            }
         }
     }
 
@@ -280,6 +284,7 @@ public partial class ProfilesView
 
                 case Key.S:
                     lstProfiles.SelectedItems.Clear();
+                    ViewModel?.ClearSelection();
                     e.Handled = true;
                     break;
 
