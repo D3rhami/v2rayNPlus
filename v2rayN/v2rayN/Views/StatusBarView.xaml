@@ -59,6 +59,8 @@
                         AutomationProperties.Name="{x:Static resx:ResUI.TbEnableTunAs}"
                         Content="{x:Static resx:ResUI.TbEnableTunAs}"
                         FontSize="{DynamicResource StdFontSize}"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="20000"
                         ToolTip="{x:Static resx:ResUI.SpTunModeTip}" />
                 </StackPanel>
 
@@ -73,6 +75,8 @@
                         Content="{x:Static resx:ResUI.menuSystemProxyClear}"
                         FontSize="{DynamicResource StdFontSize}"
                         GroupName="sysProxy"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="20000"
                         ToolTip="{x:Static resx:ResUI.SpSysProxyClearTip}" />
                     <RadioButton
                         x:Name="radioSysProxy1"
@@ -81,6 +85,8 @@
                         Content="{x:Static resx:ResUI.menuSystemProxySet}"
                         FontSize="{DynamicResource StdFontSize}"
                         GroupName="sysProxy"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="20000"
                         ToolTip="{x:Static resx:ResUI.SpSysProxySetTip}" />
                     <RadioButton
                         x:Name="radioSysProxy2"
@@ -89,6 +95,8 @@
                         Content="{x:Static resx:ResUI.menuSystemProxyNothing}"
                         FontSize="{DynamicResource StdFontSize}"
                         GroupName="sysProxy"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="20000"
                         ToolTip="{x:Static resx:ResUI.SpSysProxyNothingTip}" />
                     <RadioButton
                         x:Name="radioSysProxy3"
@@ -97,6 +105,8 @@
                         Content="{x:Static resx:ResUI.menuSystemProxyPac}"
                         FontSize="{DynamicResource StdFontSize}"
                         GroupName="sysProxy"
+                        ToolTipService.InitialShowDelay="0"
+                        ToolTipService.ShowDuration="20000"
                         ToolTip="{x:Static resx:ResUI.SpSysProxyPacTip}" />
                 </StackPanel>
 

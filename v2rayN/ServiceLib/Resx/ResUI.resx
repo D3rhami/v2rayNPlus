@@ -744,6 +744,9 @@
   <data name="SpTunModeTip" xml:space="preserve">
     <value>u</value>
   </data>
+  <data name="SpClearSelection" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
   <data name="SpSysProxyClearTip" xml:space="preserve">
     <value>e</value>
   </data>

@@ -741,6 +741,9 @@
   <data name="SpTunModeTip" xml:space="preserve">
     <value>n</value>
   </data>
+  <data name="SpClearSelection" xml:space="preserve">
+    <value>لغو انتخاب</value>
+  </data>
   <data name="SpSysProxyClearTip" xml:space="preserve">
     <value>m</value>
   </data>

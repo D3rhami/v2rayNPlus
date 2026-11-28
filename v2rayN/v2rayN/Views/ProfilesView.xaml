@@ -178,6 +178,11 @@
                             Header="{x:Static resx:ResUI.menuSetDefaultServer}"
                             InputGestureText="Enter" />
                         <MenuItem
+                            x:Name="menuClearSelection"
+                            Height="{StaticResource MenuItemHeight}"
+                            Header="{x:Static resx:ResUI.SpClearSelection}"
+                            InputGestureText="Ctrl+S" />
+                        <MenuItem
                             x:Name="menuEditServer"
                             Height="{StaticResource MenuItemHeight}"
                             Header="{x:Static resx:ResUI.menuEditServer}"

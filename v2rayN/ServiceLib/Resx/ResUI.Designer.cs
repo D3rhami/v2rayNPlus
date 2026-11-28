@@ -6805,6 +6805,11 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("SpTunModeTip", resourceCulture);
             }
         }
+        public static string SpClearSelection {
+            get {
+                return ResourceManager.GetString("SpClearSelection", resourceCulture);
+            }
+        }
         public static string SpSysProxyClearTip {
             get {
                 return ResourceManager.GetString("SpSysProxyClearTip", resourceCulture);

@@ -25,6 +25,7 @@ public partial class ProfilesView
         lstProfiles.SelectionChanged += LstProfiles_SelectionChanged;
         lstProfiles.LoadingRow += LstProfiles_LoadingRow;
         menuSelectAll.Click += menuSelectAll_Click;
+        menuClearSelection.Click += menuClearSelection_Click;
 
         if (_config.UiItem.EnableDragDropSort)
         {
@@ -230,6 +231,12 @@ public partial class ProfilesView
     private void menuSelectAll_Click(object sender, RoutedEventArgs e)
     {
         lstProfiles.SelectAll();
+    }
+
+    private void menuClearSelection_Click(object sender, RoutedEventArgs e)
+    {
+        lstProfiles.SelectedItems.Clear();
+        ViewModel?.ClearSelection();
     }
 
     private void LstProfiles_PreviewKeyDown(object sender, KeyEventArgs e)
