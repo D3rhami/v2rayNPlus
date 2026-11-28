@@ -176,7 +176,7 @@
                             x:Name="menuEditServer"
                             Height="{StaticResource MenuItemHeight}"
                             Header="{x:Static resx:ResUI.menuEditServer}"
-                            InputGestureText="Ctrl+E" />
+                            InputGestureText="Ctrl+Alt+E" />
                         <MenuItem
                             x:Name="menuCopyServer"
                             Height="{StaticResource MenuItemHeight}"

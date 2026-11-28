@@ -258,7 +258,7 @@ public partial class ProfilesView
                     break;
 
                 case Key.E:
-                    ViewModel?.ServerSpeedtest(ESpeedActionType.Mixedtest);
+                    ViewModel?.EditServerAsync();
                     break;
 
                 case Key.S:
@@ -297,7 +297,7 @@ public partial class ProfilesView
                     break;
 
                 case Key.E:
-                    ViewModel?.EditServerAsync();
+                    ViewModel?.ServerSpeedtest(ESpeedActionType.Mixedtest);
                     break;
 
                 case Key.F:
