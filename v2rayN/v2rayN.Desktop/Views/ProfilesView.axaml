@@ -120,6 +120,8 @@
                 CanUserResizeColumns="True"
                 Classes.InsetContent="True"
                 GridLinesVisibility="All"
+                HorizontalGridLinesBrush="#3A3A3A"
+                VerticalGridLinesBrush="#3A3A3A"
                 HeadersVisibility="All"
                 IsReadOnly="False"
                 ItemsSource="{Binding ProfileItems}"
