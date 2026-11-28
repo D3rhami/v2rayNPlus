@@ -144,6 +144,7 @@
             </DockPanel>
             <DataGrid
                 x:Name="lstProfiles"
+                Background="#16181D"
                 materialDesign:DataGridAssist.CellPadding="2,2"
                 AutoGenerateColumns="False"
                 BorderThickness="1"
@@ -157,6 +158,8 @@
                 GridLinesVisibility="All"
                 HorizontalGridLinesBrush="#3A3A3A"
                 VerticalGridLinesBrush="#3A3A3A"
+                RowBackground="Transparent"
+                AlternatingRowBackground="Transparent"
                 HeadersVisibility="All"
                 IsReadOnly="True"
                 RowHeaderWidth="40"
@@ -320,6 +323,7 @@
                 </DataGrid.ContextMenu>
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource MaterialDesignDataGridRow}" TargetType="DataGridRow">
+                        <Setter Property="Background" Value="Transparent" />
                         <EventSetter Event="MouseDoubleClick" Handler="LstProfiles_MouseDoubleClick" />
                     </Style>
                     <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="DataGridColumnHeader">

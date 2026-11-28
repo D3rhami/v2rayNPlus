@@ -470,7 +470,11 @@
                             </TabItem>
                         </TabControl>
                     </Grid>
-                    <materialDesign:Snackbar x:Name="MainSnackbar" MessageQueue="{materialDesign:MessageQueue}" />
+                    <materialDesign:Snackbar
+                        x:Name="MainSnackbar"
+                        Background="#1A1D23"
+                        Foreground="#E4E4E4"
+                        MessageQueue="{materialDesign:MessageQueue}" />
                 </Grid>
             </DockPanel>
         </Grid>

@@ -1,3 +1,4 @@
+using System.Windows.Media;
 using MaterialDesignColors;
 using MaterialDesignColors.ColorManipulation;
 using MaterialDesignThemes.Wpf;
@@ -124,6 +125,28 @@ public partial class ThemeSettingViewModel : MyReactiveObject
         var theme = _paletteHelper.GetTheme();
         theme.SetBaseTheme(baseTheme);
         _paletteHelper.SetTheme(theme);
+
+        var res = Application.Current.Resources;
+        if (baseTheme == BaseTheme.Dark)
+        {
+            res["MaterialDesignPaper"] = new SolidColorBrush(Color.FromRgb(0x16, 0x18, 0x1D));
+            res["MaterialDesignToolBarBackground"] = new SolidColorBrush(Color.FromRgb(0x16, 0x18, 0x1D));
+            res["MaterialDesignCardBackground"] = new SolidColorBrush(Color.FromRgb(0x1A, 0x1D, 0x23));
+            res["MaterialDesignBody"] = new SolidColorBrush(Color.FromRgb(0xE4, 0xE4, 0xE4));
+            res["MaterialDesignBodyLight"] = new SolidColorBrush(Color.FromRgb(0xF0, 0xF0, 0xF0));
+            res["MaterialDesignDivider"] = new SolidColorBrush(Color.FromRgb(0x2E, 0x32, 0x38));
+            res["MaterialDesignToolTipBackground"] = new SolidColorBrush(Color.FromRgb(0x1A, 0x1D, 0x23));
+            res["MaterialDesignTextFieldBoxBackground"] = new SolidColorBrush(Color.FromRgb(0x1A, 0x1D, 0x23));
+            res["MaterialDesignSnackbarBackground"] = new SolidColorBrush(Color.FromRgb(0x1A, 0x1D, 0x23));
+            res["MaterialDesignSnackbarForeground"] = new SolidColorBrush(Color.FromRgb(0xE4, 0xE4, 0xE4));
+        }
+        else
+        {
+            foreach (var key in new[] { "MaterialDesignPaper", "MaterialDesignToolBarBackground", "MaterialDesignCardBackground", "MaterialDesignBody", "MaterialDesignBodyLight", "MaterialDesignDivider", "MaterialDesignToolTipBackground", "MaterialDesignTextFieldBoxBackground", "MaterialDesignSnackbarBackground", "MaterialDesignSnackbarForeground" })
+            {
+                res.Remove(key);
+            }
+        }
 
         WindowsUtils.SetDarkBorder(Application.Current.MainWindow, CurrentTheme);
     }
