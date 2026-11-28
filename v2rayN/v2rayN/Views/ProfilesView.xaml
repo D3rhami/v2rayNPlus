@@ -333,6 +333,10 @@
                     <Style BasedOn="{StaticResource MaterialDesignDataGridCell}" TargetType="DataGridCell">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
                             <DataTrigger Binding="{Binding IsActive}" Value="True">
                                 <Setter Property="Background" Value="{DynamicResource MaterialDesign.Brush.Primary.Light}" />
                                 <Setter Property="Foreground" Value="Black" />
