@@ -739,22 +739,28 @@
     <value>بستن خودکار تا {0} ثانیه دیگر</value>
   </data>
   <data name="SpTunModeTip" xml:space="preserve">
-    <value>n</value>
+    <value>حالت Tun همه‌ی ترافیک کامپیوتر را با یک کارت شبکه مجازی از طریق VPN عبور می‌دهد — وقتی می‌خواهید همه‌چیز (نه فقط برنامه‌های سازگار) از VPN بگذرد روشنش کنید.</value>
   </data>
   <data name="SpClearSelection" xml:space="preserve">
     <value>لغو انتخاب</value>
   </data>
+  <data name="SpSysProxyAdvancedMode" xml:space="preserve">
+    <value>حالت پیشرفته پروکسی سیستم</value>
+  </data>
+  <data name="SpSysProxyToggleTip" xml:space="preserve">
+    <value>با تیک‌خوردن، ترافیک ویندوز از VPN می‌گذرد (Set system proxy). بدون تیک، پروکسی ویندوز پاک می‌شود (مستقیم). حالت‌های پیشرفته (دست‌نخورده / PAC) در تنظیمات - System proxy settings هستند.</value>
+  </data>
   <data name="SpSysProxyClearTip" xml:space="preserve">
-    <value>m</value>
+    <value>تنظیمات پروکسی ویندوز را حذف می‌کند — ترافیک مستقیم می‌رود و فقط برنامه‌هایی که دستی تنظیم شده‌اند از VPN استفاده می‌کنند.</value>
   </data>
   <data name="SpSysProxySetTip" xml:space="preserve">
-    <value>i</value>
+    <value>پروکسی ویندوز را خودکار روی این برنامه تنظیم می‌کند — ترافیک عادی مرورگر و برنامه‌ها از VPN می‌گذرد.</value>
   </data>
   <data name="SpSysProxyNothingTip" xml:space="preserve">
-    <value>a</value>
+    <value>تنظیمات پروکسی ویندوز را دست‌نخورده نگه می‌دارد — اگر خودتان پروکسی را تنظیم کرده‌اید این را انتخاب کنید.</value>
   </data>
   <data name="SpSysProxyPacTip" xml:space="preserve">
-    <value>g</value>
+    <value>حالت قدیمی که VPN را برای هر سایت جداگانه اعمال می‌کند — بیشتر کاربران بهتر است گزینه Set system proxy را انتخاب کنید.</value>
   </data>
   <data name="TbSettingsPass" xml:space="preserve">
     <value>مجوز احراز هویت</value>

@@ -1,3 +1,4 @@
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace v2rayN.Views;
@@ -14,6 +15,11 @@ public partial class OptionSettingWindow
 
         clbdestOverride.SelectionChanged += ClbdestOverride_SelectionChanged;
         btnBrowseCustomSystemProxyPacPath.Click += BtnBrowseCustomSystemProxyPacPath_Click;
+
+        radioSysProxyNothing.IsChecked = _config.SystemProxyItem.SysProxyType == ESysProxyType.Unchanged;
+        radioSysProxyPac.IsChecked = _config.SystemProxyItem.SysProxyType == ESysProxyType.Pac;
+        radioSysProxyNothing.Checked += RadioSysProxyAdvanced_Checked;
+        radioSysProxyPac.Checked += RadioSysProxyAdvanced_Checked;
 
         clbdestOverride.ItemsSource = Global.destOverrideProtocols;
         _config.Inbound.First().DestOverride?.ForEach(it =>
@@ -239,5 +245,17 @@ public partial class OptionSettingWindow
         }
 
         txtCustomSystemProxyPacPath.Text = fileName;
+    }
+
+    private void RadioSysProxyAdvanced_Checked(object sender, RoutedEventArgs e)
+    {
+        if (sender is RadioButton rb && rb.IsChecked == true)
+        {
+            var type = rb == radioSysProxyPac ? ESysProxyType.Pac : ESysProxyType.Unchanged;
+            if (_config.SystemProxyItem.SysProxyType != type)
+            {
+                AppEvents.SysProxyChangeRequested.Publish(type);
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace v2rayN.Views;
 public partial class StatusBarView
 {
     private static Config _config;
+    private bool _syncingSysProxy;
 
     public StatusBarView()
     {
@@ -57,18 +58,31 @@ public partial class StatusBarView
             this.OneWayBind(ViewModel, vm => vm.SpeedDirectDisplay, v => v.txtSpeedDirectDisplay.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.EnableTun, v => v.togEnableTun.IsChecked).DisposeWith(disposables);
 
-            radioSysProxy0.Checked += (_, _) => ViewModel.SystemProxySelected = (int)ESysProxyType.ForcedClear;
-            radioSysProxy1.Checked += (_, _) => ViewModel.SystemProxySelected = (int)ESysProxyType.ForcedChange;
-            radioSysProxy2.Checked += (_, _) => ViewModel.SystemProxySelected = (int)ESysProxyType.Unchanged;
-            radioSysProxy3.Checked += (_, _) => ViewModel.SystemProxySelected = (int)ESysProxyType.Pac;
+            togSysProxy.Checked += (_, _) =>
+            {
+                if (!_syncingSysProxy)
+                {
+                    ViewModel.SystemProxySelected = (int)ESysProxyType.ForcedChange;
+                }
+            };
+            togSysProxy.Unchecked += (_, _) =>
+            {
+                if (!_syncingSysProxy)
+                {
+                    ViewModel.SystemProxySelected = (int)ESysProxyType.ForcedClear;
+                }
+            };
             this.WhenAnyValue(x => x.ViewModel.SystemProxySelected)
                 .Subscribe(i =>
                 {
-                    var radios = new[] { radioSysProxy0, radioSysProxy1, radioSysProxy2, radioSysProxy3 };
-                    var idx = i >= 0 && i < radios.Length ? i : 0;
-                    for (var k = 0; k < radios.Length; k++)
+                    _syncingSysProxy = true;
+                    try
                     {
-                        radios[k].IsChecked = k == idx;
+                        togSysProxy.IsChecked = i == (int)ESysProxyType.ForcedChange;
+                    }
+                    finally
+                    {
+                        _syncingSysProxy = false;
                     }
                 })
                 .DisposeWith(disposables);

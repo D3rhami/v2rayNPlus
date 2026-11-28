@@ -742,22 +742,28 @@
     <value>Auto close in {0}s</value>
   </data>
   <data name="SpTunModeTip" xml:space="preserve">
-    <value>u</value>
+    <value>Tun mode routes all of your computer traffic through the VPN with a virtual network card - turn it on when you want everything proxied, not just apps that support a proxy.</value>
   </data>
   <data name="SpClearSelection" xml:space="preserve">
     <value>Clear selection</value>
   </data>
+  <data name="SpSysProxyAdvancedMode" xml:space="preserve">
+    <value>Advanced system proxy mode</value>
+  </data>
+  <data name="SpSysProxyToggleTip" xml:space="preserve">
+    <value>When checked, Windows traffic goes through the VPN (Set system proxy). When unchecked, the Windows proxy is cleared (direct). Advanced modes (do not change / PAC) are in Settings - System proxy settings.</value>
+  </data>
   <data name="SpSysProxyClearTip" xml:space="preserve">
-    <value>e</value>
+    <value>Removes the Windows proxy setting - your traffic goes direct and only apps configured manually use the VPN.</value>
   </data>
   <data name="SpSysProxySetTip" xml:space="preserve">
-    <value>o</value>
+    <value>Points the Windows proxy at this app automatically - normal browser and program traffic goes through the VPN.</value>
   </data>
   <data name="SpSysProxyNothingTip" xml:space="preserve">
-    <value>e</value>
+    <value>Leaves the Windows proxy settings untouched - pick this if you configure the proxy yourself.</value>
   </data>
   <data name="SpSysProxyPacTip" xml:space="preserve">
-    <value>e</value>
+    <value>Legacy mode that applies the VPN per-website using a small script - most users should pick Set system proxy instead.</value>
   </data>
   <data name="TbSettingsPass" xml:space="preserve">
     <value>Auth pass</value>

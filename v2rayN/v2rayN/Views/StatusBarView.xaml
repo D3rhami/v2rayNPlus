@@ -47,67 +47,29 @@
 
                 <StackPanel
                     x:Name="spEnableTun"
-                    Width="Auto"
                     Margin="{StaticResource MarginLeftRight8}"
                     VerticalAlignment="Center"
-                    DockPanel.Dock="Left"
-                    Orientation="Horizontal">
+                    DockPanel.Dock="Left">
                     <CheckBox
                         x:Name="togEnableTun"
                         Margin="{StaticResource Margin4}"
-                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
                         AutomationProperties.Name="{x:Static resx:ResUI.TbEnableTunAs}"
                         Content="{x:Static resx:ResUI.TbEnableTunAs}"
                         FontSize="{DynamicResource StdFontSize}"
                         ToolTipService.InitialShowDelay="0"
                         ToolTipService.ShowDuration="20000"
                         ToolTip="{x:Static resx:ResUI.SpTunModeTip}" />
-                </StackPanel>
-
-                <StackPanel
-                    Margin="{StaticResource MarginLeftRight8}"
-                    VerticalAlignment="Center"
-                    DockPanel.Dock="Left">
-                    <RadioButton
-                        x:Name="radioSysProxy0"
+                    <CheckBox
+                        x:Name="togSysProxy"
                         Margin="{StaticResource Margin4}"
-                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemProxyClear}"
-                        Content="{x:Static resx:ResUI.menuSystemProxyClear}"
+                        HorizontalAlignment="Left"
+                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemproxy}"
+                        Content="{x:Static resx:ResUI.menuSystemproxy}"
                         FontSize="{DynamicResource StdFontSize}"
-                        GroupName="sysProxy"
                         ToolTipService.InitialShowDelay="0"
                         ToolTipService.ShowDuration="20000"
-                        ToolTip="{x:Static resx:ResUI.SpSysProxyClearTip}" />
-                    <RadioButton
-                        x:Name="radioSysProxy1"
-                        Margin="{StaticResource Margin4}"
-                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemProxySet}"
-                        Content="{x:Static resx:ResUI.menuSystemProxySet}"
-                        FontSize="{DynamicResource StdFontSize}"
-                        GroupName="sysProxy"
-                        ToolTipService.InitialShowDelay="0"
-                        ToolTipService.ShowDuration="20000"
-                        ToolTip="{x:Static resx:ResUI.SpSysProxySetTip}" />
-                    <RadioButton
-                        x:Name="radioSysProxy2"
-                        Margin="{StaticResource Margin4}"
-                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemProxyNothing}"
-                        Content="{x:Static resx:ResUI.menuSystemProxyNothing}"
-                        FontSize="{DynamicResource StdFontSize}"
-                        GroupName="sysProxy"
-                        ToolTipService.InitialShowDelay="0"
-                        ToolTipService.ShowDuration="20000"
-                        ToolTip="{x:Static resx:ResUI.SpSysProxyNothingTip}" />
-                    <RadioButton
-                        x:Name="radioSysProxy3"
-                        Margin="{StaticResource Margin4}"
-                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemProxyPac}"
-                        Content="{x:Static resx:ResUI.menuSystemProxyPac}"
-                        FontSize="{DynamicResource StdFontSize}"
-                        GroupName="sysProxy"
-                        ToolTipService.InitialShowDelay="0"
-                        ToolTipService.ShowDuration="20000"
-                        ToolTip="{x:Static resx:ResUI.SpSysProxyPacTip}" />
+                        ToolTip="{x:Static resx:ResUI.SpSysProxyToggleTip}" />
                 </StackPanel>
 
                 <StackPanel

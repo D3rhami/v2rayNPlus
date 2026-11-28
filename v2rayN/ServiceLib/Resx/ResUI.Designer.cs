@@ -6810,6 +6810,16 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("SpClearSelection", resourceCulture);
             }
         }
+        public static string SpSysProxyAdvancedMode {
+            get {
+                return ResourceManager.GetString("SpSysProxyAdvancedMode", resourceCulture);
+            }
+        }
+        public static string SpSysProxyToggleTip {
+            get {
+                return ResourceManager.GetString("SpSysProxyToggleTip", resourceCulture);
+            }
+        }
         public static string SpSysProxyClearTip {
             get {
                 return ResourceManager.GetString("SpSysProxyClearTip", resourceCulture);
