@@ -1436,8 +1436,11 @@
                                     FontSize="{DynamicResource StdFontSize}"
                                     GroupName="sysProxyAdvanced"
                                     ToolTipService.InitialShowDelay="0"
-                                    ToolTipService.ShowDuration="20000"
-                                    ToolTip="{x:Static resx:ResUI.SpSysProxyNothingTip}" />
+                                    ToolTipService.ShowDuration="20000">
+                                    <RadioButton.ToolTip>
+                                        <TextBlock Text="{x:Static resx:ResUI.SpSysProxyNothingTip}" TextWrapping="Wrap" MaxWidth="360" />
+                                    </RadioButton.ToolTip>
+                                </RadioButton>
                                 <RadioButton
                                     x:Name="radioSysProxyPac"
                                     Margin="0,2"
@@ -1445,8 +1448,11 @@
                                     FontSize="{DynamicResource StdFontSize}"
                                     GroupName="sysProxyAdvanced"
                                     ToolTipService.InitialShowDelay="0"
-                                    ToolTipService.ShowDuration="20000"
-                                    ToolTip="{x:Static resx:ResUI.SpSysProxyPacTip}" />
+                                    ToolTipService.ShowDuration="20000">
+                                    <RadioButton.ToolTip>
+                                        <TextBlock Text="{x:Static resx:ResUI.SpSysProxyPacTip}" TextWrapping="Wrap" MaxWidth="360" />
+                                    </RadioButton.ToolTip>
+                                </RadioButton>
                                 <Separator Margin="0,6" />
                                 <Grid Height="34" Margin="0,3">
                                     <Grid.ColumnDefinitions>

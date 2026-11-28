@@ -351,28 +351,28 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         Width="80"
                         Binding="{Binding ConfigType}"
                         ExName="ConfigType"
                         Header="{x:Static resx:ResUI.LvServiceType}" />
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         Width="150"
                         Binding="{Binding Remarks}"
                         ExName="Remarks"
                         Header="{x:Static resx:ResUI.LvRemarks}" />
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         Width="60"
                         Binding="{Binding Port}"
                         ExName="Port"
                         Header="{x:Static resx:ResUI.LvPort}" />
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         Width="100"
                         Binding="{Binding SubRemarks}"
                         ExName="SubRemarks"
                         Header="{x:Static resx:ResUI.LvSubscription}"
                         Visibility="Hidden" />
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         Width="100"
                         Binding="{Binding DelayVal}"
                         ExName="DelayVal"
@@ -385,7 +385,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         Width="100"
                         Binding="{Binding SpeedVal}"
                         ExName="SpeedVal"
@@ -396,22 +396,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
-
-                    <base:MyDGTextColumn
-                        x:Name="colTodayUp"
-                        Width="100"
-                        Binding="{Binding TodayUp}"
-                        ExName="TodayUp"
-                        Header="{x:Static resx:ResUI.LvTodayUploadDataAmount}" />
-
-                    <base:MyDGTextColumn
-                        x:Name="colIpInfo"
-                        Width="100"
-                        Binding="{Binding IpInfo}"
-                        ExName="IpInfo"
-                        Header="{x:Static resx:ResUI.LvTestIpInfo}" />
-
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         x:Name="colYt"
                         Width="90"
                         Binding="{Binding YouTubeText}"
@@ -424,7 +409,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         x:Name="colNf"
                         Width="90"
                         Binding="{Binding NetflixText}"
@@ -437,7 +422,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         x:Name="colGem"
                         Width="85"
                         Binding="{Binding GeminiText}"
@@ -450,7 +435,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         x:Name="colChat"
                         Width="95"
                         Binding="{Binding ChatGptText}"
@@ -463,41 +448,51 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </base:MyDGTextColumn>
-
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
+                        Width="120"
+                        Binding="{Binding Address}"
+                        ExName="Address"
+                        Header="{x:Static resx:ResUI.LvAddress}" />
+<base:MyDGTextColumn
+                        Width="100"
+                        Binding="{Binding Network}"
+                        ExName="Network"
+                        Header="{x:Static resx:ResUI.LvTransportProtocol}" />
+<base:MyDGTextColumn
+                        Width="100"
+                        Binding="{Binding StreamSecurity}"
+                        ExName="StreamSecurity"
+                        Header="{x:Static resx:ResUI.LvTLS}" />
+<base:MyDGTextColumn
+                        x:Name="colIpInfo"
+                        Width="100"
+                        Binding="{Binding IpInfo}"
+                        ExName="IpInfo"
+                        Header="{x:Static resx:ResUI.LvTestIpInfo}" />
+<base:MyDGTextColumn
+                        x:Name="colTodayUp"
+                        Width="100"
+                        Binding="{Binding TodayUp}"
+                        ExName="TodayUp"
+                        Header="{x:Static resx:ResUI.LvTodayUploadDataAmount}" />
+<base:MyDGTextColumn
                         x:Name="colTodayDown"
                         Width="100"
                         Binding="{Binding TodayDown}"
                         ExName="TodayDown"
                         Header="{x:Static resx:ResUI.LvTodayDownloadDataAmount}" />
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         x:Name="colTotalUp"
                         Width="100"
                         Binding="{Binding TotalUp}"
                         ExName="TotalUp"
                         Header="{x:Static resx:ResUI.LvTotalUploadDataAmount}" />
-                    <base:MyDGTextColumn
+<base:MyDGTextColumn
                         x:Name="colTotalDown"
                         Width="100"
                         Binding="{Binding TotalDown}"
                         ExName="TotalDown"
                         Header="{x:Static resx:ResUI.LvTotalDownloadDataAmount}" />
-
-                    <base:MyDGTextColumn
-                        Width="120"
-                        Binding="{Binding Address}"
-                        ExName="Address"
-                        Header="{x:Static resx:ResUI.LvAddress}" />
-                    <base:MyDGTextColumn
-                        Width="100"
-                        Binding="{Binding Network}"
-                        ExName="Network"
-                        Header="{x:Static resx:ResUI.LvTransportProtocol}" />
-                    <base:MyDGTextColumn
-                        Width="100"
-                        Binding="{Binding StreamSecurity}"
-                        ExName="StreamSecurity"
-                        Header="{x:Static resx:ResUI.LvTLS}" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

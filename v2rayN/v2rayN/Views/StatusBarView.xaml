@@ -52,24 +52,30 @@
                     DockPanel.Dock="Left">
                     <CheckBox
                         x:Name="togEnableTun"
-                        Margin="{StaticResource Margin4}"
+                        Margin="4,1,4,1"
                         HorizontalAlignment="Left"
                         AutomationProperties.Name="{x:Static resx:ResUI.TbEnableTunAs}"
                         Content="{x:Static resx:ResUI.TbEnableTunAs}"
                         FontSize="{DynamicResource StdFontSize}"
                         ToolTipService.InitialShowDelay="0"
-                        ToolTipService.ShowDuration="20000"
-                        ToolTip="{x:Static resx:ResUI.SpTunModeTip}" />
+                        ToolTipService.ShowDuration="20000">
+                        <CheckBox.ToolTip>
+                            <TextBlock Text="{x:Static resx:ResUI.SpTunModeTip}" TextWrapping="Wrap" MaxWidth="360" />
+                        </CheckBox.ToolTip>
+                    </CheckBox>
                     <CheckBox
                         x:Name="togSysProxy"
-                        Margin="{StaticResource Margin4}"
+                        Margin="4,1,4,1"
                         HorizontalAlignment="Left"
                         AutomationProperties.Name="{x:Static resx:ResUI.menuSystemproxy}"
                         Content="{x:Static resx:ResUI.menuSystemproxy}"
                         FontSize="{DynamicResource StdFontSize}"
                         ToolTipService.InitialShowDelay="0"
-                        ToolTipService.ShowDuration="20000"
-                        ToolTip="{x:Static resx:ResUI.SpSysProxyToggleTip}" />
+                        ToolTipService.ShowDuration="20000">
+                        <CheckBox.ToolTip>
+                            <TextBlock Text="{x:Static resx:ResUI.SpSysProxyToggleTip}" TextWrapping="Wrap" MaxWidth="360" />
+                        </CheckBox.ToolTip>
+                    </CheckBox>
                 </StackPanel>
 
                 <StackPanel
