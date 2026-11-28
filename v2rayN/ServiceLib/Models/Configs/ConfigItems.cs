@@ -67,7 +67,7 @@ public class GrpcItem
 public class GUIItem
 {
     public bool AutoRun { get; set; }
-    public bool EnableStatistics { get; set; }
+    public bool EnableStatistics { get; set; } = true;
     public bool DisplayRealTimeSpeed { get; set; }
     public bool KeepOlderDedupl { get; set; }
     public int AutoUpdateInterval { get; set; }

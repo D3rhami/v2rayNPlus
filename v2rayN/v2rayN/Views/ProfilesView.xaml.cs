@@ -430,6 +430,11 @@ public partial class ProfilesView
                         if (item.Name.StartsWith("to", StringComparison.CurrentCultureIgnoreCase))
                         {
                             item2.Visibility = _config.GuiItem.EnableStatistics ? Visibility.Visible : Visibility.Hidden;
+                            if (item2.Visibility == Visibility.Visible && item.Width < 0)
+                            {
+                                item2.Width = 110;
+                                item2.DisplayIndex = displayIndex++;
+                            }
                         }
                         if (item.Name.Equals("IpInfo", StringComparison.CurrentCultureIgnoreCase))
                         {
