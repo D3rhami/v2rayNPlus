@@ -741,6 +741,21 @@
   <data name="TbAutoCloseIn" xml:space="preserve">
     <value>Auto close in {0}s</value>
   </data>
+  <data name="SpTunModeTip" xml:space="preserve">
+    <value>u</value>
+  </data>
+  <data name="SpSysProxyClearTip" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="SpSysProxySetTip" xml:space="preserve">
+    <value>o</value>
+  </data>
+  <data name="SpSysProxyNothingTip" xml:space="preserve">
+    <value>e</value>
+  </data>
+  <data name="SpSysProxyPacTip" xml:space="preserve">
+    <value>e</value>
+  </data>
   <data name="TbSettingsPass" xml:space="preserve">
     <value>Auth pass</value>
   </data>

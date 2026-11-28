@@ -52,17 +52,52 @@
                     VerticalAlignment="Center"
                     DockPanel.Dock="Left"
                     Orientation="Horizontal">
-                    <TextBlock
-                        Margin="{StaticResource MarginLeftRight8}"
-                        VerticalAlignment="Center"
-                        Style="{StaticResource StatusbarItem}"
-                        Text="{x:Static resx:ResUI.TbEnableTunAs}" />
-                    <ToggleButton
+                    <CheckBox
                         x:Name="togEnableTun"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        AutomationProperties.Name="{x:Static resx:ResUI.TbEnableTunAs}" />
+                        AutomationProperties.Name="{x:Static resx:ResUI.TbEnableTunAs}"
+                        Content="{x:Static resx:ResUI.TbEnableTunAs}"
+                        FontSize="{DynamicResource StdFontSize}"
+                        ToolTip="{x:Static resx:ResUI.SpTunModeTip}" />
+                </StackPanel>
+
+                <StackPanel
+                    Margin="{StaticResource MarginLeftRight8}"
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Left">
+                    <RadioButton
+                        x:Name="radioSysProxy0"
+                        Margin="{StaticResource Margin4}"
+                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemProxyClear}"
+                        Content="{x:Static resx:ResUI.menuSystemProxyClear}"
+                        FontSize="{DynamicResource StdFontSize}"
+                        GroupName="sysProxy"
+                        ToolTip="{x:Static resx:ResUI.SpSysProxyClearTip}" />
+                    <RadioButton
+                        x:Name="radioSysProxy1"
+                        Margin="{StaticResource Margin4}"
+                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemProxySet}"
+                        Content="{x:Static resx:ResUI.menuSystemProxySet}"
+                        FontSize="{DynamicResource StdFontSize}"
+                        GroupName="sysProxy"
+                        ToolTip="{x:Static resx:ResUI.SpSysProxySetTip}" />
+                    <RadioButton
+                        x:Name="radioSysProxy2"
+                        Margin="{StaticResource Margin4}"
+                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemProxyNothing}"
+                        Content="{x:Static resx:ResUI.menuSystemProxyNothing}"
+                        FontSize="{DynamicResource StdFontSize}"
+                        GroupName="sysProxy"
+                        ToolTip="{x:Static resx:ResUI.SpSysProxyNothingTip}" />
+                    <RadioButton
+                        x:Name="radioSysProxy3"
+                        Margin="{StaticResource Margin4}"
+                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemProxyPac}"
+                        Content="{x:Static resx:ResUI.menuSystemProxyPac}"
+                        FontSize="{DynamicResource StdFontSize}"
+                        GroupName="sysProxy"
+                        ToolTip="{x:Static resx:ResUI.SpSysProxyPacTip}" />
                 </StackPanel>
 
                 <StackPanel
@@ -70,20 +105,6 @@
                     VerticalAlignment="Center"
                     DockPanel.Dock="Left"
                     Orientation="Horizontal">
-                    <ComboBox
-                        x:Name="cmbSystemProxy"
-                        Width="160"
-                        Margin="{StaticResource MarginLeftRight8}"
-                        materialDesign:HintAssist.Hint="{x:Static resx:ResUI.menuSystemproxy}"
-                        AutomationProperties.Name="{x:Static resx:ResUI.menuSystemproxy}"
-                        FontSize="{DynamicResource StdFontSize}"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                        <ComboBoxItem Content="{x:Static resx:ResUI.menuSystemProxyClear}" />
-                        <ComboBoxItem Content="{x:Static resx:ResUI.menuSystemProxySet}" />
-                        <ComboBoxItem Content="{x:Static resx:ResUI.menuSystemProxyNothing}" />
-                        <ComboBoxItem Content="{x:Static resx:ResUI.menuSystemProxyPac}" />
-                    </ComboBox>
-
                     <ComboBox
                         x:Name="cmbRoutings2"
                         Width="160"

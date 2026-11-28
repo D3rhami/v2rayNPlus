@@ -738,6 +738,21 @@
   <data name="TbAutoCloseIn" xml:space="preserve">
     <value>بستن خودکار تا {0} ثانیه دیگر</value>
   </data>
+  <data name="SpTunModeTip" xml:space="preserve">
+    <value>n</value>
+  </data>
+  <data name="SpSysProxyClearTip" xml:space="preserve">
+    <value>m</value>
+  </data>
+  <data name="SpSysProxySetTip" xml:space="preserve">
+    <value>i</value>
+  </data>
+  <data name="SpSysProxyNothingTip" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="SpSysProxyPacTip" xml:space="preserve">
+    <value>g</value>
+  </data>
   <data name="TbSettingsPass" xml:space="preserve">
     <value>مجوز احراز هویت</value>
   </data>

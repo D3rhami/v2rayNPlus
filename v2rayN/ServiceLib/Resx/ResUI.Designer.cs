@@ -6800,6 +6800,31 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("TbAutoCloseIn", resourceCulture);
             }
         }
+        public static string SpTunModeTip {
+            get {
+                return ResourceManager.GetString("SpTunModeTip", resourceCulture);
+            }
+        }
+        public static string SpSysProxyClearTip {
+            get {
+                return ResourceManager.GetString("SpSysProxyClearTip", resourceCulture);
+            }
+        }
+        public static string SpSysProxySetTip {
+            get {
+                return ResourceManager.GetString("SpSysProxySetTip", resourceCulture);
+            }
+        }
+        public static string SpSysProxyNothingTip {
+            get {
+                return ResourceManager.GetString("SpSysProxyNothingTip", resourceCulture);
+            }
+        }
+        public static string SpSysProxyPacTip {
+            get {
+                return ResourceManager.GetString("SpSysProxyPacTip", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 New Port for LAN 的本地化字符串。
